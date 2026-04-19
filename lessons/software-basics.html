@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Software | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+  <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">SK</div>
+        <span class="font-bold text-xl tracking-tight">SmartKids</span>
+      </a>
+      <a href="../lessons.html" class="text-sm font-semibold text-purple-600 hover:underline">← All Lessons</a>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-r from-purple-700 to-indigo-500 text-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-white">Module 1: Software</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-4">What is Software?</h1>
+      <p class="mt-4 text-purple-100 text-lg">The invisible instructions that tell the hardware what to do!</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-6">
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-slate-800">1. The Simple Difference</h2>
+      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+        <p class="text-lg text-slate-700 mb-4">
+          If <strong>Hardware</strong> is the body of the computer, then <strong>Software</strong> is the mind.
+        </p>
+        <p class="text-slate-600">
+          Software is a set of instructions (code) that tells the hardware exactly how to perform a task. You cannot touch software, but you see it working every time you open an app or a game.
+        </p>
+      </div>
+    </section>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      
+      <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-purple-500 shadow-lg">
+        <div class="text-4xl mb-4">🏠</div>
+        <h3 class="text-xl font-bold mb-2 text-purple-700">System Software</h3>
+        <p class="text-slate-600 text-sm mb-4 italic">The "House" for your apps.</p>
+        <p class="text-slate-600 text-sm">This is the <strong>Operating System (OS)</strong>. It manages all the hardware. Examples: Windows, macOS, Android.</p>
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-indigo-500 shadow-lg">
+        <div class="text-4xl mb-4">🎮</div>
+        <h3 class="text-xl font-bold mb-2 text-indigo-700">Applications (Apps)</h3>
+        <p class="text-slate-600 text-sm mb-4 italic">Tools for specific tasks.</p>
+        <p class="text-slate-600 text-sm">Programs you use to do work or have fun. Examples: Chrome, MS Word, WhatsApp, Minecraft.</p>
+      </div>
+    </div>
+
+    <div class="bg-indigo-900 text-white p-8 rounded-3xl mb-12 shadow-xl">
+      <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><span>📱</span> A Mobile Example</h3>
+      <p class="opacity-90 leading-relaxed">
+        Your actual phone—the glass screen and battery—is <strong>Hardware</strong>. 
+        But <strong>Android</strong> or <strong>iOS</strong> is the System Software that makes it turn on. 
+        <strong>TikTok</strong> or <strong>Gmail</strong> are the Applications you use inside it!
+      </p>
+    </div>
+
+    <section class="bg-slate-100 p-8 rounded-3xl border border-slate-200">
+      <h2 class="text-xl font-bold mb-4">Software Knowledge Check</h2>
+      <p class="text-sm text-slate-600 mb-6">Is "Microsoft Windows" Hardware or Software?</p>
+      <div class="space-y-3">
+        <button onclick="alert('Try again! You can touch a window in a house, but you cannot touch Windows on a computer.')" class="w-full text-left bg-white p-4 rounded-xl border border-slate-300 hover:border-purple-400 transition">A) Hardware</button>
+        <button onclick="alert('Correct! Windows is an Operating System, which is a type of Software.')" class="w-full text-left bg-white p-4 rounded-xl border border-slate-300 hover:border-purple-400 transition">B) Software</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-800 pb-8">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-2">
+          <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center font-bold text-xs">SK</div>
+          <span class="font-bold tracking-tight text-lg">SmartKids Learning</span>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">
+          Part of the SmartKids Digital Literacy Program
+        </p>
+        <div class="h-5">
+          <p id="footer-typing" class="text-sm font-mono text-blue-400"></p>
+        </div>
+      </div>
+      <nav class="flex gap-8 text-sm font-medium">
+        <a href="../about.html" class="hover:text-white transition-colors">About</a>
+        <a href="../privacy.html" class="hover:text-white transition-colors">Privacy</a>
+      </nav>
+    </div>
+    <p class="text-center mt-8 text-[10px] uppercase tracking-widest text-slate-600">© 2026 SmartKids Tech Skills</p>
+  </footer>
+
+  <script>
+    const footerMsg = "Empowering the next generation of African tech leaders.";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(() => { el.innerHTML = ""; charIdx = 0; type(); }, 5000);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
