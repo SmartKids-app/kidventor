@@ -139,48 +139,7 @@
     </button>
   </nav>
 </header>
-  
-  <!-- HEADER --
-<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-md z-50 transition-all duration-500">
-  <div class="max-w-6xl mx-auto px-5 sm:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo --
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white font-bold shadow-md">SKL</div>
-        <div>
-          <h1 class="text-lg font-semibold">SmartKids Learning</h1>
-          <p class="text-xs text-slate-500">Coding & Digital Literacy</p>
-        </div>
-      </div>
-
-      <!-- Desktop Menu --
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="https://slide-t.github.io/smartkids-learning/admin.html" class="hover:text-blue-600 transition">Admin Only</a>
-        <a href="#about" class="hover:text-blue-600 transition">About</a>
-        <a href="features.html" class="hover:text-blue-600 transition">Features</a>
-        <a href="quiz.html" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 shadow transition">Ability Test</a>
-      </nav>
-
-      <!-- Mobile Hamburger --
-      <button id="menu-toggle" class="md:hidden relative w-8 h-8 flex flex-col justify-between items-center group">
-        <span class="block w-6 h-[2px] bg-slate-800 rounded transition-transform duration-300 group-[.open]:rotate-45 group-[.open]:translate-y-[10px]"></span>
-        <span class="block w-6 h-[2px] bg-slate-800 rounded transition-opacity duration-300 group-[.open]:opacity-0"></span>
-        <span class="block w-6 h-[2px] bg-slate-800 rounded transition-transform duration-300 group-[.open]:-rotate-45 group-[.open]:-translate-y-[10px]"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Menu --
-  <nav id="mobile-nav" class="hidden flex-col space-y-4 px-6 py-6 bg-white shadow-lg rounded-b-2xl transform transition-all duration-500 ease-out opacity-0 scale-y-0 origin-top">
-    <a href="quiz.html" class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">Ability Test</a>
-    <a href="#about" class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">About</a>
-    <a href="features.html" class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">Features</a>
-    <a href="admin.html" class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">Admin Only</a>
-    
-  </nav>
-</header>-->
-
-<script>
+ <script>
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menu-toggle");
   const mobileNav = document.getElementById("mobile-nav");
@@ -212,67 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-  
-<!-- Header --
-<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm shadow-md z-40">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo + Title + Sign Up --
-      <div class="flex items-center space-x-4">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-sky-400 flex items-center justify-center text-white font-bold">SKL</div>
-        <div class="hidden sm:block">
-          <h1 class="text-lg font-semibold">SmartKids Learning</h1>
-          <p class="text-xs text-slate-500">Coding, Computer Literacy & Test of Knowledge</p>
-        </div>
-
-<!-- Auth Button --
-<button id="authBtn"
-  class="ml-4 px-4 py-1.5 border border-blue-600 rounded-full text-blue-600 text-sm font-medium bg-white transition duration-200 ease-in-out hover:bg-blue-50 active:scale-95 active:shadow-[0_0_10px_rgba(59,130,246,0.7)]">
-  Sign In / Register
-</button>
-<!-- Blinking Features Button --
-<a href="features.html" class="blinking-button">Features</a>      
-  </div>
-      <!-- Desktop Menu --
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="https://slide-t.github.io/smartkids-learning/admin.html" class="block">Admin Only</a>
-        <a href="#about" class="hover:underline">About</a>
-      </nav>
-      <!-- Right side --
-      <div class="flex items-center gap-3">
-        <!-- Hamburger (mobile only) --
-        <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 px-3 py-2 border rounded-lg">
-          <span class="block w-5 h-0.5 bg-slate-800"></span>
-          <span class="block w-5 h-0.5 bg-slate-800"></span>
-          <span class="block w-5 h-0.5 bg-slate-800"></span>
-        </button>
-        <!-- Start Learning --
-        <a href="https://slide-t.github.io/smartkids-learning/quiz.html" class="inline-block px-4 py-2 rounded-full bg-indigo-600 text-white text-sm shadow-sm hover:bg-indigo-700">Ability Test</a>
-      </div>
-    </div>
-  </div>
-  <!-- Mobile Menu --
-<div id="mobile-menu"
-  class="hidden flex-col space-y-4 px-6 py-6 bg-white shadow-lg rounded-b-2xl 
-         transform transition-all duration-500 ease-in-out origin-top scale-y-0">
-  <a href="quiz.html"
-     class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">
-    Ability Test
-  </a>
-  <a href="#about"
-     class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">
-    About
-  </a>
-  <a href="admin.html"
-     class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">
-    Admin Only
-  </a>
-  <a href="lessons.html"
-     class="block text-center py-3 rounded-xl border border-gray-300 bg-gray-50 hover:bg-blue-600 hover:text-white active:scale-95 transition-all duration-300 shadow-sm">
-    Start Lessons
-  </a>
-</div>
-</header>
 <!-- Hero Banner -->
 <div class="relative mt-16">
   <!-- Responsive Hero Images -->
@@ -312,42 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </a>
   </div>
 </div>
-<!-- Fade Script --
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const captions = document.querySelectorAll(".caption-text");
-    const images = document.querySelectorAll(".hero-image");
-    let index = 0;
-    const fadeDuration = 1000; // 1 second
-    const displayDuration = 3000; // visible for 3 seconds
-
-    // Initial state
-    captions.forEach((c, i) => {
-      c.style.opacity = i === 0 ? 1 : 0;
-      c.style.transition = `opacity ${fadeDuration}ms ease`;
-    });
-    images.forEach((img, i) => {
-      img.style.opacity = i === 0 ? 1 : 0;
-      img.style.transition = `opacity ${fadeDuration}ms ease`;
-    });
-
-    // Rotate captions & images
-    setInterval(() => {
-      const currentCaption = captions[index];
-      const nextCaption = captions[(index + 1) % captions.length];
-      const currentImage = images[index];
-      const nextImage = images[(index + 1) % images.length];
-      currentCaption.style.opacity = 0;
-      currentImage.style.opacity = 0;
-      setTimeout(() => {
-        nextCaption.style.opacity = 1;
-        nextImage.style.opacity = 1;
-      }, fadeDuration / 2);
-      index = (index + 1) % captions.length;
-    }, fadeDuration + displayDuration);
-  });
-</script>
- <!-- Hero Section -->
+<!-- Hero Section -->
   <main class="pt-28">
     <!-- Keep your hero and other sections as before -->
   </main>
