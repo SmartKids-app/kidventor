@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 3: Scrolling & Selecting | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    ::selection { background-color: #fbbf24; color: #000; }
+    .scroll-box::-webkit-scrollbar { width: 12px; }
+    .scroll-box::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+    .scroll-box::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; border: 3px solid #f1f5f9; }
+    .scroll-box::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    .hidden-message { opacity: 0.1; transition: opacity 0.3s; }
+    .hidden-message:hover { opacity: 1; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
+
+  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center shadow-sm sticky top-0 z-50">
+    <a href="../mouse-practice.html" class="text-indigo-600 font-bold flex items-center gap-2">
+      <span>←</span> Back to Hub
+    </a>
+    <div class="text-slate-500 font-medium text-sm">Year 3: Scrolling & Highlighting</div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto py-12 px-6">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-slate-800">Precision Skills 🎯</h1>
+      <p class="text-slate-600 mt-2">Learn to move through long pages and pick out important words.</p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      
+      <section>
+        <h2 class="text-xl font-bold mb-4 text-indigo-700 flex items-center gap-2">
+          <span>🖱️</span> 1. The Scroll Race
+        </h2>
+        <p class="text-sm text-slate-600 mb-4">Use the <strong>wheel</strong> on your mouse (or two fingers on a touchpad) to scroll to the bottom of this box to find the secret code!</p>
+        
+        <div class="scroll-box h-64 overflow-y-scroll bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-inner">
+          <p class="mb-4">Keep going...</p>
+          <p class="mb-4">Not there yet...</p>
+          <div class="h-64 flex items-center justify-center text-slate-300">--- Still Scrolling ---</div>
+          <p class="mb-4">Almost there...</p>
+          <div class="h-64 flex items-center justify-center text-slate-300">--- Almost there ---</div>
+          <div class="bg-indigo-100 p-4 rounded-xl text-center border-2 border-dashed border-indigo-300">
+            <span class="text-xs uppercase font-bold text-indigo-500 block mb-1">Secret Code:</span>
+            <span class="text-2xl font-black text-indigo-700 tracking-widest">SCROLL-MASTER</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold mb-4 text-amber-600 flex items-center gap-2">
+          <span>✍️</span> 2. Highlight the Hero
+        </h2>
+        <p class="text-sm text-slate-600 mb-4">Click and drag your mouse across the text below to "paint" it. Can you highlight the word <strong>"SUCCESS"</strong>?</p>
+        
+        <div class="bg-white border-2 border-slate-200 rounded-2xl p-8 shadow-sm text-lg leading-relaxed select-text">
+          "The secret to <span class="font-bold">SUCCESS</span> is to never give up. Computers are tools that help us achieve our goals."
+        </div>
+
+        <div class="mt-6 p-4 bg-amber-50 rounded-xl border border-amber-100">
+          <h4 class="font-bold text-amber-800 text-xs uppercase mb-1">Smart Tip:</h4>
+          <p class="text-[11px] text-amber-700 leading-tight">
+            Double-click a word to select just that word. Triple-click (click 3 times fast) to select the whole paragraph!
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="mt-16 bg-slate-900 text-white p-8 rounded-3xl shadow-xl">
+      <h3 class="text-xl font-bold mb-6">Double-Click Challenge</h3>
+      <p class="text-slate-400 mb-6 italic">In a CBT exam, you often have to select an answer. Try to double-click the correct option below:</p>
+      
+      <div class="grid gap-4">
+        <div class="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-indigo-500 transition cursor-text">
+          Option A: I use the right-click to highlight text.
+        </div>
+        <div class="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-green-500 transition cursor-text">
+          Option B: I use the left-click and drag to highlight text.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20 border-t border-slate-800">
+    <div class="max-w-5xl mx-auto text-center">
+        <p id="footer-typing" class="text-sm font-mono text-indigo-400 h-6"></p>
+        <p class="text-[10px] uppercase tracking-widest mt-4">© 2026 SmartKids Tech Skills • Nigeria</p>
+    </div>
+  </footer>
+
+  <script>
+    const footerMsg = "Great precision leads to great coding skills...";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 70);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
