@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How the Internet Works | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+  <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center text-white font-bold">SK</div>
+        <span class="font-bold text-xl tracking-tight">SmartKids</span>
+      </a>
+      <a href="../lessons.html" class="text-sm font-semibold text-sky-600 hover:underline">← All Lessons</a>
+    </div>
+  </nav>
+
+  <header class="bg-sky-600 text-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Module 2: Connectivity</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-4">How the Internet Works</h1>
+      <p class="mt-4 text-sky-100 text-lg">The "Magic" of how computers talk to each other across the world.</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-6">
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-sky-800">1. A Giant Web of Cables</h2>
+      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+        <p class="text-lg text-slate-700 mb-4">
+          Many people think the Internet is in the clouds, but it is actually a <strong>giant network of physical cables</strong> that run under the ground and across the bottom of the ocean!
+        </p>
+        <p class="text-slate-600">
+          When you send a message from Nigeria to a friend in another country, your data travels through these cables at the speed of light.
+        </p>
+      </div>
+    </section>
+
+    <div class="bg-sky-900 text-white p-8 rounded-3xl mb-12 shadow-xl">
+      <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><span>📮</span> The Digital Post Office</h3>
+      <p class="opacity-90 leading-relaxed mb-4">
+        Think of the Internet like a Post Office. Every computer has a unique address called an <strong>IP Address</strong> (like your home address).
+      </p>
+      <ul class="space-y-4 text-sm opacity-90">
+        <li class="flex gap-3"><b class="text-sky-300">1. The Letter:</b> Your email or photo is broken into small pieces called "Packets."</li>
+        <li class="flex gap-3"><b class="text-sky-300">2. The Envelope:</b> Each packet has the destination address written on it.</li>
+        <li class="flex gap-3"><b class="text-sky-300">3. The Router:</b> Routers are like mail trucks that move your packets from one network to another until they reach the destination.</li>
+      </ul>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-sky-400">
+        <h3 class="font-bold text-xl mb-2">The Server</h3>
+        <p class="text-slate-600 text-sm">A powerful computer that "serves" information. When you go to <em>google.com</em>, your computer asks Google's server to send it the website.</p>
+      </div>
+      <div class="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-sky-400">
+        <h3 class="font-bold text-xl mb-2">The Browser</h3>
+        <p class="text-slate-600 text-sm">Apps like <strong>Chrome</strong> or <strong>Safari</strong> that act as your "window" to view the information sent by servers.</p>
+      </div>
+    </div>
+
+    <section class="bg-slate-100 p-8 rounded-3xl border border-slate-200">
+      <h2 class="text-xl font-bold mb-4">Internet Trivia</h2>
+      <p class="text-sm text-slate-600 mb-6">What is the "unique address" that every computer on the internet has?</p>
+      <div class="space-y-3">
+        <button onclick="alert('Try again! An Email Address is for people, but computers use something else.')" class="w-full text-left bg-white p-4 rounded-xl border border-slate-300 hover:border-sky-400 transition shadow-sm">A) Email Address</button>
+        <button onclick="alert('Correct! An IP Address is the specific numeric address of a device.')" class="w-full text-left bg-white p-4 rounded-xl border border-slate-300 hover:border-sky-400 transition shadow-sm">B) IP Address</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-800 pb-8">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-2">
+          <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center font-bold text-xs">SK</div>
+          <span class="font-bold tracking-tight text-lg text-white">SmartKids Learning</span>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">
+          Part of the SmartKids Digital Literacy Program
+        </p>
+        <div class="h-5">
+          <p id="footer-typing" class="text-sm font-mono text-blue-400"></p>
+        </div>
+      </div>
+      <nav class="flex gap-8 text-sm font-medium">
+        <a href="../about.html" class="hover:text-white transition-colors">About</a>
+        <a href="../privacy.html" class="hover:text-white transition-colors">Privacy</a>
+      </nav>
+    </div>
+    <p class="text-center mt-8 text-[10px] uppercase tracking-widest text-slate-600">© 2026 SmartKids Tech Skills • Nigeria</p>
+  </footer>
+
+  <script>
+    const footerMsg = "Empowering the next generation of African tech leaders.";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(() => { el.innerHTML = ""; charIdx = 0; type(); }, 5000);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
