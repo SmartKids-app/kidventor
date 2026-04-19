@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netiquette: Being Kind Online | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-indigo-50 text-slate-900 font-sans leading-relaxed">
+
+  <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">SK</div>
+        <span class="font-bold text-xl tracking-tight">SmartKids</span>
+      </a>
+      <a href="../lessons.html" class="text-sm font-semibold text-indigo-600 hover:underline">← All Lessons</a>
+    </div>
+  </nav>
+
+  <header class="bg-indigo-600 text-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Digital Citizenship</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-4">What is Netiquette?</h1>
+      <p class="mt-4 text-indigo-100 text-lg">Learn the golden rules of how to behave in the digital world.</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-6">
+    
+    <section class="bg-white rounded-3xl p-8 shadow-sm border border-indigo-100 mb-10">
+      <h2 class="text-2xl font-bold mb-4 text-indigo-800">The Definition</h2>
+      <p class="text-slate-700 text-lg">
+        <strong>Netiquette</strong> is a combination of the words <em>Network</em> and <em>Etiquette</em>. It is a set of rules for behaving properly online. Just as we use good manners at the dinner table or in the classroom, we must use good manners on the internet.
+      </p>
+    </section>
+
+    <h2 class="text-3xl font-bold mb-8 text-center">The 5 Golden Rules</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <div class="bg-white p-6 rounded-2xl border-t-4 border-yellow-400 shadow-sm">
+        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>🤝</span> Remember the Human</h3>
+        <p class="text-slate-600 text-sm">Never say anything online that you wouldn't say to someone's face. Behind every screen name is a real person with real feelings.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border-t-4 border-blue-400 shadow-sm">
+        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>🤫</span> Respect Privacy</h3>
+        <p class="text-slate-600 text-sm">Do not share other people's secrets, photos, or private information without their permission. Keep your own passwords private too!</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border-t-4 border-red-400 shadow-sm">
+        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>📢</span> Don't SHOUT</h3>
+        <p class="text-slate-600 text-sm">Writing in all capital letters (LIKE THIS) is considered shouting online. Use normal casing to be polite.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border-t-4 border-green-400 shadow-sm">
+        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>✨</span> Check Your Facts</h3>
+        <p class="text-slate-600 text-sm">Don't spread "Fake News." Always make sure information is true before you share it with your friends or family.</p>
+      </div>
+    </div>
+
+    <div class="mt-12 bg-indigo-900 text-white p-8 rounded-3xl shadow-xl">
+      <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><span>🌍</span> African Wisdom Online</h3>
+      <p class="italic opacity-90 leading-relaxed">
+        "It takes a village to raise a child." In the digital village, we are all responsible for each other. When you are kind to someone in a comment or a chat, you are helping build a better digital world for everyone.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-800 pb-8">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-2">
+          <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center font-bold text-xs">SK</div>
+          <span class="font-bold tracking-tight text-lg">SmartKids Learning</span>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">
+          Part of the SmartKids Digital Literacy Program
+        </p>
+        <div class="h-5">
+          <p id="footer-typing" class="text-sm font-mono text-blue-400"></p>
+        </div>
+      </div>
+      <nav class="flex gap-8 text-sm font-medium">
+        <a href="../about.html" class="hover:text-white">About</a>
+        <a href="../privacy.html" class="hover:text-white">Privacy</a>
+      </nav>
+    </div>
+    <p class="text-center mt-8 text-[10px] uppercase tracking-widest">© 2026 SmartKids Tech Skills</p>
+  </footer>
+
+  <script>
+    const footerMsg = "Empowering the next generation of African tech leaders.";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(() => { el.innerHTML = ""; charIdx = 0; type(); }, 5000);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
