@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is a Computer? | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+  <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">SK</div>
+        <span class="font-bold text-xl tracking-tight">SmartKids</span>
+      </a>
+      <a href="../lessons.html" class="text-sm font-semibold text-blue-600 hover:underline">← All Lessons</a>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Module 1: Foundations</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-4">What is a Computer?</h1>
+      <p class="mt-4 text-blue-100 text-lg max-w-2xl">Understanding the amazing machines that help us learn, play, and connect with the world.</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-6">
+    
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-blue-800">1. The Simple Definition</h2>
+      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+        <p class="text-lg text-slate-700">
+          A <strong>computer</strong> is an electronic device that manipulates information, or data. It has the ability to <strong>store</strong>, <strong>retrieve</strong>, and <strong>process</strong> data.
+        </p>
+        <p class="mt-4 text-slate-600">
+          Think of a computer like a very fast chef. You give it the ingredients (Input), it follows a recipe (Processing), and it serves a delicious meal (Output).
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-blue-800">2. The "Four Functions" of a Computer</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border-l-4 border-yellow-400 shadow-sm">
+          <h3 class="font-bold text-lg text-yellow-700">📥 Input</h3>
+          <p class="text-sm text-slate-600">How you tell the computer what to do (using a keyboard, mouse, or your voice).</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border-l-4 border-blue-400 shadow-sm">
+          <h3 class="font-bold text-lg text-blue-700">⚙️ Processing</h3>
+          <p class="text-sm text-slate-600">The "thinking" part where the computer follows instructions (done by the CPU).</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border-l-4 border-green-400 shadow-sm">
+          <h3 class="font-bold text-lg text-green-700">📤 Output</h3>
+          <p class="text-sm text-slate-600">How the computer shows you the results (on a screen or through speakers).</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border-l-4 border-purple-400 shadow-sm">
+          <h3 class="font-bold text-lg text-purple-700">💾 Storage</h3>
+          <p class="text-sm text-slate-600">Where the computer remembers things for later (the Hard Drive or Memory).</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="bg-blue-900 text-white p-8 rounded-3xl shadow-xl my-12 relative overflow-hidden">
+      <div class="relative z-10">
+        <h3 class="text-xl font-bold mb-2 flex items-center gap-2"><span>💡</span> Did You Know?</h3>
+        <p class="opacity-90">
+          The first computers were so big that they could fill an entire room! Today, computers are so small they can fit inside your watch or even your pocket (like a smartphone).
+        </p>
+      </div>
+      <div class="absolute -right-4 -bottom-4 text-9xl opacity-10 font-bold">?!</div>
+    </div>
+
+    <section class="bg-slate-100 p-8 rounded-3xl border border-slate-200">
+      <h2 class="text-xl font-bold mb-4">Quick Quiz</h2>
+      <p class="text-sm text-slate-600 mb-6">Which part of a computer is like its "brain"?</p>
+      <div class="flex flex-col gap-3">
+        <button onclick="alert('Not quite! The monitor is the eyes/face of the computer.')" class="bg-white p-4 rounded-xl border text-left hover:bg-blue-50 transition shadow-sm">A) The Monitor</button>
+        <button onclick="alert('Correct! The CPU (Central Processing Unit) is the brain that does all the thinking.')" class="bg-white p-4 rounded-xl border text-left hover:bg-blue-50 transition shadow-sm">B) The CPU</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-800 pb-8">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-2">
+          <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center font-bold text-xs">SK</div>
+          <span class="font-bold tracking-tight text-lg">SmartKids Learning</span>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">
+          Part of the SmartKids Digital Literacy Program
+        </p>
+        <div class="h-5">
+          <p id="footer-typing" class="text-sm font-mono text-blue-400"></p>
+        </div>
+      </div>
+      <nav class="flex gap-8 text-sm font-medium">
+        <a href="../about.html" class="hover:text-white transition-colors">About</a>
+        <a href="../privacy.html" class="hover:text-white transition-colors">Privacy</a>
+      </nav>
+    </div>
+    <p class="text-center mt-8 text-[10px] uppercase tracking-widest text-slate-600">© 2026 SmartKids Tech Skills</p>
+  </footer>
+
+  <script>
+    const footerMsg = "Empowering the next generation of African tech leaders.";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 70);
+      } else {
+        setTimeout(() => { el.innerHTML = ""; charIdx = 0; type(); }, 5000);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
