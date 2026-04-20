@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 5: Power Keys | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .key-cap { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-weight: 800; border-bottom: 5px solid #cbd5e1; background: white; transition: all 0.1s; position: relative; }
+    .key-active { background: #0ea5e9 !important; color: white !important; border-color: #0284c7 !important; transform: translateY(2px); }
+    .key-success { background: #22c55e !important; color: white !important; }
+    
+    /* Gate System Styles */
+    .gate-locked { filter: grayscale(1); opacity: 0.3; pointer-events: none; border: 2px dashed #cbd5e1; }
+    .gate-unlocked { border: 2px solid #0ea5e9; background: white; cursor: pointer; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; }
+    .status-done { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+
+    .timer-bar { transition: width 0.1s linear; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
+
+  <div id="mission-overlay" class="fixed inset-0 z-[100] bg-slate-900/95 flex items-center justify-center p-6 hidden">
+    <div class="bg-white max-w-xl w-full rounded-[2.5rem] p-10 shadow-2xl text-center">
+      <div id="overlay-icon" class="text-6xl mb-4">🚀</div>
+      <h2 id="overlay-title" class="text-3xl font-black text-slate-800 mb-4">Level Title</h2>
+      <div id="overlay-content" class="text-slate-600 mb-8 text-lg"></div>
+      <button onclick="closeOverlay()" class="w-full bg-sky-600 text-white font-bold py-5 rounded-2xl text-xl">I'm Ready!</button>
+    </div>
+  </div>
+
+  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <a href="../keyboard.html" class="text-sky-600 font-bold">← Hub</a>
+    <div class="flex gap-4">
+        <div id="badge-1" class="status-dot status-done"></div>
+        <div id="badge-2" class="status-dot"></div>
+        <div id="badge-3" class="status-dot"></div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto py-10 px-6">
+    <div id="gate-selector" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div id="gate-1" class="gate-unlocked p-6 rounded-3xl text-center shadow-lg" onclick="startLevel(1)">
+            <span class="text-4xl block mb-2">⌨️</span>
+            <h3 class="font-black text-sm uppercase">1. The Spacebar</h3>
+            <p class="text-[10px] text-slate-500">Master your Thumbs</p>
+        </div>
+        <div id="gate-2" class="gate-locked p-6 rounded-3xl text-center shadow-lg" onclick="startLevel(2)">
+            <span class="text-4xl block mb-2">⌫</span>
+            <h3 class="font-black text-sm uppercase">2. The Eraser</h3>
+            <p class="text-[10px] text-slate-500">Backspace Control</p>
+        </div>
+        <div id="gate-3" class="gate-locked p-6 rounded-3xl text-center shadow-lg" onclick="startLevel(3)">
+            <span class="text-4xl block mb-2">⬆️</span>
+            <h3 class="font-black text-sm uppercase">3. The Shifter</h3>
+            <p class="text-[10px] text-slate-500">Capital Letters</p>
+        </div>
+    </div>
+
+    <div id="play-area" class="hidden">
+        <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-slate-200 mb-8 text-center relative overflow-hidden">
+            <div id="timer-container" class="absolute top-0 left-0 w-full h-2 bg-slate-100">
+                <div id="timer-progress" class="h-full bg-sky-500 timer-bar" style="width: 100%"></div>
+            </div>
+            <div id="target-box" class="text-7xl font-black text-slate-800 h-32 flex items-center justify-center uppercase italic">READY?</div>
+            <p id="instruction" class="text-sky-600 font-bold uppercase text-xs tracking-widest"></p>
+        </div>
+
+        <div class="bg-slate-900 p-12 rounded-[3.5rem] shadow-2xl flex justify-center items-center h-48">
+            <div id="key-visual-container" class="flex gap-4"></div>
+        </div>
+    </div>
+  </main>
+
+  <script>
+    let currentLevel = 0;
+    let streak = 0;
+    let timerId = null;
+    let activeTarget = "";
+
+    const levelData = {
+        1: {
+            title: "Thumb Power",
+            desc: "The Spacebar is the most used key! <b>Rule:</b> Only use your RIGHT THUMB to press it.",
+            targets: ["SPACE", "SPACE", "SPACE", "SPACE", "SPACE"],
+            instruction: "Use Right Thumb",
+            keyHtml: '<div id="K-SPACE" class="key-cap" style="width:250px">SPACE</div>'
+        },
+        2: {
+            title: "The Eraser",
+            desc: "Mistakes happen. Use your <b>Right Pinky</b> to reach up to the Backspace key. Don't look!",
+            targets: ["BACKSPACE", "BACKSPACE", "BACKSPACE"],
+            instruction: "Reach with Right Pinky",
+            keyHtml: '<div id="K-BACKSPACE" class="key-cap" style="width:120px">BACKSPACE</div>'
+        },
+        3: {
+            title: "The Great Shifter",
+            desc: "To make a CAPITAL letter, hold <b>SHIFT</b> with one hand and tap the letter with the other!",
+            targets: ["A", "B", "C", "D"], // We will check for uppercase
+            instruction: "Hold Shift + Letter",
+            keyHtml: '<div id="K-SHIFT" class="key-cap" style="width:100px">SHIFT</div> <div class="text-white text-4xl">+</div> <div class="key-cap">Letter</div>'
+        }
+    };
+
+    function startLevel(lvl) {
+        currentLevel = lvl;
+        streak = 0;
+        const data = levelData[lvl];
+        
+        // Show Overlay
+        document.getElementById('overlay-title').innerText = data.title;
+        document.getElementById('overlay-content').innerHTML = data.desc;
+        document.getElementById('mission-overlay').classList.remove('hidden');
+        
+        // Setup Play Area
+        document.getElementById('gate-selector').classList.add('hidden');
+        document.getElementById('play-area').classList.remove('hidden');
+        document.getElementById('key-visual-container').innerHTML = data.keyHtml;
+        document.getElementById('instruction').innerText = data.instruction;
+    }
+
+    function closeOverlay() {
+        document.getElementById('mission-overlay').classList.add('hidden');
+        nextTarget();
+    }
+
+    function nextTarget() {
+        const data = levelData[currentLevel];
+        if (streak >= data.targets.length) {
+            completeLevel();
+            return;
+        }
+        activeTarget = data.targets[streak];
+        document.getElementById('target-box').innerText = activeTarget;
+        startTimer();
+    }
+
+    function startTimer() {
+        clearInterval(timerId);
+        let timeLeft = 4000;
+        timerId = setInterval(() => {
+            timeLeft -= 100;
+            document.getElementById('timer-progress').style.width = (timeLeft/4000)*100 + "%";
+            if(timeLeft <= 0) { clearInterval(timerId); fail(); }
+        }, 100);
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (currentLevel === 0) return;
+        
+        let success = false;
+        if (currentLevel === 1 && e.code === "Space") success = true;
+        if (currentLevel === 2 && e.key === "Backspace") { e.preventDefault(); success = true; }
+        if (currentLevel === 3 && e.shiftKey && e.key.toUpperCase() === activeTarget) success = true;
+
+        if (success) {
+            streak++;
+            clearInterval(timerId);
+            nextTarget();
+        } else if (e.key !== "Shift") {
+            fail();
+        }
+    });
+
+    function fail() {
+        streak = 0;
+        document.getElementById('target-box').classList.add('text-red-500');
+        setTimeout(() => {
+            document.getElementById('target-box').classList.remove('text-red-500');
+            nextTarget();
+        }, 400);
+    }
+
+    function completeLevel() {
+        clearInterval(timerId);
+        document.getElementById(`badge-${currentLevel}`).classList.add('status-done');
+        if (currentLevel < 3) {
+            document.getElementById(`gate-${currentLevel + 1}`).classList.remove('gate-locked');
+            document.getElementById(`gate-${currentLevel + 1}`).classList.add('gate-unlocked');
+        }
+        
+        document.getElementById('play-area').classList.add('hidden');
+        document.getElementById('gate-selector').classList.remove('hidden');
+        
+        if (currentLevel === 3) {
+            alert("GRADUATION COMPLETE! You are a Certified Power User.");
+        }
+        currentLevel = 0;
+    }
+  </script>
+</body>
+</html>
