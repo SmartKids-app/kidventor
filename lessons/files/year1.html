@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 1: The Folder Sorter | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <style>
+    .folder { transition: all 0.3s; border: 4px dashed #cbd5e1; }
+    .folder.drag-over { border-color: #3b82f6; background: #eff6ff; transform: scale(1.05); }
+    .file-icon { cursor: grab; user-select: none; }
+    .file-icon:active { cursor: grabbing; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans p-8">
+
+  <header class="max-w-4xl mx-auto text-center mb-12">
+    <h1 class="text-4xl font-black text-slate-800">The Folder Sorter</h1>
+    <p class="text-slate-500 mt-2">A computer is like a library. Let's put these files in the right place!</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <div id="folder-photos" class="folder bg-white p-8 rounded-[3rem] text-center" ondragover="event.preventDefault()" ondrop="handleDrop(event, 'photo')">
+        <div class="text-6xl mb-4">🖼️</div>
+        <h2 class="font-black text-amber-600 uppercase tracking-widest">Photos</h2>
+        <p class="text-xs text-slate-400">Put pictures here</p>
+        <div id="count-photo" class="mt-4 font-bold text-slate-300">0 Items</div>
+    </div>
+
+    <div id="folder-docs" class="folder bg-white p-8 rounded-[3rem] text-center" ondragover="event.preventDefault()" ondrop="handleDrop(event, 'doc')">
+        <div class="text-6xl mb-4">📄</div>
+        <h2 class="font-black text-blue-600 uppercase tracking-widest">Documents</h2>
+        <p class="text-xs text-slate-400">Put writing here</p>
+        <div id="count-doc" class="mt-4 font-bold text-slate-300">0 Items</div>
+    </div>
+
+    <div id="folder-music" class="folder bg-white p-8 rounded-[3rem] text-center" ondragover="event.preventDefault()" ondrop="handleDrop(event, 'music')">
+        <div class="text-6xl mb-4">🎵</div>
+        <h2 class="font-black text-green-600 uppercase tracking-widest">Music</h2>
+        <p class="text-xs text-slate-400">Put songs here</p>
+        <div id="count-music" class="mt-4 font-bold text-slate-300">0 Items</div>
+    </div>
+
+    <div class="md:col-span-3 bg-slate-200 p-10 rounded-[3rem] mt-8">
+        <h3 class="text-center font-bold text-slate-500 mb-8 uppercase tracking-widest italic">The Messy Desktop</h3>
+        <div id="desktop" class="flex flex-wrap justify-center gap-6">
+            <div draggable="true" ondragstart="handleDragStart(event, 'photo')" class="file-icon bg-white p-4 rounded-2xl shadow-md text-center w-24">
+                <div class="text-3xl">🦁</div>
+                <p class="text-[10px] font-bold mt-2">lion.jpg</p>
+            </div>
+            <div draggable="true" ondragstart="handleDragStart(event, 'doc')" class="file-icon bg-white p-4 rounded-2xl shadow-md text-center w-24">
+                <div class="text-3xl">📝</div>
+                <p class="text-[10px] font-bold mt-2">story.txt</p>
+            </div>
+            <div draggable="true" ondragstart="handleDragStart(event, 'music')" class="file-icon bg-white p-4 rounded-2xl shadow-md text-center w-24">
+                <div class="text-3xl">🥁</div>
+                <p class="text-[10px] font-bold mt-2">drums.mp3</p>
+            </div>
+            </div>
+    </div>
+  </main>
+
+  <script>
+    let draggedType = '';
+    let scores = { photo: 0, doc: 0, music: 0 };
+    const totalItems = 3; // Update this as you add more items
+
+    function handleDragStart(e, type) {
+        draggedType = type;
+        e.target.style.opacity = '0.4';
+        // Store the ID of the element so we can remove it on drop
+        e.dataTransfer.setData("text", e.target.innerHTML);
+    }
+
+    function handleDrop(e, folderType) {
+        e.preventDefault();
+        const folder = e.currentTarget;
+        
+        if (draggedType === folderType) {
+            // SUCCESS
+            scores[folderType]++;
+            document.getElementById(`count-${folderType}`).innerText = `${scores[folderType]} Items`;
+            folder.classList.add('bg-green-100', 'border-green-500');
+            setTimeout(() => folder.classList.remove('bg-green-100', 'border-green-500'), 500);
+            
+            // Remove the item from desktop (In a real app, we'd hide the specific dragged element)
+            alert("Correct! It's in the folder.");
+            checkWin();
+        } else {
+            // WRONG FOLDER
+            folder.classList.add('bg-red-100', 'border-red-500');
+            setTimeout(() => folder.classList.remove('bg-red-100', 'border-red-500'), 500);
+            alert("Oops! That doesn't belong there.");
+        }
+    }
+
+    function checkWin() {
+        const currentTotal = scores.photo + scores.doc + scores.music;
+        if (currentTotal === totalItems) {
+            alert("Year 1 Complete! You are a master organizer.");
+            window.location.href = '../keyboard-practice.html'; // Or next year
+        }
+    }
+  </script>
+</body>
+</html>
