@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 11: File Systems & Search | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-50 text-slate-900 font-sans min-h-screen">
+
+  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center shadow-sm">
+    <a href="../mouse-practice.html" class="text-zinc-600 font-bold flex items-center gap-2">
+      <span>←</span> Level 11 Hub
+    </a>
+    <div class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Advanced File Management</div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto py-12 px-6">
+    <header class="mb-10">
+      <h1 class="text-3xl font-black text-slate-800 underline decoration-indigo-500 underline-offset-8">Data Architecture 📂</h1>
+      <p class="text-slate-600 mt-4">Learn to navigate "Breadcrumbs" and use Search to filter large amounts of data.</p>
+    </header>
+
+    <div class="bg-white p-4 rounded-xl border border-slate-200 mb-6 flex items-center gap-2 text-sm text-slate-500 overflow-x-auto">
+      <span class="hover:text-indigo-600 cursor-pointer">Root</span> <span>/</span>
+      <span class="hover:text-indigo-600 cursor-pointer">Users</span> <span>/</span>
+      <span class="hover:text-indigo-600 cursor-pointer">SmartKids</span> <span>/</span>
+      <span class="font-bold text-slate-800">Final_Projects</span>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <aside class="lg:col-span-1 space-y-6">
+        <div class="bg-indigo-600 text-white p-6 rounded-3xl shadow-lg">
+          <h3 class="font-bold mb-2 flex items-center gap-2">
+            <span>⌨️</span> Filter Skill
+          </h3>
+          <p class="text-xs opacity-90 mb-4">Type to filter the file list. In the real world, <strong>Ctrl + F</strong> is your best friend!</p>
+          <input type="text" id="fileSearch" placeholder="Search files..." class="w-full px-4 py-2 rounded-lg text-slate-900 outline-none" onkeyup="filterFiles()">
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-200">
+          <h3 class="font-bold text-sm text-slate-400 uppercase mb-4">Metadata Concept</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Every file has <strong>Metadata</strong>. This is data <em>about</em> the data. It tells the computer the <strong>Size</strong>, <strong>Author</strong>, and <strong>Date</strong> without you opening the file.
+          </p>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-50 border-b border-slate-200">
+            <tr>
+              <th class="px-6 py-4 font-bold text-slate-700">File Name</th>
+              <th class="px-6 py-4 font-bold text-slate-700">Date</th>
+              <th class="px-6 py-4 font-bold text-slate-700">Size</th>
+            </tr>
+          </thead>
+          <tbody id="fileList">
+            <tr class="file-item border-b border-slate-100 hover:bg-slate-50">
+              <td class="px-6 py-4 font-medium">project_alpha.pdf</td>
+              <td class="px-6 py-4 text-slate-500">2026-04-10</td>
+              <td class="px-6 py-4 text-slate-500">1.2 MB</td>
+            </tr>
+            <tr class="file-item border-b border-slate-100 hover:bg-slate-50">
+              <td class="px-6 py-4 font-medium">website_logo.png</td>
+              <td class="px-6 py-4 text-slate-500">2026-04-12</td>
+              <td class="px-6 py-4 text-slate-500">450 KB</td>
+            </tr>
+            <tr class="file-item border-b border-slate-100 hover:bg-slate-50">
+              <td class="px-6 py-4 font-medium">exam_results.xlsx</td>
+              <td class="px-6 py-4 text-slate-500">2026-04-15</td>
+              <td class="px-6 py-4 text-slate-500">85 KB</td>
+            </tr>
+            <tr class="file-item border-b border-slate-100 hover:bg-slate-50">
+              <td class="px-6 py-4 font-medium">curriculum_v2.docx</td>
+              <td class="px-6 py-4 text-slate-500">2026-04-18</td>
+              <td class="px-6 py-4 text-slate-500">2.4 MB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function filterFiles() {
+      const input = document.getElementById('fileSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('.file-item');
+      
+      rows.forEach(row => {
+        const text = row.querySelector('td').innerText.toLowerCase();
+        row.style.display = text.includes(input) ? '' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
