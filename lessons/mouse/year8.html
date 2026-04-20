@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 8: Spreadsheet Navigation | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .cell { border: 1px solid #e2e8f0; width: 100px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; cursor: cell; transition: all 0.1s; }
+    .cell:hover { background-color: #f1f5f9; }
+    .cell.selected { background-color: #dbeafe; border: 2px solid #3b82f6; }
+    .header-cell { background-color: #f8fafc; font-weight: bold; position: sticky; top: 0; z-index: 10; border: 1px solid #cbd5e1; }
+    .row-num { background-color: #f8fafc; font-weight: bold; width: 40px; position: sticky; left: 0; z-index: 5; border: 1px solid #cbd5e1; }
+    .spreadsheet-container { height: 400px; overflow: auto; border: 2px solid #cbd5e1; border-radius: 12px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
+
+  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center shadow-sm sticky top-0 z-50">
+    <a href="../mouse-practice.html" class="text-green-600 font-bold flex items-center gap-2">
+      <span>←</span> Hub
+    </a>
+    <div class="text-slate-500 font-medium text-sm">Year 8: Cells & Data Selection</div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto py-10 px-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-extrabold text-slate-800">Spreadsheet Master 📊</h1>
+      <p class="text-slate-600 mt-2">Practice moving between tiny cells and selecting large groups of information.</p>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="font-bold text-xs text-green-600 uppercase mb-2">Goal 1</h3>
+        <p class="text-sm">Find and click on Cell <strong>C-15</strong>.</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="font-bold text-xs text-blue-600 uppercase mb-2">Goal 2</h3>
+        <p class="text-sm">Scroll down and find the word "SUCCESS" in <strong>Row 50</strong>.</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="font-bold text-xs text-orange-600 uppercase mb-2">Goal 3</h3>
+        <p class="text-sm">Highlight (Click & Drag) the first 5 cells in Column A.</p>
+      </div>
+    </div>
+
+    <div class="spreadsheet-container bg-white" id="sheet">
+      <table class="border-collapse">
+        <thead>
+          <tr>
+            <th class="row-num"></th>
+            <th class="header-cell">A</th>
+            <th class="header-cell">B</th>
+            <th class="header-cell">C</th>
+            <th class="header-cell">D</th>
+            <th class="header-cell">E</th>
+            <th class="header-cell">F</th>
+          </tr>
+        </thead>
+        <tbody id="sheet-body">
+            </tbody>
+      </table>
+    </div>
+
+    <section class="mt-12 bg-green-900 text-white p-8 rounded-3xl">
+      <h3 class="text-xl font-bold mb-4">The Power of the Grid</h3>
+      <p class="text-sm opacity-80 leading-relaxed">
+        In tools like Excel or Google Sheets, everything is organized in rows and columns. Precision clicking is vital here—if you click the wrong cell, you might change the wrong number! Master the grid, and you master the world's most powerful data tools.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const body = document.getElementById('sheet-body');
+    const cols = ['A', 'B', 'C', 'D', 'E', 'F'];
+    
+    for (let i = 1; i <= 100; i++) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="row-num text-center text-xs">${i}</td>`;
+        
+        cols.forEach(col => {
+            const td = document.createElement('td');
+            td.className = 'cell';
+            td.id = `${col}-${i}`;
+            td.innerText = (i === 50 && col === 'B') ? 'SUCCESS' : '';
+            
+            td.addEventListener('click', function() {
+                document.querySelectorAll('.cell').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+            tr.appendChild(td);
+        });
+        body.appendChild(tr);
+    }
+  </script>
+
+</body>
+</html>
