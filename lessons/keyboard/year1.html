@@ -9,6 +9,228 @@
     .key-cap { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 800; border-bottom: 4px solid #cbd5e1; background: white; transition: all 0.15s; font-size: 0.9rem; }
     .key-active { background: #f97316 !important; color: white !important; border-color: #ea580c !important; transform: translateY(2px); border-bottom-width: 2px; }
     .key-success { background: #22c55e !important; color: white !important; border-color: #16a34a !important; }
+    
+    /* Finger Highlight Colors */
+    .f-pinky { border-top: 4px solid #ec4899; }
+    .f-ring { border-top: 4px solid #a855f7; }
+    .f-middle { border-top: 4px solid #3b82f6; }
+    .f-index { border-top: 4px solid #eab308; }
+    
+    .mission-tab { border-bottom: 4px solid transparent; transition: all 0.3s; opacity: 0.4; }
+    .mission-tab.active { border-color: #f97316; opacity: 1; color: #f97316; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
+
+  <div id="mission-overlay" class="fixed inset-0 z-[100] bg-slate-900/90 flex items-center justify-center p-6">
+    <div class="bg-white max-w-2xl w-full rounded-[2.5rem] p-10 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <div id="overlay-icon" class="text-6xl mb-4 text-center">✋</div>
+      <h2 id="overlay-title" class="text-3xl font-black text-center text-slate-800 mb-4">Mission Briefing</h2>
+      
+      <div id="overlay-content" class="text-slate-600 leading-relaxed mb-8 space-y-6">
+        </div>
+
+      <button onclick="startMission()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-5 rounded-2xl transition-all shadow-lg shadow-orange-200 text-xl">
+        I Understand! Start Practice 🚀
+      </button>
+    </div>
+  </div>
+
+  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <a href="../keyboard.html" class="text-orange-600 font-bold flex items-center gap-2"><span>←</span> Hub</a>
+    <div class="flex gap-6">
+        <div id="tab-0" class="mission-tab active font-black text-[10px] uppercase tracking-widest">1. Geography</div>
+        <div id="tab-1" class="mission-tab font-black text-[10px] uppercase tracking-widest">2. Finding Letters</div>
+        <div id="tab-2" class="mission-tab font-black text-[10px] uppercase tracking-widest">3. Alphabet Map</div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto py-10 px-6 text-center">
+    <div class="bg-white p-8 rounded-[2rem] shadow-xl border-b-8 border-slate-200 mb-8">
+        <h2 id="mission-title" class="text-orange-500 font-black uppercase text-sm mb-2 tracking-tighter italic">Mission</h2>
+        <div id="target-box" class="text-7xl font-black text-slate-800 h-24 flex items-center justify-center">...</div>
+        <p id="finger-instruction" class="mt-4 font-bold text-blue-600 animate-pulse"></p>
+    </div>
+
+    <div class="bg-slate-900 p-8 rounded-[3rem] shadow-2xl mb-8">
+        <div class="flex flex-col gap-2 items-center" id="kb-container"></div>
+    </div>
+
+    <div class="flex justify-center gap-4 flex-wrap">
+        <div class="flex items-center gap-2 px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-bold">Pinky</div>
+        <div class="flex items-center gap-2 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">Ring</div>
+        <div class="flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">Middle</div>
+        <div class="flex items-center gap-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">Index</div>
+    </div>
+  </main>
+
+  <script>
+    const kbLayout = [
+        ["Q","W","E","R","T","Y","U","I","O","P"],
+        ["A","S","D","F","G","H","J","K","L"],
+        ["Z","X","C","V","B","N","M"]
+    ];
+
+    // Maps each key to a specific finger type for Year 1 visualization
+    const fingerMap = {
+        'Q':'pinky', 'A':'pinky', 'Z':'pinky',
+        'W':'ring', 'S':'ring', 'X':'ring',
+        'E':'middle', 'D':'middle', 'C':'middle',
+        'R':'index', 'T':'index', 'F':'index', 'G':'index', 'V':'index', 'B':'index',
+        'Y':'index', 'U':'index', 'H':'index', 'J':'index', 'N':'index', 'M':'index',
+        'I':'middle', 'K':'middle',
+        'O':'ring', 'L':'ring',
+        'P':'pinky'
+    };
+
+    let currentMission = 0;
+    let step = 0;
+    let missionActive = false;
+
+    const missions = [
+        { 
+            title: "Keyboard Geography", 
+            icon: "✋",
+            details: `
+                <p><strong>Did you know?</strong> You have 10 fingers, and each one has a special "home" on the keyboard. We don't just use one finger to type everything!</p>
+                <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500 text-left text-sm">
+                    <strong>The Rules:</strong><br>
+                    1. Use your <b>Left Pinky</b> for the far left keys.<br>
+                    2. Use your <b>Index Fingers</b> for the keys in the middle.<br>
+                    3. Never cross your hands!
+                </div>
+                <p>In this mission, look at the <strong>colors</strong> on the keys. They show you which finger is responsible for which row!</p>
+            `, 
+            targets: ["TOP ROW", "MIDDLE ROW", "BOTTOM ROW"] 
+        },
+        { 
+            title: "Finding Letters", 
+            icon: "🔍",
+            details: `<p>Great! Now let's test your speed. I will give you a letter. <b>Look at the color</b> on the virtual keyboard to see which finger you should use to press it.</p>`, 
+            targets: ["F", "J", "D", "K", "S"] 
+        },
+        { 
+            title: "Alphabet Map", 
+            icon: "🔤",
+            details: `<p>Final Challenge! We are going from A to Z. Try to keep your hands steady and only move the finger assigned to that letter's color.</p>`, 
+            targets: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("") 
+        }
+    ];
+
+    function showOverlay() {
+        missionActive = false;
+        const m = missions[currentMission];
+        document.getElementById('overlay-icon').innerText = m.icon;
+        document.getElementById('overlay-title').innerText = m.title;
+        document.getElementById('overlay-content').innerHTML = m.details;
+        document.getElementById('mission-overlay').classList.remove('hidden');
+    }
+
+    function startMission() {
+        document.getElementById('mission-overlay').classList.add('hidden');
+        missionActive = true;
+        runMission();
+    }
+
+    function buildKeyboard() {
+        const container = document.getElementById('kb-container');
+        container.innerHTML = '';
+        kbLayout.forEach((row, rIdx) => {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = `flex gap-2 ${rIdx === 1 ? 'ml-4' : (rIdx === 2 ? 'ml-8' : '')}`;
+            rowDiv.id = `row-${rIdx}`;
+            row.forEach(key => {
+                const k = document.createElement('div');
+                k.id = `K-${key}`;
+                const fClass = `f-${fingerMap[key]}`;
+                k.className = `key-cap ${fClass}`;
+                k.innerText = key;
+                rowDiv.appendChild(k);
+            });
+            container.appendChild(rowDiv);
+        });
+    }
+
+    function runMission() {
+        const m = missions[currentMission];
+        document.getElementById('mission-title').innerText = m.title;
+        const target = m.targets[step];
+        document.getElementById('target-box').innerText = target;
+
+        document.querySelectorAll('.key-cap').forEach(k => k.classList.remove('key-active'));
+        
+        if (currentMission === 0) {
+            document.querySelectorAll(`#row-${step} .key-cap`).forEach(k => k.classList.add('key-active'));
+            document.getElementById('finger-instruction').innerText = "Press any key in the highlighted row!";
+        } else {
+            const keyEl = document.getElementById(`K-${target}`);
+            if(keyEl) keyEl.classList.add('key-active');
+            const finger = fingerMap[target];
+            document.getElementById('finger-instruction').innerText = `Use your ${finger.toUpperCase()} finger!`;
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if(!missionActive) return;
+        const pressed = e.key.toUpperCase();
+        const m = missions[currentMission];
+        const target = m.targets[step];
+        let correct = false;
+
+        if (currentMission === 0) {
+            correct = kbLayout[step].includes(pressed);
+        } else {
+            correct = (pressed === target);
+        }
+
+        if (correct) {
+            const el = document.getElementById(`K-${pressed}`);
+            if(el) el.classList.add('key-success');
+            setTimeout(() => {
+                if(el) el.classList.remove('key-success');
+                step++;
+                if (step >= m.targets.length) {
+                    advanceMission();
+                } else {
+                    runMission();
+                }
+            }, 300);
+        }
+    });
+
+    function advanceMission() {
+        document.getElementById(`tab-${currentMission}`).classList.remove('active');
+        currentMission++;
+        step = 0;
+        if (currentMission < missions.length) {
+            document.getElementById(`tab-${currentMission}`).classList.add('active');
+            showOverlay();
+        } else {
+            document.getElementById('target-box').innerText = "🏅 DONE";
+            document.getElementById('finger-instruction').innerText = "You are ready for the Home Row!";
+        }
+    }
+
+    buildKeyboard();
+    showOverlay();
+  </script>
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 1: Keyboard Mastery | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .key-cap { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 800; border-bottom: 4px solid #cbd5e1; background: white; transition: all 0.15s; font-size: 0.9rem; }
+    .key-active { background: #f97316 !important; color: white !important; border-color: #ea580c !important; transform: translateY(2px); border-bottom-width: 2px; }
+    .key-success { background: #22c55e !important; color: white !important; border-color: #16a34a !important; }
     .mission-tab { border-bottom: 4px solid transparent; transition: all 0.3s; opacity: 0.4; }
     .mission-tab.active { border-color: #f97316; opacity: 1; color: #f97316; }
     .overlay-animate { animation: fadeIn 0.4s ease-out; }
