@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 3: The Rescue Mission | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .bin-zone { transition: all 0.3s; border: 4px dashed #94a3b8; }
+    .bin-zone.active { border-color: #ef4444; background: #fee2e2; }
+    .file-card { cursor: pointer; transition: transform 0.2s; }
+    .file-card:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-8 font-sans">
+
+  <div class="max-w-4xl mx-auto">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-black text-slate-800">The Recycle Bin Rescue</h1>
+      <p class="text-slate-500 mt-2">Oops! We accidentally deleted the "School_Project.doc". Can you go into the Bin and restore it?</p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      
+      <div class="bg-white p-8 rounded-[3rem] shadow-xl">
+        <h2 class="text-xl font-bold mb-6 text-slate-400 uppercase tracking-widest">My Desktop</h2>
+        <div id="desktop-files" class="space-y-4 min-h-[200px]">
+          <p id="empty-msg" class="text-slate-300 italic text-sm text-center mt-10">Desktop is empty...</p>
+        </div>
+      </div>
+
+      <div id="recycle-bin" class="bg-slate-200 p-8 rounded-[3rem] border-4 border-dashed border-slate-300">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-slate-500 uppercase tracking-widest">Recycle Bin</h2>
+            <span class="text-4xl">🗑️</span>
+        </div>
+        
+        <div id="bin-files" class="space-y-4">
+            <div id="rescue-item" onclick="restoreFile()" class="file-card bg-white p-4 rounded-2xl shadow-md flex items-center gap-4 border-2 border-transparent hover:border-blue-500">
+                <span class="text-3xl">📄</span>
+                <div>
+                    <p class="font-bold text-slate-700">School_Project.doc</p>
+                    <p class="text-[10px] text-blue-500 font-bold uppercase">Click to Restore</p>
+                </div>
+            </div>
+
+            <div class="file-card bg-white/50 p-4 rounded-2xl flex items-center gap-4 opacity-50 cursor-not-allowed">
+                <span class="text-3xl">🍌</span>
+                <p class="font-bold text-slate-400 italic text-sm">banana_peel.jpg (Old Junk)</p>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/80 flex items-center justify-center z-50">
+        <div class="bg-white p-12 rounded-[3rem] text-center max-w-sm">
+            <div class="text-6xl mb-4">🙌</div>
+            <h2 class="text-2xl font-black mb-2">Rescue Successful!</h2>
+            <p class="text-slate-500 mb-6">You learned that the Recycle Bin is your digital safety net.</p>
+            <button onclick="window.location.href='../../lessons.html'" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-blue-700">Finish Module 3</button>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    function restoreFile() {
+        const item = document.getElementById('rescue-item');
+        const desktop = document.getElementById('desktop-files');
+        const emptyMsg = document.getElementById('empty-msg');
+        
+        // 1. Remove from Bin
+        item.remove();
+        
+        // 2. Hide "Empty" message
+        emptyMsg.classList.add('hidden');
+        
+        // 3. Add to Desktop with "Fixed" styling
+        const restored = document.createElement('div');
+        restored.className = "bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 flex items-center gap-4 animate-bounce";
+        restored.innerHTML = `
+            <span class="text-3xl">📄</span>
+            <p class="font-bold text-blue-800">School_Project.doc (RESTORED)</p>
+        `;
+        desktop.appendChild(restored);
+
+        // 4. Show Win Modal after a short delay
+        setTimeout(() => {
+            document.getElementById('success-modal').classList.remove('hidden');
+        }, 1500);
+    }
+  </script>
+</body>
+</html>
