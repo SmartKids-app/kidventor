@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year 7: Precision Scroll & Zoom | SmartKids Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #map-container { overflow: hidden; cursor: grab; background: #f1f5f9; position: relative; height: 500px; }
+    #map-container:active { cursor: grabbing; }
+    #world-map { 
+        transform-origin: center; 
+        transition: transform 0.1s ease-out; 
+        width: 1500px; height: 1000px;
+        background: radial-gradient(circle, #bfdbfe 1px, transparent 1px);
+        background-size: 40px 40px;
+        display: flex; align-items: center; justify-content: center;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-white font-sans min-h-screen">
+
+  <nav class="bg-slate-800 border-b border-slate-700 py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <a href="../mouse-practice.html" class="text-blue-400 font-bold flex items-center gap-2">
+      <span>←</span> Hub
+    </a>
+    <div class="text-slate-400 font-medium text-sm">Year 7: Navigation & Zoom</div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto py-10 px-6">
+    <header class="mb-8 flex flex-col md:flex-row justify-between items-end gap-4">
+      <div>
+        <h1 class="text-3xl font-extrabold text-blue-400">The Explorer's Lens 🔭</h1>
+        <p class="text-slate-400 mt-2">Find the hidden 💎 Treasure on the map using your mouse wheel!</p>
+      </div>
+      <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-sm">
+        <span class="text-blue-400 font-bold">Zoom:</span> Use Scroll Wheel <br>
+        <span class="text-blue-400 font-bold">Pan:</span> Click & Drag
+      </div>
+    </header>
+
+    <div id="map-container" class="rounded-3xl border-4 border-slate-700 shadow-2xl">
+      <div id="world-map" style="transform: scale(1) translate(0px, 0px);">
+          <div class="p-12 bg-white text-slate-800 rounded-full shadow-2xl border-8 border-blue-500 text-4xl font-black">
+              MAP CENTER
+          </div>
+          <div id="treasure" onclick="alert('TREASURE FOUND! You have great precision!')" class="absolute cursor-pointer hover:scale-125 transition" style="top: 800px; left: 1200px;">
+              <span class="text-6xl">💎</span>
+              <p class="text-xs font-bold text-blue-600 bg-white px-2 py-1 rounded shadow-lg">TREASURE</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-8">
+        <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
+            <h3 class="text-xl font-bold mb-4 text-blue-400">What is "Panning"?</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+                Panning is moving the "view" of a document without moving the document itself. It's like moving your head to see a larger picture. In Year 7, we master this to navigate complex websites and design tools.
+            </p>
+        </div>
+        <div class="bg-blue-600 p-8 rounded-3xl shadow-xl">
+            <h3 class="text-xl font-bold mb-4">Precision Challenge</h3>
+            <ul class="space-y-3 text-sm font-medium">
+                <li class="flex items-center gap-2">✅ Zoom in until the "Map Center" fills the screen.</li>
+                <li class="flex items-center gap-2">✅ Zoom out to see the entire grid.</li>
+                <li class="flex items-center gap-2">✅ Pan to the far bottom-right to find the Diamond.</li>
+            </ul>
+        </div>
+    </div>
+  </main>
+
+  <script>
+    const container = document.getElementById('map-container');
+    const map = document.getElementById('world-map');
+    
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    // Zoom Logic
+    container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        scale = Math.min(Math.max(0.5, scale + delta), 3);
+        updateTransform();
+    }, { passive: false });
+
+    // Pan Logic
+    container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    });
+
+    function updateTransform() {
+        map.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+  </script>
+
+</body>
+</html>
