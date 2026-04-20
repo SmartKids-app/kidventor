@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 9: Shortcut Ninja | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .key-cap { width: 80px; height: 60px; display: flex; items: center; justify-content: center; border-radius: 12px; border-bottom: 5px solid #cbd5e1; background: white; font-weight: 800; font-size: 0.8rem; }
+    .active-combo { background: #10b981 !important; color: white !important; border-color: #059669 !important; transform: translateY(2px); }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans">
+
+  <nav class="p-6 flex justify-between">
+    <h2 class="font-black text-emerald-600">YEAR 9: SHORTCUTS</h2>
+    <div id="progress" class="font-mono">Mission: 1/4</div>
+  </nav>
+
+  <main class="max-w-2xl mx-auto py-10">
+    <div class="bg-white p-12 rounded-[3rem] shadow-xl text-center mb-8">
+        <div id="shortcut-name" class="text-3xl font-black text-slate-800 mb-2">COPY TEXT</div>
+        <p id="shortcut-combo" class="text-emerald-500 font-mono text-xl font-bold mb-8">CTRL + C</p>
+        
+        <div class="flex justify-center gap-4">
+            <div id="visual-ctrl" class="key-cap">CTRL</div>
+            <div class="text-3xl font-bold text-slate-300">+</div>
+            <div id="visual-key" class="key-cap">C</div>
+        </div>
+    </div>
+
+    <div class="bg-emerald-50 p-6 rounded-2xl border-2 border-emerald-100 italic text-slate-600 text-center">
+        "Speed Tip: Never use your mouse to copy and paste again!"
+    </div>
+  </main>
+
+  <script>
+    const missions = [
+        { name: "COPY TEXT", combo: "C", label: "C" },
+        { name: "PASTE TEXT", combo: "V", label: "V" },
+        { name: "UNDO MISTAKE", combo: "Z", label: "Z" },
+        { name: "SELECT ALL", combo: "A", label: "A" }
+    ];
+
+    let current = 0;
+
+    window.addEventListener('keydown', (e) => {
+        const goal = missions[current];
+        if (e.ctrlKey && e.key.toUpperCase() === goal.combo) {
+            e.preventDefault(); // Prevent browser from actually copying
+            
+            document.getElementById('visual-ctrl').classList.add('active-combo');
+            document.getElementById('visual-key').classList.add('active-combo');
+
+            setTimeout(() => {
+                document.getElementById('visual-ctrl').classList.remove('active-combo');
+                document.getElementById('visual-key').classList.remove('active-combo');
+                current++;
+                if(current < missions.length) updateMission();
+                else finish();
+            }, 500);
+        }
+    });
+
+    function updateMission() {
+        const m = missions[current];
+        document.getElementById('shortcut-name').innerText = m.name;
+        document.getElementById('shortcut-combo').innerText = "CTRL + " + m.label;
+        document.getElementById('visual-key').innerText = m.label;
+        document.getElementById('progress').innerText = `Mission: ${current + 1}/4`;
+    }
+
+    function finish() {
+        document.getElementById('shortcut-name').innerText = "🏆 MASTERED";
+        document.getElementById('shortcut-combo').innerText = "Shortcuts Unlocked!";
+    }
+  </script>
+</body>
+</html>
