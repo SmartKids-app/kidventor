@@ -97,6 +97,63 @@
         el.classList.toggle('item-open');
     }
 
+    // --- 1. COOKIE HELPER FUNCTIONS ---
+function setProgress(level) {
+    const d = new Date();
+    // Set expiry to 24 hours from now
+    d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+    document.cookie = "smartkids_mouse=" + level + ";expires=" + d.toUTCString() + ";path=/";
+}
+
+function getProgress() {
+    let name = "smartkids_mouse=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return null;
+}
+
+// --- 2. THE UPDATED LOCKING LOGIC ---
+const urlParams = new URLSearchParams(window.location.search);
+let unlocked = urlParams.get('unlocked');
+
+// If the URL has an unlock code, save it to the cookie!
+if (unlocked) {
+    setProgress(unlocked);
+} else {
+    // If no URL code, check if we have one saved from earlier today
+    unlocked = getProgress();
+}
+
+// Convert to number for comparison
+const currentLevel = parseInt(unlocked) || 1;
+
+// --- 3. UI UPDATES ---
+if (currentLevel >= 2) {
+    const y2 = document.getElementById('link-y2');
+    y2.classList.remove('opacity-50', 'pointer-events-none');
+    y2.classList.add('border-amber-400');
+    document.getElementById('lock-y2').innerHTML = '<span class="text-green-500">PLAY →</span>';
+    document.getElementById('prog-bar').style.width = '16%';
+}
+
+if (currentLevel >= 3) {
+    const y3 = document.getElementById('link-y3');
+    y3.classList.remove('opacity-50', 'pointer-events-none');
+    y3.classList.add('border-amber-400');
+    document.getElementById('lock-y3').innerHTML = '<span class="text-green-500">PLAY →</span>';
+    document.getElementById('prog-bar').style.width = '25%';
+}
+
+if (currentLevel >= 13) {
+    // Graduation Logic
+    document.getElementById('prog-bar').style.width = '100%';
+    document.getElementById('grad-box').classList.remove('hidden');
+}
+    
+    /*
     // LOCKING LOGIC BASED ON URL
     const urlParams = new URLSearchParams(window.location.search);
     const unlocked = urlParams.get('unlocked');
@@ -117,7 +174,7 @@
         document.getElementById('prog-bar').style.width = '25%';
     }
 
-    // Logic for Graduation would trigger when unlocked === '13'
+    // Logic for Graduation would trigger when unlocked === '13'*/
   </script>
 </body>
 </html>
