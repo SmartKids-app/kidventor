@@ -2,6 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Year 1: Home Row Hero | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .key-cap { transition: all 0.1s; transform: translateY(0); }
+    .key-pressed { transform: translateY(4px); background-color: #fda4af !important; border-bottom-width: 0px !important; }
+    
+    @keyframes dropKnight {
+      0% { transform: translateY(-100px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .knight-fall { animation: dropKnight 0.4s ease-out; }
+    
+    @keyframes slideUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      10% { transform: translateY(0); opacity: 1; }
+      90% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100%); opacity: 0; }
+    }
+    .feedback-overlay { animation: slideUp 2s forwards; }
+  </style>
+</head>
+<body class="bg-rose-900 min-h-screen flex flex-col items-center justify-center font-sans overflow-hidden">
+
+  <div id="diy-manual" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+    <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-rose-500">
+      <div class="text-5xl mb-4">🏰</div>
+      <h2 class="text-3xl font-black mb-4 text-slate-800">Mission: Knight's Landing</h2>
+      <div class="space-y-4 mb-8 text-slate-600">
+        <p>Your fingers are knights. They must stay on the <b>Home Row</b> to protect the castle!</p>
+        <ul class="space-y-2 font-medium">
+            <li class="flex gap-2"><span>👉</span> Feel the bumps on <b>F</b> and <b>J</b>.</li>
+            <li class="flex gap-2"><span>⌨️</span> Press the letter that appears on screen.</li>
+            <li class="flex gap-2"><span>🚫</span> <b>Don't look down!</b> Trust your knights.</li>
+        </ul>
+      </div>
+      <button onclick="startGame()" class="w-full bg-rose-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-all">Start Training</button>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <div id="target-letter" class="text-[12rem] font-black text-rose-300 mb-8 knight-fall uppercase">F</div>
+    
+    <div class="flex gap-3 justify-center mb-12">
+        <div id="visual-A" class="key-cap w-16 h-16 bg-white rounded-xl border-b-8 border-rose-200 flex items-center justify-center text-2xl font-black text-slate-700">A</div>
+        <div id="visual-S" class="key-cap w-16 h-16 bg-white rounded-xl border-b-8 border-rose-200 flex items-center justify-center text-2xl font-black text-slate-700">S</div>
+        <div id="visual-D" class="key-cap w-16 h-16 bg-white rounded-xl border-b-8 border-rose-200 flex items-center justify-center text-2xl font-black text-slate-700">D</div>
+        <div id="visual-F" class="key-cap w-16 h-16 bg-rose-100 rounded-xl border-b-8 border-rose-300 flex items-center justify-center text-2xl font-black text-rose-600">F</div>
+        <div class="w-8"></div>
+        <div id="visual-J" class="key-cap w-16 h-16 bg-rose-100 rounded-xl border-b-8 border-rose-300 flex items-center justify-center text-2xl font-black text-rose-600">J</div>
+        <div id="visual-K" class="key-cap w-16 h-16 bg-white rounded-xl border-b-8 border-rose-200 flex items-center justify-center text-2xl font-black text-slate-700">K</div>
+        <div id="visual-L" class="key-cap w-16 h-16 bg-white rounded-xl border-b-8 border-rose-200 flex items-center justify-center text-2xl font-black text-slate-700">L</div>
+    </div>
+
+    <div class="text-white font-bold tracking-widest uppercase text-sm opacity-50">
+        Progress: <span id="score">0</span> / 15
+    </div>
+  </div>
+
+  <div id="feedback-container" class="fixed inset-x-0 bottom-10 flex justify-center pointer-events-none z-50"></div>
+
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/95 flex items-center justify-center z-50 p-6 text-center">
+    <div class="bg-white p-12 rounded-[3.5rem] max-w-sm border-b-8 border-rose-600">
+        <div class="text-7xl mb-4">🎖️</div>
+        <h2 class="text-3xl font-black mb-2 text-slate-800">Home Row Hero!</h2>
+        <p class="text-slate-500 mb-8">Your fingers found their homes perfectly. Ready to weave some words?</p>
+        <button onclick="window.location.href='keyboard-practice.html?unlocked=2'" class="w-full bg-rose-600 text-white py-4 rounded-2xl font-bold text-xl">Continue Journey</button>
+    </div>
+  </div>
+
+  <script>
+    const homeRow = ['A', 'S', 'D', 'F', 'J', 'K', 'L'];
+    let currentTarget = '';
+    let score = 0;
+    const targetEl = document.getElementById('target-letter');
+
+    function startGame() {
+        document.getElementById('diy-manual').remove();
+        nextLetter();
+        
+        window.addEventListener('keydown', (e) => {
+            const key = e.key.toUpperCase();
+            if (!homeRow.includes(key)) return;
+
+            // Visual Keyboard Animation
+            const keyEl = document.getElementById(`visual-${key}`);
+            if (keyEl) {
+                keyEl.classList.add('key-pressed');
+                setTimeout(() => keyEl.classList.remove('key-pressed'), 100);
+            }
+
+            if (key === currentTarget) {
+                score++;
+                document.getElementById('score').innerText = score;
+                showFeedback("✨ Perfect Strike!", true);
+                
+                if (score >= 15) {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                } else {
+                    nextLetter();
+                }
+            } else {
+                showFeedback("❌ Wrong Knight! Check your Home Row.", false);
+            }
+        });
+    }
+
+    function nextLetter() {
+        currentTarget = homeRow[Math.floor(Math.random() * homeRow.length)];
+        targetEl.classList.remove('knight-fall');
+        void targetEl.offsetWidth; // Trigger reflow for animation
+        targetEl.innerText = currentTarget;
+        targetEl.classList.add('knight-fall');
+    }
+
+    function showFeedback(text, isSuccess) {
+        const container = document.getElementById('feedback-container');
+        container.innerHTML = '';
+        const div = document.createElement('div');
+        div.className = `feedback-overlay px-8 py-3 rounded-full text-white font-bold bg-rose-500 shadow-xl`;
+        div.innerHTML = text;
+        container.appendChild(div);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Year 1: Keyboard Mastery | SmartKids</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -220,180 +354,4 @@
 
 
 
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Year 1: Keyboard Mastery | SmartKids</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .key-cap { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 800; border-bottom: 4px solid #cbd5e1; background: white; transition: all 0.15s; font-size: 0.9rem; }
-    .key-active { background: #f97316 !important; color: white !important; border-color: #ea580c !important; transform: translateY(2px); border-bottom-width: 2px; }
-    .key-success { background: #22c55e !important; color: white !important; border-color: #16a34a !important; }
-    .mission-tab { border-bottom: 4px solid transparent; transition: all 0.3s; opacity: 0.4; }
-    .mission-tab.active { border-color: #f97316; opacity: 1; color: #f97316; }
-    .overlay-animate { animation: fadeIn 0.4s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-  </style>
-</head>
-<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
 
-  <div id="mission-overlay" class="fixed inset-0 z-[100] bg-slate-900/90 flex items-center justify-center p-6">
-    <div class="bg-white max-w-lg w-full rounded-[2.5rem] p-8 shadow-2xl overlay-animate">
-      <div id="overlay-icon" class="text-5xl mb-4 text-center">🗺️</div>
-      <h2 id="overlay-title" class="text-2xl font-black text-center text-slate-800 mb-4">Mission Briefing</h2>
-      <div id="overlay-content" class="text-slate-600 leading-relaxed mb-8 space-y-4 text-center">
-        </div>
-      <button onclick="startMission()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-orange-200">
-        I'm Ready! Let's Go 🚀
-      </button>
-    </div>
-  </div>
-
-  <nav class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-    <a href="../keyboard.html" class="text-orange-600 font-bold flex items-center gap-2"><span>←</span> Hub</a>
-    <div class="flex gap-6">
-        <div id="tab-0" class="mission-tab active font-black text-[10px] uppercase tracking-widest">1. Geography</div>
-        <div id="tab-1" class="mission-tab font-black text-[10px] uppercase tracking-widest">2. Finding Letters</div>
-        <div id="tab-2" class="mission-tab font-black text-[10px] uppercase tracking-widest">3. Alphabet Map</div>
-    </div>
-  </nav>
-
-  <main class="max-w-4xl mx-auto py-10 px-6">
-    <div class="bg-white p-8 rounded-[2rem] shadow-xl text-center border-b-8 border-slate-200 mb-8">
-        <h2 id="mission-title" class="text-orange-500 font-black uppercase text-sm mb-2 tracking-tighter">Mission Title</h2>
-        <div id="target-box" class="text-7xl font-black text-slate-800 h-24 flex items-center justify-center italic">...</div>
-    </div>
-
-    <div class="bg-slate-900 p-6 rounded-[2rem] shadow-2xl overflow-x-auto">
-        <div class="flex flex-col gap-2 min-w-[600px] items-center" id="kb-container"></div>
-    </div>
-  </main>
-
-  <script>
-    const kbLayout = [
-        ["Q","W","E","R","T","Y","U","I","O","P"],
-        ["A","S","D","F","G","H","J","K","L"],
-        ["Z","X","C","V","B","N","M"]
-    ];
-
-    let currentMission = 0;
-    let step = 0;
-    let missionActive = false;
-
-    const missions = [
-        { 
-            title: "Keyboard Geography", 
-            icon: "🗺️",
-            details: "<strong>Definition:</strong> Geography is the study of where things are. On a keyboard, keys are organized into 3 main rows. Today, you will learn the Top, Middle, and Bottom rows!", 
-            targets: ["TOP ROW", "MIDDLE ROW", "BOTTOM ROW"] 
-        },
-        { 
-            title: "Finding Letters", 
-            icon: "🔍",
-            details: "<strong>Goal:</strong> Now that you know the rows, let's hunt for specific letters. Look at the screen, find the letter on your physical keyboard, and press it as fast as you can!", 
-            targets: ["S", "K", "I", "L", "Z"] 
-        },
-        { 
-            title: "Alphabet Map", 
-            icon: "🔤",
-            details: "<strong>The Challenge:</strong> Can you type the whole alphabet? We will go from A to Z. This helps your brain remember exactly where every letter lives on the map.", 
-            targets: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("") 
-        }
-    ];
-
-    function showOverlay() {
-        missionActive = false;
-        const m = missions[currentMission];
-        document.getElementById('overlay-icon').innerText = m.icon;
-        document.getElementById('overlay-title').innerText = m.title;
-        document.getElementById('overlay-content').innerHTML = m.details;
-        document.getElementById('mission-overlay').classList.remove('hidden');
-    }
-
-    function startMission() {
-        document.getElementById('mission-overlay').classList.add('hidden');
-        missionActive = true;
-        runMission();
-    }
-
-    function buildKeyboard() {
-        const container = document.getElementById('kb-container');
-        container.innerHTML = '';
-        kbLayout.forEach((row, rIdx) => {
-            const rowDiv = document.createElement('div');
-            rowDiv.className = `flex gap-2 ${rIdx === 1 ? 'ml-4' : (rIdx === 2 ? 'ml-8' : '')}`;
-            rowDiv.id = `row-${rIdx}`;
-            row.forEach(key => {
-                const k = document.createElement('div');
-                k.id = `K-${key}`;
-                k.className = "key-cap";
-                k.innerText = key;
-                rowDiv.appendChild(k);
-            });
-            container.appendChild(rowDiv);
-        });
-    }
-
-    function runMission() {
-        const m = missions[currentMission];
-        document.getElementById('mission-title').innerText = `Current Mission: ${m.title}`;
-        const target = m.targets[step];
-        document.getElementById('target-box').innerText = target;
-
-        document.querySelectorAll('.key-cap').forEach(k => k.classList.remove('key-active'));
-        if (currentMission === 0) {
-            document.querySelectorAll(`#row-${step} .key-cap`).forEach(k => k.classList.add('key-active'));
-        } else {
-            const keyEl = document.getElementById(`K-${target}`);
-            if(keyEl) keyEl.classList.add('key-active');
-        }
-    }
-
-    window.addEventListener('keydown', (e) => {
-        if(!missionActive) return;
-        const pressed = e.key.toUpperCase();
-        const m = missions[currentMission];
-        const target = m.targets[step];
-        let correct = false;
-
-        if (currentMission === 0) {
-            correct = kbLayout[step].includes(pressed);
-        } else {
-            correct = (pressed === target);
-        }
-
-        if (correct) {
-            const el = document.getElementById(`K-${pressed}`);
-            if(el) el.classList.add('key-success');
-            setTimeout(() => {
-                if(el) el.classList.remove('key-success');
-                step++;
-                if (step >= m.targets.length) {
-                    advanceMission();
-                } else {
-                    runMission();
-                }
-            }, 300);
-        }
-    });
-
-    function advanceMission() {
-        document.getElementById(`tab-${currentMission}`).classList.remove('active');
-        currentMission++;
-        step = 0;
-        if (currentMission < missions.length) {
-            document.getElementById(`tab-${currentMission}`).classList.add('active');
-            showOverlay(); // Show overlay for NEXT mission
-        } else {
-            document.getElementById('target-box').innerText = "🏆 COMPLETE";
-            document.getElementById('mission-title').innerText = "Year 1 Mastery Attained!";
-        }
-    }
-
-    buildKeyboard();
-    showOverlay(); // Show first overlay on load
-  </script>
-</body>
-</html>
