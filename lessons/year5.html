@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 5: Power Keys | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .block { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .space-indicator { animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    
+    .shake { animation: shake 0.2s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body class="bg-amber-50 min-h-screen flex flex-col items-center justify-center font-sans overflow-hidden p-6">
+
+  <div id="diy-manual" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+    <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-amber-500 text-center">
+      <div class="text-6xl mb-4">🏗️</div>
+      <h2 class="text-3xl font-black mb-4 text-slate-800">Mission: Power Keys</h2>
+      <div class="space-y-4 mb-8 text-slate-600 text-left">
+        <p>A true operator knows the "Heavy" keys by heart:</p>
+        <ul class="space-y-3 font-medium">
+            <li class="flex gap-3"><span>🌌</span> <b>Spacebar:</b> Use your thumbs ONLY!</li>
+            <li class="flex gap-3"><span>🔙</span> <b>Backspace:</b> Reach with your right pinky.</li>
+            <li class="flex gap-3"><span>📑</span> <b>Tab:</b> Jump ahead with your left pinky.</li>
+        </ul>
+      </div>
+      <button onclick="startGame()" class="w-full bg-amber-500 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg">Start Constructing</button>
+    </div>
+  </div>
+
+  <div class="w-full max-w-xl bg-white p-10 rounded-[3rem] shadow-xl border-b-8 border-amber-200 text-center relative">
+    <div class="text-xs font-black text-amber-500 uppercase tracking-[0.3em] mb-8">Current Task</div>
+    
+    <div id="game-display" class="min-h-[120px] flex items-center justify-center gap-2 mb-8">
+        </div>
+
+    <div class="text-slate-400 font-bold text-xs uppercase">
+        Structure Strength: <span id="progress" class="text-amber-600">0</span> / 10
+    </div>
+  </div>
+
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/98 flex items-center justify-center z-50 p-6 text-center">
+    <div class="bg-white p-12 rounded-[3.5rem] max-w-sm border-b-8 border-amber-600">
+        <div class="text-7xl mb-4">👷‍♂️</div>
+        <h2 class="text-3xl font-black mb-2 text-slate-800">Master Operator!</h2>
+        <p class="text-slate-500 mb-8">You've mastered the heavy lifting. You're ready for the full alphabet!</p>
+        <button onclick="window.location.href='keyboard-practice.html?unlocked=6'" class="w-full bg-amber-500 text-white py-4 rounded-2xl font-bold text-xl shadow-lg">Proceed to Year 6</button>
+    </div>
+  </div>
+
+  <script>
+    const tasks = [
+        { type: 'SPACE', label: 'SPACE', key: ' ' },
+        { type: 'TAB', label: '↹ TAB', key: 'Tab' },
+        { type: 'BACK', label: '⌫ BACK', key: 'Backspace' }
+    ];
+
+    let currentTask = null;
+    let score = 0;
+
+    function startGame() {
+        document.getElementById('diy-manual').remove();
+        nextTask();
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') e.preventDefault(); // Stop tab from leaving the page
+
+            if (e.key === currentTask.key) {
+                score++;
+                document.getElementById('progress').innerText = score;
+                animateSuccess();
+                if (score >= 10) {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                } else {
+                    nextTask();
+                }
+            } else {
+                document.getElementById('game-display').classList.add('shake');
+                setTimeout(() => document.getElementById('game-display').classList.remove('shake'), 200);
+            }
+        });
+    }
+
+    function nextTask() {
+        currentTask = tasks[Math.floor(Math.random() * tasks.length)];
+        const display = document.getElementById('game-display');
+        
+        let color = "bg-amber-100 text-amber-600 border-amber-300";
+        if(currentTask.type === 'BACK') color = "bg-rose-100 text-rose-600 border-rose-300";
+        if(currentTask.type === 'TAB') color = "bg-blue-100 text-blue-600 border-blue-300";
+
+        display.innerHTML = `
+            <div class="block px-8 py-4 rounded-2xl border-b-4 font-black text-3xl ${color} scale-110">
+                ${currentTask.label}
+            </div>
+        `;
+    }
+
+    function animateSuccess() {
+        const display = document.getElementById('game-display');
+        display.innerHTML = `<div class="text-5xl animate-bounce">✨</div>`;
+    }
+  </script>
+</body>
+</html>
