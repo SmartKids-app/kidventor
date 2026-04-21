@@ -7,6 +7,157 @@
   <style>
     .search-result:hover { border-color: #3b82f6; background-color: #f8fafc; }
     .ad-badge { border: 1px solid #059669; color: #059669; padding: 1px 4px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+    
+    /* Animation for the Feedback Overlay */
+    @keyframes slideUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      10% { transform: translateY(0); opacity: 1; }
+      90% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100%); opacity: 0; }
+    }
+    .feedback-overlay { animation: slideUp 3s forwards; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-6 font-sans overflow-x-hidden">
+
+  <div id="diy-manual" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
+    <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-blue-500">
+      <div class="text-4xl mb-4">📖</div>
+      <h2 class="text-3xl font-black mb-4 text-slate-800">How To: Scout</h2>
+      <ul class="text-slate-600 space-y-4 mb-8 font-medium">
+        <li class="flex gap-3"><span>🔍</span> <b>Read</b> the blue mission box at the top.</li>
+        <li class="flex gap-3"><span>🚫</span> <b>Avoid</b> items labeled "Ad"—they want to sell things.</li>
+        <li class="flex gap-3"><span>⚠️</span> <b>Avoid</b> "Clickbait"—those are silly fake stories.</li>
+        <li class="flex gap-3"><span>🎯</span> <b>Click</b> the link that looks like a real school book.</li>
+      </ul>
+      <button onclick="document.getElementById('diy-manual').remove()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-transform">Start Searching!</button>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto">
+    <div class="bg-blue-600 text-white p-6 rounded-3xl mb-8 shadow-lg relative overflow-hidden">
+      <div class="relative z-10">
+        <p class="text-xs font-bold uppercase tracking-widest opacity-80">Target Data:</p>
+        <h1 id="missionText" class="text-2xl font-black italic">Find "Facts about Blue Whales"</h1>
+      </div>
+      <div class="absolute right-[-20px] top-[-20px] text-8xl opacity-10">🔍</div>
+    </div>
+
+    <div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-200">
+      <div class="p-6 border-b bg-slate-50 flex items-center gap-4">
+        <div class="text-2xl font-black text-blue-600 tracking-tighter">Goggle</div>
+        <div class="flex-1 bg-white border-2 border-slate-200 rounded-full py-2 px-5 font-bold text-slate-400 italic">
+            <span id="currentSearch">Blue Whales</span>
+        </div>
+      </div>
+
+      <div id="resultsArea" class="p-8 space-y-8"></div>
+    </div>
+  </div>
+
+  <div id="feedback-container" class="fixed inset-x-0 bottom-10 flex justify-center pointer-events-none z-50">
+    </div>
+
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/90 flex items-center justify-center z-50 p-6 text-center">
+    <div class="bg-white p-12 rounded-[3rem] max-w-sm">
+        <div class="text-7xl mb-4 animate-bounce">🎖️</div>
+        <h2 class="text-3xl font-black mb-2">Expert Scout!</h2>
+        <p class="text-slate-500 mb-8">You successfully identified real information from the noise.</p>
+        <button onclick="window.location.href='year3.html'" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold">Year 3: The Inbox Rescue</button>
+    </div>
+  </div>
+
+  <script>
+    const levels = [
+        {
+            goal: 'Find "Facts about Blue Whales"',
+            searchTerm: 'Blue Whales',
+            results: [
+                { type: 'ad', title: 'Buy Whale Toys - 50% Off!', desc: 'Huge sale on plush whales and toys. Order today!', link: 'www.toys-store.com', feedback: '💰 <b>Whoops!</b> That is an Ad. They want to sell toys, not teach facts.' },
+                { type: 'real', title: 'Blue Whale: The Largest Animal on Earth', desc: 'National Geographic: Facts about habitat, diet, and size.', link: 'www.natgeo.org', feedback: '✅ <b>Correct!</b> National Geographic is a trusted source.' },
+                { type: 'fake', title: 'I saw a Flying Whale! (CLICK HERE)', desc: 'You won\'t believe this video of a whale in the clouds!', link: 'www.clicky.net', feedback: '⚠️ <b>Careful!</b> That looks like Clickbait (fake news).' }
+            ]
+        },
+        {
+            goal: 'Find "The History of Robots"',
+            searchTerm: 'Robots History',
+            results: [
+                { type: 'fake', title: 'Robots are coming from Outer Space!', desc: 'The scary truth about alien robots. Read now!', link: 'www.weird.com', feedback: '⚠️ <b>Nice try!</b> But that is a tall tale, not history.' },
+                { type: 'real', title: 'Timeline of Robotics', desc: 'Britannica: Exploring the invention of robots through the ages.', link: 'www.britannica.com', feedback: '✅ <b>Perfect!</b> Britannica is a great place for history.' },
+                { type: 'ad', title: 'Best Robot Vacuum - Shop Now', desc: 'Clean your floors with our 2026 AI Robot!', link: 'www.vacuum.biz', feedback: '💰 <b>Wait!</b> That is an Ad for a vacuum cleaner.' }
+            ]
+        }
+    ];
+
+    let currentLevel = 0;
+
+    function renderLevel() {
+        const level = levels[currentLevel];
+        document.getElementById('missionText').innerText = level.goal;
+        document.getElementById('currentSearch').innerText = level.searchTerm;
+        const area = document.getElementById('resultsArea');
+        area.innerHTML = '';
+
+        [...level.results].sort(() => Math.random() - 0.5).forEach(res => {
+            const div = document.createElement('div');
+            div.className = "search-result border-2 border-transparent p-4 rounded-2xl cursor-pointer transition-all";
+            const adTag = res.type === 'ad' ? '<span class="ad-badge mr-2">Ad</span>' : '';
+            div.innerHTML = `
+                <p class="text-[10px] text-slate-400 font-mono mb-1">${res.link}</p>
+                <h3 class="text-xl font-bold text-blue-700 hover:underline mb-1">${adTag}${res.title}</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">${res.desc}</p>
+            `;
+            div.onclick = () => handleChoice(res);
+            area.appendChild(div);
+        });
+    }
+
+    function showFeedback(text, isSuccess) {
+        const container = document.getElementById('feedback-container');
+        container.innerHTML = ''; // Clear previous
+        
+        const overlay = document.createElement('div');
+        overlay.className = `feedback-overlay px-8 py-4 rounded-full shadow-2xl text-white font-bold text-lg flex items-center gap-3 ${isSuccess ? 'bg-green-500' : 'bg-slate-800'}`;
+        overlay.innerHTML = `<span>${isSuccess ? '✨' : 'ℹ️'}</span> ${text}`;
+        
+        container.appendChild(overlay);
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => overlay.remove(), 3000);
+    }
+
+    function handleChoice(res) {
+        showFeedback(res.feedback, res.type === 'real');
+
+        if (res.type === 'real') {
+            currentLevel++;
+            setTimeout(() => {
+                if (currentLevel < levels.length) {
+                    renderLevel();
+                } else {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                }
+            }, 2500); // Wait for feedback to be read
+        }
+    }
+
+    renderLevel();
+</script>
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 2: Search Scout | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .search-result:hover { border-color: #3b82f6; background-color: #f8fafc; }
+    .ad-badge { border: 1px solid #059669; color: #059669; padding: 1px 4px; border-radius: 4px; font-size: 10px; font-weight: bold; }
   </style>
 </head>
 <body class="bg-slate-50 min-h-screen p-6 font-sans">
