@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 3: Inbox Rescue | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .email-item:hover { background-color: #f1f5f9; }
+    @keyframes slideUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      10% { transform: translateY(0); opacity: 1; }
+      90% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100%); opacity: 0; }
+    }
+    .feedback-overlay { animation: slideUp 3.5s forwards; }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen p-6 font-sans overflow-x-hidden">
+
+  <div id="diy-manual" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+    <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-indigo-500">
+      <div class="text-4xl mb-4">📧</div>
+      <h2 class="text-3xl font-black mb-4 text-slate-800">How To: Rescue Inbox</h2>
+      <ul class="text-slate-600 space-y-4 mb-8 font-medium">
+        <li class="flex gap-3"><span>📂</span> <b>Sort</b> your mail into the correct folders.</li>
+        <li class="flex gap-3"><span>🛑</span> <b>Spam:</b> Junk mail or ads you didn't ask for.</li>
+        <li class="flex gap-3"><span>🎣</span> <b>Phishing:</b> Fake emails asking for passwords!</li>
+        <li class="flex gap-3"><span>✅</span> <b>Safe:</b> Emails from friends, family, or school.</li>
+      </ul>
+      <button onclick="document.getElementById('diy-manual').remove()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-transform">Open My Mail</button>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-indigo-600 text-white p-6 rounded-3xl mb-8 shadow-lg flex justify-between items-center">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest opacity-80">Safety Mission:</p>
+        <h1 class="text-2xl font-black italic">Clean your Inbox! (Identify the Safe Email)</h1>
+      </div>
+      <div class="bg-white/20 px-6 py-2 rounded-2xl text-xl font-black" id="task-counter">1 / 3</div>
+    </div>
+
+    <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200 flex min-h-[500px]">
+      <div class="w-48 bg-slate-50 border-r p-6 hidden md:block">
+        <button class="bg-indigo-600 text-white w-full py-2 rounded-lg font-bold mb-6">Compose</button>
+        <div class="space-y-4 text-sm font-bold text-slate-500">
+            <div class="text-indigo-600">📥 Inbox</div>
+            <div>⭐ Starred</div>
+            <div>📤 Sent</div>
+            <div>🚫 Spam</div>
+        </div>
+      </div>
+
+      <div id="emailArea" class="flex-1 divide-y divide-slate-100">
+        </div>
+    </div>
+  </div>
+
+  <div id="feedback-container" class="fixed inset-x-0 bottom-10 flex justify-center pointer-events-none z-50"></div>
+
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/90 flex items-center justify-center z-50 p-6 text-center">
+    <div class="bg-white p-12 rounded-[3.5rem] max-w-sm">
+        <div class="text-7xl mb-4">🏆</div>
+        <h2 class="text-3xl font-black mb-2">Inbox Hero!</h2>
+        <p class="text-slate-500 mb-8">You successfully identified phishing and spam. Your digital world is safe!</p>
+        <button onclick="window.location.href='../../lessons.html'" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold">Return to Lessons</button>
+    </div>
+  </div>
+
+  <script>
+    const levels = [
+        {
+            emails: [
+                { type: 'phishing', from: 'Security-Bank', subject: 'URGENT: Password Reset', body: 'Someone stole your money! Click here to give us your password now.', feedback: '🎣 <b>Danger!</b> Real banks never ask for your password in an email.' },
+                { type: 'safe', from: 'Ms. Applebee', subject: 'Homework for Monday', body: 'Hi! Please remember to bring your drawing of a robot to class.', feedback: '✅ <b>Safe!</b> This is a normal email from your teacher.' },
+                { type: 'spam', from: 'Free-Pizza-4-U', subject: 'YOU WON PIZZA!!!', body: 'Click here to win 100 free pizzas. Just enter your phone number!', feedback: '🛑 <b>Spam!</b> If it sounds too good to be true, it’s probably junk.' }
+            ]
+        },
+        {
+            emails: [
+                { type: 'safe', from: 'Grandma', subject: 'Happy Birthday!', body: 'I sent a card in the real mail. Hope you have a great day!', feedback: '✅ <b>Safe!</b> Family emails are great to keep.' },
+                { type: 'phishing', from: 'Game-Master', subject: 'Get 1,000,000 Free Gems', body: 'Log in here with your username and password to get free gems!', feedback: '⚠️ <b>Phishing!</b> They are trying to steal your game account.' },
+                { type: 'spam', from: 'Buy-Shoes-Now', subject: 'SALE SALE SALE', body: 'Buy these shoes. Best prices ever. Click now.', feedback: '🛑 <b>Spam!</b> This is just an advertisement you didn\'t ask for.' }
+            ]
+        }
+    ];
+
+    let currentLevel = 0;
+
+    function renderLevel() {
+        const area = document.getElementById('emailArea');
+        area.innerHTML = '';
+        document.getElementById('task-counter').innerText = `${currentLevel + 1} / ${levels.length}`;
+
+        [...levels[currentLevel].emails].sort(() => Math.random() - 0.5).forEach(mail => {
+            const div = document.createElement('div');
+            div.className = "email-item p-6 cursor-pointer transition-all flex items-center gap-4";
+            div.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-lg font-bold text-slate-500">${mail.from[0]}</div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-black text-slate-800">${mail.from}</span>
+                        <span class="text-xs text-slate-400">10:42 AM</span>
+                    </div>
+                    <p class="text-sm font-bold text-indigo-600 mb-1">${mail.subject}</p>
+                    <p class="text-xs text-slate-500 truncate w-64">${mail.body}</p>
+                </div>
+            `;
+            div.onclick = () => handleChoice(mail);
+            area.appendChild(div);
+        });
+    }
+
+    function showFeedback(text, isSuccess) {
+        const container = document.getElementById('feedback-container');
+        container.innerHTML = '';
+        const overlay = document.createElement('div');
+        overlay.className = `feedback-overlay px-8 py-4 rounded-full shadow-2xl text-white font-bold text-lg flex items-center gap-3 ${isSuccess ? 'bg-green-500' : 'bg-slate-800'}`;
+        overlay.innerHTML = `<span>${isSuccess ? '📩' : '🚫'}</span> ${text}`;
+        container.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 3500);
+    }
+
+    function handleChoice(mail) {
+        showFeedback(mail.feedback, mail.type === 'safe');
+
+        if (mail.type === 'safe') {
+            currentLevel++;
+            setTimeout(() => {
+                if (currentLevel < levels.length) {
+                    renderLevel();
+                } else {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    // AUTO-REDIRECT after 5 seconds of seeing the trophy
+                    setTimeout(() => {
+                        window.location.href = '../../lessons.html';
+                    }, 5000);
+                }
+            }, 2500);
+        }
+    }
+
+    renderLevel();
+</script>
+</body>
+</html>
