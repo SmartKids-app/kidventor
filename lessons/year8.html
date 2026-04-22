@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year 8: Common Words | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .word-bubble { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .typing-active { color: #8b5cf6; border-bottom: 4px solid #8b5cf6; }
+    .web-line { stroke: #e2e8f0; stroke-width: 2; }
+  </style>
+</head>
+<body class="bg-indigo-50 min-h-screen flex flex-col items-center justify-center font-sans p-6 overflow-hidden">
+
+  <div id="diy-manual" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+    <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-violet-500 text-center">
+      <div class="text-6xl mb-4">🕷️</div>
+      <h2 class="text-3xl font-black mb-4 text-slate-800">The Word Weaver</h2>
+      <div class="space-y-4 mb-8 text-slate-600 text-left">
+        <p>Don't look at individual letters. Look at the <b>whole word</b> and let your fingers flow!</p>
+        <ul class="space-y-3 font-medium">
+            <li class="flex gap-3"><span>🕸️</span> Type the "Glue Words" to strengthen your web.</li>
+            <li class="flex gap-3"><span>⚡</span> Speed comes from rhythm, not rushing.</li>
+            <li class="flex gap-3"><span>⏎</span> Press **Space** after every word to submit it.</li>
+        </ul>
+      </div>
+      <button onclick="startGame()" class="w-full bg-violet-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-all">Start Weaving</button>
+    </div>
+  </div>
+
+  <div class="relative w-full max-w-2xl bg-white p-12 rounded-[4rem] shadow-2xl border-b-8 border-violet-200 text-center">
+    <div class="text-violet-400 font-black tracking-widest text-xs mb-8 uppercase">Master the Glue Words</div>
+    
+    <div id="word-container" class="mb-10 h-32 flex flex-col items-center justify-center">
+        <div id="target-word" class="text-6xl font-black text-slate-300 transition-all">the</div>
+        <div id="user-input" class="text-6xl font-black text-violet-600 absolute"></div>
+    </div>
+
+    <div class="flex justify-center gap-4 mb-8">
+        <div id="next-preview" class="px-4 py-2 bg-slate-100 rounded-full text-slate-400 font-bold text-sm">Next: and</div>
+    </div>
+
+    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+        <div id="progress-bar" class="bg-violet-500 h-full w-0 transition-all"></div>
+    </div>
+  </div>
+
+  <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/98 flex items-center justify-center z-50 p-6 text-center">
+    <div class="bg-white p-12 rounded-[3.5rem] max-w-sm border-b-8 border-violet-600">
+        <div class="text-7xl mb-4">🎖️</div>
+        <h2 class="text-3xl font-black mb-2 text-slate-800">Speed Weaver!</h2>
+        <p class="text-slate-500 mb-8">You are no longer typing letters—you are typing words. Your brain is level-up!</p>
+        <button onclick="window.location.href='keyboard-practice.html?unlocked=9'" class="w-full bg-violet-600 text-white py-4 rounded-2xl font-bold text-xl">On to Shortcuts</button>
+    </div>
+  </div>
+
+  <script>
+    const glueWords = ["the", "and", "for", "you", "that", "with", "this", "from", "have", "they", "will", "would", "there", "their"];
+    let wordIndex = 0;
+    let currentInput = "";
+    let score = 0;
+
+    function startGame() {
+        document.getElementById('diy-manual').remove();
+        updateDisplay();
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === " ") {
+                e.preventDefault();
+                checkWord();
+            } else if (e.key === "Backspace") {
+                currentInput = currentInput.slice(0, -1);
+            } else if (e.key.length === 1) {
+                currentInput += e.key.toLowerCase();
+            }
+            updateDisplay();
+        });
+    }
+
+    function updateDisplay() {
+        document.getElementById('target-word').innerText = glueWords[wordIndex];
+        document.getElementById('user-input').innerText = currentInput;
+        document.getElementById('next-preview').innerText = "Next: " + glueWords[(wordIndex + 1) % glueWords.length];
+    }
+
+    function checkWord() {
+        if (currentInput === glueWords[wordIndex]) {
+            score++;
+            wordIndex = (wordIndex + 1) % glueWords.length;
+            currentInput = "";
+            
+            const prog = (score / 15) * 100;
+            document.getElementById('progress-bar').style.width = prog + "%";
+
+            if (score >= 15) {
+                document.getElementById('success-modal').classList.remove('hidden');
+            }
+        } else {
+            // Shake effect on error
+            const container = document.getElementById('word-container');
+            container.classList.add('animate-ping');
+            setTimeout(() => container.classList.remove('animate-ping'), 200);
+            currentInput = "";
+        }
+    }
+  </script>
+</body>
+</html>
