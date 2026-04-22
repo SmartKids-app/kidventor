@@ -177,9 +177,13 @@
   window.addEventListener('load', typeWriter);
 </script>
 <script>
-  document.querySelectorAll('.brand-name').forEach(el => {
-    el.innerText = 'Kidventor';
-  });
+  // This automatically finds every "SmartKids" and changes it to "Kidventor"
+  // It also updates your Title tag!
+  document.title = "Kidventor Academy | Digital Literacy & Innovation";
+  
+  const bodyText = document.body.innerHTML;
+  const updatedText = bodyText.replace(/SmartKids/g, 'Kidventor');
+  document.body.innerHTML = updatedText;
 </script>
 </body>
 </html>
