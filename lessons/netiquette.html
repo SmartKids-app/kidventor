@@ -3,102 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netiquette: Being Kind Online | SmartKids Learning</title>
+  <title>Shield & Safety | Kidventor Academy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .shield-gradient { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
+    .rule-card { transition: all 0.3s ease; }
+    .rule-card:hover { transform: scale(1.02); }
+  </style>
 </head>
-<body class="bg-indigo-50 text-slate-900 font-sans leading-relaxed">
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
 
-  <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+  <nav class="bg-white/90 backdrop-blur-md border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
-      <a href="../index.html" class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">SK</div>
-        <span class="font-bold text-xl tracking-tight">SmartKids</span>
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform">K</div>
+        <span class="font-black text-xl tracking-tighter uppercase text-slate-800">Kidventor</span>
       </a>
-      <a href="../lessons.html" class="text-sm font-semibold text-indigo-600 hover:underline">← All Lessons</a>
+      <a href="../lessons.html" class="text-xs font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-800 transition">← Back to Hub</a>
     </div>
   </nav>
 
-  <header class="bg-indigo-600 text-white py-16 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Digital Citizenship</span>
-      <h1 class="text-4xl md:text-5xl font-extrabold mt-4">What is Netiquette?</h1>
-      <p class="mt-4 text-indigo-100 text-lg">Learn the golden rules of how to behave in the digital world.</p>
+  <header class="shield-gradient text-white py-24 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-[0.3em] mb-6 inline-block border border-white/30">Module 06: Cyber Defense</span>
+      <h1 class="text-5xl md:text-7xl font-black mt-4 tracking-tighter">Become a Digital <span class="text-indigo-200">Guardian.</span></h1>
+      <p class="mt-6 text-indigo-100 text-lg max-w-2xl mx-auto opacity-90">
+        The internet is a vast ocean. To explore it, you need a strong shield. Learn to protect your data, your identity, and your village.
+      </p>
     </div>
+    <div class="absolute top-0 left-0 text-[20rem] opacity-10 -translate-x-20 -translate-y-20 select-none">🛡️</div>
   </header>
 
-  <main class="max-w-4xl mx-auto py-12 px-6">
+  <main class="max-w-5xl mx-auto py-16 px-6">
     
-    <section class="bg-white rounded-3xl p-8 shadow-sm border border-indigo-100 mb-10">
-      <h2 class="text-2xl font-bold mb-4 text-indigo-800">The Definition</h2>
-      <p class="text-slate-700 text-lg">
-        <strong>Netiquette</strong> is a combination of the words <em>Network</em> and <em>Etiquette</em>. It is a set of rules for behaving properly online. Just as we use good manners at the dinner table or in the classroom, we must use good manners on the internet.
-      </p>
+    <section class="bg-white rounded-[3rem] p-10 md:p-16 shadow-xl shadow-indigo-100/50 border border-indigo-50 mb-16 relative overflow-hidden">
+      <div class="relative z-10">
+        <h2 class="text-3xl font-black mb-6 text-slate-800 tracking-tight">Security vs. Etiquette</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              <strong>Cyber Security</strong> is the lock on your door. It’s the armor that keeps hackers, viruses, and "phishers" away from your private information.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>Netiquette</strong> is how you treat people once you're inside the house. It's being kind, truthful, and helpful in the digital world.
+            </p>
+          </div>
+          <div class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
+            <h4 class="font-black text-indigo-600 uppercase text-xs tracking-widest mb-2">Pro-Tip</h4>
+            <p class="text-sm text-indigo-900 font-medium italic">"A good Kidventor is both safe and kind. You can't build the future if your tools are compromised!"</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <h2 class="text-3xl font-bold mb-8 text-center">The 5 Golden Rules</h2>
-    <div class="grid md:grid-cols-2 gap-6">
+    <h2 class="text-4xl font-black mb-12 text-center tracking-tighter">The Guardians' Protocol</h2>
+    <div class="grid md:grid-cols-2 gap-8">
       
-      <div class="bg-white p-6 rounded-2xl border-t-4 border-yellow-400 shadow-sm">
-        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>🤝</span> Remember the Human</h3>
-        <p class="text-slate-600 text-sm">Never say anything online that you wouldn't say to someone's face. Behind every screen name is a real person with real feelings.</p>
+      <div class="rule-card bg-white p-8 rounded-[2.5rem] border-b-8 border-indigo-500 shadow-lg">
+        <div class="text-4xl mb-4">🔑</div>
+        <h3 class="font-black text-2xl mb-3 tracking-tight">Fortress Passwords</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">Don't use "123456" or your pet's name. Use <strong>Passphrases</strong>—a string of random words that are easy for you to remember but impossible for a robot to guess.</p>
+        <div class="bg-slate-50 px-4 py-2 rounded-xl font-mono text-[11px] text-indigo-600">Example: BlueMonkey$Banana$Jump2026</div>
       </div>
 
-      <div class="bg-white p-6 rounded-2xl border-t-4 border-blue-400 shadow-sm">
-        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>🤫</span> Respect Privacy</h3>
-        <p class="text-slate-600 text-sm">Do not share other people's secrets, photos, or private information without their permission. Keep your own passwords private too!</p>
+      <div class="rule-card bg-white p-8 rounded-[2.5rem] border-b-8 border-rose-500 shadow-lg">
+        <div class="text-4xl mb-4">🎣</div>
+        <h3 class="font-black text-2xl mb-3 tracking-tight">Spot the Bait</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">If an email or message says you won a "Free iPhone" or asks for your password urgently, it's likely a <strong>Phishing Scam</strong>. Look at the sender's address carefully!</p>
+        <div class="bg-rose-50 px-4 py-2 rounded-xl font-bold text-[11px] text-rose-600 uppercase tracking-widest">Rule: Think Before You Click.</div>
       </div>
 
-      <div class="bg-white p-6 rounded-2xl border-t-4 border-red-400 shadow-sm">
-        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>📢</span> Don't SHOUT</h3>
-        <p class="text-slate-600 text-sm">Writing in all capital letters (LIKE THIS) is considered shouting online. Use normal casing to be polite.</p>
+      <div class="rule-card bg-white p-8 rounded-[2.5rem] border-b-8 border-emerald-500 shadow-lg">
+        <div class="text-4xl mb-4">📱</div>
+        <h3 class="font-black text-2xl mb-3 tracking-tight">Two-Key Defense</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">Enable <strong>Multi-Factor Authentication (MFA)</strong>. This means even if someone steals your password, they still can't get in without the secret code sent to your phone.</p>
+        <div class="bg-emerald-50 px-4 py-2 rounded-xl font-bold text-[11px] text-emerald-600 uppercase tracking-widest">Status: Highly Recommended</div>
       </div>
 
-      <div class="bg-white p-6 rounded-2xl border-t-4 border-green-400 shadow-sm">
-        <h3 class="font-bold text-xl mb-2 flex items-center gap-2"><span>✨</span> Check Your Facts</h3>
-        <p class="text-slate-600 text-sm">Don't spread "Fake News." Always make sure information is true before you share it with your friends or family.</p>
+      <div class="rule-card bg-white p-8 rounded-[2.5rem] border-b-8 border-amber-500 shadow-lg">
+        <div class="text-4xl mb-4">🤫</div>
+        <h3 class="font-black text-2xl mb-3 tracking-tight">Digital Footprint</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">Everything you post stays forever. Never share your home address, school name, or current location with anyone you haven't met in the real world.</p>
+        <div class="bg-amber-50 px-4 py-2 rounded-xl font-bold text-[11px] text-amber-600 uppercase tracking-widest">Rule: Keep it Private.</div>
       </div>
     </div>
 
-    <div class="mt-12 bg-indigo-900 text-white p-8 rounded-3xl shadow-xl">
-      <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><span>🌍</span> African Wisdom Online</h3>
-      <p class="italic opacity-90 leading-relaxed">
-        "It takes a village to raise a child." In the digital village, we are all responsible for each other. When you are kind to someone in a comment or a chat, you are helping build a better digital world for everyone.
-      </p>
+    <div class="mt-20 bg-slate-900 text-white p-12 rounded-[3.5rem] shadow-2xl relative overflow-hidden">
+      <div class="relative z-10">
+        <h3 class="text-2xl font-black mb-6 flex items-center gap-3">
+          <span class="text-indigo-400">🌍</span> The Digital Village
+        </h3>
+        <p class="text-lg italic text-slate-300 leading-relaxed opacity-90">
+          "A shield is not just for yourself, but for your neighbors." When you follow safe practices, you prevent viruses and scams from spreading to your friends, family, and community. We are all guardians of the internet.
+        </p>
+      </div>
+      <div class="absolute -bottom-10 -right-10 text-9xl opacity-10">🤝</div>
     </div>
 
   </main>
 
-  <footer class="bg-slate-900 text-slate-400 py-12 px-4 mt-20">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-800 pb-8">
+  <footer class="bg-slate-950 text-slate-500 py-20 px-6 mt-20">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 border-b border-slate-900 pb-12">
       <div class="text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-2">
-          <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center font-bold text-xs">SK</div>
-          <span class="font-bold tracking-tight text-lg">SmartKids Learning</span>
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-4">
+          <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-black text-xs">K</div>
+          <span class="font-black tracking-tighter text-xl uppercase">Kidventor Academy</span>
         </div>
-        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">
-          Part of the SmartKids Digital Literacy Program
-        </p>
-        <div class="h-5">
-          <p id="footer-typing" class="text-sm font-mono text-blue-400"></p>
+        <div class="h-6">
+          <p id="footer-typing" class="text-sm font-mono text-indigo-400"></p>
         </div>
       </div>
-      <nav class="flex gap-8 text-sm font-medium">
-        <a href="../about.html" class="hover:text-white">About</a>
-        <a href="../privacy.html" class="hover:text-white">Privacy</a>
+      <nav class="flex gap-10 text-[10px] font-black uppercase tracking-[0.2em]">
+        <a href="../about.html" class="hover:text-white transition">About</a>
+        <a href="../privacy.html" class="hover:text-white transition">Privacy</a>
+        <a href="../morals.html" class="text-indigo-500">Ethics Hub</a>
       </nav>
     </div>
-    <p class="text-center mt-8 text-[10px] uppercase tracking-widest">© 2026 SmartKids Tech Skills</p>
+    <p class="text-center mt-10 text-[10px] uppercase tracking-[0.4em] font-bold">© 2026 Kidventor Global Education</p>
   </footer>
 
   <script>
-    const footerMsg = "Empowering the next generation of African tech leaders.";
+    const footerMsg = "Empowering the next generation of global innovators.";
     let charIdx = 0;
     function type() {
       const el = document.getElementById("footer-typing");
       if (charIdx < footerMsg.length) {
         el.innerHTML += footerMsg.charAt(charIdx);
         charIdx++;
-        setTimeout(type, 70);
+        setTimeout(type, 60);
       } else {
         setTimeout(() => { el.innerHTML = ""; charIdx = 0; type(); }, 5000);
       }
