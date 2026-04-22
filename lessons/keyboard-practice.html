@@ -36,7 +36,42 @@
     </div>
 
 </main>
+<div id="grad-box" class="hidden fixed inset-0 bg-slate-900/90 backdrop-blur-xl z-[200] flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl rounded-[4rem] p-12 border-[16px] border-double border-amber-400 shadow-[0_0_100px_rgba(251,191,36,0.4)] text-center relative overflow-hidden">
+        
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-400 rounded-full flex items-center justify-center text-white font-black text-6xl rotate-12 shadow-xl border-8 border-white">
+            100%
+        </div>
 
+        <div class="mb-6">
+            <span class="text-xs font-black uppercase tracking-[0.5em] text-slate-400">Official Certification</span>
+            <h1 class="text-5xl font-black text-slate-800 mt-2">DIPLOMA OF MASTERY</h1>
+            <p class="text-slate-500 font-medium italic mt-2">Keyboarding Academy Class of 2026</p>
+        </div>
+
+        <div class="my-12 py-8 border-y-2 border-slate-100">
+            <p class="text-2xl text-slate-700 font-medium">This certifies that</p>
+            <div class="text-6xl font-serif font-black text-blue-600 my-4 tracking-tight">The Digital Native</div>
+            <p class="text-xl text-slate-500 max-w-xl mx-auto">
+                Has successfully completed all **12 Levels** of the Keyboarding Academy, demonstrating elite speed, accuracy, and professional navigation.
+            </p>
+        </div>
+
+        <div class="flex justify-around items-end mb-12">
+            <div class="text-center">
+                <div class="w-32 h-[2px] bg-slate-300 mb-2"></div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase">Academy Director</p>
+            </div>
+            <div class="text-6xl">🎓</div>
+            <div class="text-center">
+                <div class="w-32 h-[2px] bg-slate-300 mb-2"></div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase">Verification ID: SK-2026</p>
+            </div>
+        </div>
+
+        <button onclick="document.getElementById('grad-box').style.display='none'" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-black hover:scale-105 transition-all">CLOSE DIPLOMA</button>
+    </div>
+</div>
 <script>
     const years = [
         { id: 1, name: "Geography", icon: "🗺️" },
