@@ -3,6 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethics Hub | Kidventor Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .moral-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 2.5rem; overflow: hidden; }
+    .moral-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgba(217, 119, 6, 0.15); }
+    .amber-glass { background: rgba(251, 191, 36, 0.1); backdrop-filter: blur(8px); border: 1px solid rgba(251, 191, 36, 0.2); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+  <nav class="bg-white/90 backdrop-blur-md border-b py-5 px-6 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform">K</div>
+        <span class="font-black text-xl tracking-tighter uppercase text-slate-800">Kidventor</span>
+      </a>
+      <div class="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+        <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+        <a href="lessons.html" class="hover:text-indigo-600 transition">Curriculum</a>
+        <a href="about.html" class="bg-amber-500 text-white px-6 py-3 rounded-xl hover:bg-amber-600 transition shadow-lg shadow-amber-100">
+            Academy Mission
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-amber-600 py-32 px-6 text-center text-white relative overflow-hidden">
+    <div class="relative z-10 max-w-4xl mx-auto">
+        <span class="amber-glass px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-8 inline-block">The Moral Operating System</span>
+        <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">Wisdom for <br>Modern <span class="text-amber-200">Inventors.</span></h1>
+        <p class="text-amber-50 text-xl font-medium leading-relaxed opacity-90 max-w-2xl mx-auto">
+          Tech gives you power. Character gives you direction. Explore the timeless virtues that turn smart kids into great leaders.
+        </p>
+    </div>
+    <div class="absolute -top-10 -right-10 text-[20rem] opacity-10 select-none rotate-12">📜</div>
+    <div class="absolute -bottom-20 -left-10 text-[15rem] opacity-10 select-none -rotate-12">🐘</div>
+  </header>
+
+  <main class="max-w-7xl mx-auto py-24 px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="max-w-xl">
+        <h2 class="text-4xl font-black text-slate-800 tracking-tighter mb-4">Foundation of Character</h2>
+        <p class="text-slate-500 font-medium leading-relaxed">Our curriculum balances technical mastery with "The Village Wisdom"—principles rooted in heritage and designed for the future.</p>
+      </div>
+      <div class="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 bg-amber-50 px-4 py-2 rounded-full border border-amber-100">
+        4 Core Modules Available
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <a href="morals/respect.html" class="moral-card bg-white p-10 border border-slate-100 shadow-sm block group">
+        <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center text-3xl mb-8 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">👴🏾</div>
+        <h3 class="text-2xl font-black mb-4 tracking-tight text-slate-800">The Elder Protocol</h3>
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">Why listening to the wisdom of those who came before us is the ultimate shortcut to success.</p>
+        <span class="text-amber-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2">Initiate Lesson <span>→</span></span>
+      </a>
+
+      <a href="morals/honesty.html" class="moral-card bg-white p-10 border border-slate-100 shadow-sm block group">
+        <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center text-3xl mb-8 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500">🐢</div>
+        <h3 class="text-2xl font-black mb-4 tracking-tight text-slate-800">True Source Code</h3>
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">An African folktale about the Woodcutter and the rewards of radical honesty in a digital world.</p>
+        <span class="text-emerald-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2">Read Story <span>→</span></span>
+      </a>
+
+      <a href="morals/ubuntu.html" class="moral-card bg-white p-10 border border-slate-100 shadow-sm block group">
+        <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center text-3xl mb-8 group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-500">🤝</div>
+        <h3 class="text-2xl font-black mb-4 tracking-tight text-slate-800">The Ubuntu Link</h3>
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">"I am because we are." Discover the beauty of collaborative invention and communal growth.</p>
+        <span class="text-indigo-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2">Explore Logic <span>→</span></span>
+      </a>
+
+      <a href="morals/hard-work.html" class="moral-card bg-white p-10 border border-slate-100 shadow-sm block group">
+        <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-3xl flex items-center justify-center text-3xl mb-8 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-500">🐜</div>
+        <h3 class="text-2xl font-black mb-4 tracking-tight text-slate-800">Diligence Engine</h3>
+        <p class="text-slate-500 text-sm mb-8 leading-relaxed">The Ant and the Cricket. A lesson on why we must debug our habits today to enjoy a bug-free tomorrow.</p>
+        <span class="text-rose-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-2">View Archive <span>→</span></span>
+      </a>
+
+    </div>
+
+    <div class="mt-24 bg-slate-900 rounded-[3.5rem] p-12 md:p-20 text-center relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <div class="text-amber-500 text-5xl mb-8 font-serif italic">"</div>
+            <p class="text-2xl md:text-3xl text-white font-medium italic leading-relaxed mb-8">
+                An inventor without morals is just a dangerous person with a tool. A Kidventor uses tech to lift the whole village.
+            </p>
+            <div class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">The Kidventor Code</div>
+        </div>
+        <div class="absolute -bottom-20 -right-20 text-[15rem] opacity-5 text-white pointer-events-none font-black">CODE</div>
+    </div>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-500 py-24 px-6">
+    <div class="max-w-7xl mx-auto border-b border-slate-900 pb-16 flex flex-col md:flex-row justify-between items-center gap-12">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-white mb-6">
+          <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-black text-sm">K</div>
+          <span class="font-black tracking-tighter text-2xl uppercase">Kidventor Academy</span>
+        </div>
+        <div class="h-6">
+          <p id="footer-typing" class="text-sm font-mono text-amber-500/80"></p>
+        </div>
+      </div>
+      <nav class="flex gap-12 text-[10px] font-black uppercase tracking-[0.2em]">
+        <a href="about.html" class="hover:text-white transition">About</a>
+        <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+        <a href="contact.html" class="hover:text-white transition">Contact</a>
+      </nav>
+    </div>
+    <div class="max-w-7xl mx-auto pt-12 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-bold uppercase tracking-[0.3em]">
+        <p>© 2026 Kidventor Tech Hub • Global Heritage</p>
+        <p>Built for the Next Generation of Global Leaders</p>
+    </div>
+  </footer>
+
+  <script>
+    const footerMsg = "Building technology rooted in character and heritage.";
+    let charIdx = 0;
+    function type() {
+      const el = document.getElementById("footer-typing");
+      if (charIdx < footerMsg.length) {
+        el.innerHTML += footerMsg.charAt(charIdx);
+        charIdx++;
+        setTimeout(type, 60);
+      } else {
+        setTimeout(() => {
+          el.innerHTML = "";
+          charIdx = 0;
+          type();
+        }, 5000);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>African Moral Teachings | SmartKids Learning</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
