@@ -63,6 +63,46 @@
     const items = [
         { text: "The capital of France is Paris.", type: "fact" },
         { text: "CLICK HERE to win a free iPhone 25 right now!", type: "fake" },
+        { text: "Dogs are better pets than cats.", type: "fake" }, // Opinion
+        { text: "Water freezes at 0°C (32°F).", type: "fact" },
+        { text: "WARNING: Your computer has 5,000 viruses! Click to clean!", type: "fake" }, // Clickbait/Scareware
+        { text: "Elephants are the largest land animals on Earth.", type: "fact" },
+        { text: "Blue is the prettiest color in the world.", type: "fake" } // Opinion
+    ];
+
+    let currentItem = 0;
+    let score = 0;
+
+    // Update the score denominator in your HTML to 0/7 and the success logic below:
+    function checkAnswer(userChoice) {
+        const parcel = document.getElementById('parcel');
+        const feedback = document.getElementById('feedback');
+        const correct = items[currentItem].type === userChoice;
+
+        if (correct) {
+            score++;
+            document.getElementById('score').innerText = `${score}/7`; // Updated to 7
+            parcel.classList.add('fact-glow');
+            feedback.innerText = "EXCELLENT SCOUTING!";
+            feedback.className = "mt-8 text-center text-xl font-black text-emerald-500 opacity-100";
+        } else {
+            parcel.classList.add('fake-glow');
+            feedback.innerText = "WATCH OUT! THAT WAS TRICKY.";
+            feedback.className = "mt-8 text-center text-xl font-black text-rose-500 opacity-100";
+        }
+
+        setTimeout(() => {
+            parcel.classList.remove('fact-glow', 'fake-glow');
+            feedback.classList.add('opacity-0');
+            nextItem();
+        }, 1200);
+    }
+    
+    
+    
+    /*const items = [
+        { text: "The capital of France is Paris.", type: "fact" },
+        { text: "CLICK HERE to win a free iPhone 25 right now!", type: "fake" },
         { text: "Dogs are better pets than cats.", type: "fake" }, // It's an opinion!
         { text: "Water freezes at 0°C (32°F).", type: "fact" }
     ];
