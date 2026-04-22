@@ -5,74 +5,124 @@
   <title>Year 3: Cargo Master | SmartKids</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .warehouse { height: 200vh; background: linear-gradient(#cbd5e1, #94a3b8); }
-    .package { width: 100px; height: 100px; cursor: grab; transition: transform 0.2s; z-index: 40; }
+    .warehouse { height: 250vh; background: linear-gradient(#cbd5e1, #94a3b8, #475569); }
+    .package { width: 120px; height: 120px; cursor: grab; transition: all 0.2s; z-index: 40; }
     .package:active { cursor: grabbing; transform: scale(1.1); }
-    .truck { border: 6px dashed #475569; transition: all 0.3s; }
-    .truck.over { background: #fef3c7; border-color: #f59e0b; scale: 1.05; }
+    .truck { border: 6px dashed #475569; transition: all 0.3s; position: relative; }
+    .truck.over { background: #fef3c7; border-color: #f59e0b; transform: scale(1.05); }
+    
+    /* Animation for appearing items */
+    @keyframes bounceIn {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .item-appear { animation: bounceIn 0.5s ease-out; }
   </style>
 </head>
-<body class="bg-slate-300 font-sans">
+<body class="bg-slate-300 font-sans overflow-x-hidden">
+
+  <div class="fixed top-6 left-6 z-[80] bg-white/80 backdrop-blur-md border-2 border-indigo-500 px-6 py-3 rounded-2xl shadow-xl">
+    <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Delivery Progress</p>
+    <div class="flex items-center gap-2 mt-1">
+        <div id="slot-1" class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-300 transition-all">📦</div>
+        <div id="slot-2" class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-300 transition-all">🎁</div>
+        <div id="slot-3" class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center border-2 border-slate-300 transition-all">💎</div>
+    </div>
+  </div>
 
   <div id="diy-manual" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[100] flex items-center justify-center p-6">
     <div class="bg-white max-w-md rounded-[3rem] p-10 shadow-2xl border-4 border-indigo-500 text-center">
-      <div class="text-6xl mb-4">📦</div>
+      <div class="text-6xl mb-4">🚚</div>
       <h2 class="text-3xl font-black mb-4 text-slate-800">Mission: Cargo Master</h2>
       <div class="space-y-4 mb-8 text-slate-600 text-left">
-        <p>This is the final test! You must use all your skills:</p>
-        <ul class="space-y-2">
-            <li>1. 🖱️ <b>Scroll Down</b> to the bottom of the warehouse.</li>
-            <li>2. 👈 <b>Hold the Click</b> to grab the Golden Package.</li>
-            <li>3. 🚚 <b>Drag & Scroll</b> back up to the delivery truck!</li>
+        <p>The truck is waiting for <b>3 special deliveries</b>. Are you ready?</p>
+        <ul class="space-y-3 font-medium">
+            <li class="flex gap-3"><span>🖱️</span> <b>Scroll Down</b> to find the items.</li>
+            <li><span>👈</span> <b>Hold the Click</b> to grab them.</li>
+            <li><span>🚚</span> <b>Drag & Scroll</b> back up to the truck!</li>
         </ul>
       </div>
-      <button onclick="document.getElementById('diy-manual').remove()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-all">Accept Mission</button>
+      <button onclick="document.getElementById('diy-manual').remove()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg shadow-indigo-200">START LOADING</button>
     </div>
   </div>
 
   <div class="warehouse relative">
-    <div class="h-screen flex flex-col items-center justify-start pt-20">
-        <div id="drop-zone" class="truck w-80 h-48 rounded-[2rem] flex flex-col items-center justify-center text-slate-400">
-            <span class="text-6xl mb-2">🚚</span>
-            <p class="font-black uppercase tracking-widest text-sm">Drop Cargo Here</p>
+    <div class="h-screen flex flex-col items-center justify-start pt-24">
+        <div id="drop-zone" class="truck w-80 h-56 rounded-[3rem] bg-white/50 flex flex-col items-center justify-center text-slate-400 shadow-inner">
+            <span id="truck-icon" class="text-7xl mb-2">🚚</span>
+            <p id="truck-label" class="font-black uppercase tracking-widest text-xs">Waiting for Cargo...</p>
         </div>
-        <div class="mt-20 text-center animate-bounce">
-            <p class="text-slate-600 font-bold text-xl">Scroll Down to find the package! ⬇️</p>
+        <div class="mt-16 text-center animate-bounce">
+            <p class="text-slate-500 font-black text-sm uppercase tracking-widest">Scroll Down to the Loading Dock ⬇️</p>
         </div>
     </div>
 
-    <div class="h-screen flex items-center justify-center">
-        <div id="cargo" draggable="true" class="package bg-amber-400 rounded-2xl shadow-2xl flex items-center justify-center text-5xl border-4 border-white">📦</div>
+    <div class="h-screen flex items-center justify-center relative">
+        <div id="cargo-container" class="transition-all duration-500">
+            <div id="cargo" draggable="true" class="package bg-amber-400 rounded-[2rem] shadow-2xl flex items-center justify-center text-6xl border-4 border-white item-appear">📦</div>
+        </div>
+        <div class="absolute bottom-10 left-10 text-9xl opacity-10">🏭</div>
+        <div class="absolute top-10 right-10 text-9xl opacity-10">🏗️</div>
     </div>
   </div>
 
   <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/95 flex items-center justify-center z-[110] p-6 text-center">
-    <div class="bg-white p-12 rounded-[3.5rem] max-w-sm border-b-8 border-indigo-500">
-        <div class="text-7xl mb-4">🎓🐭</div>
-        <h2 class="text-3xl font-black mb-2 text-slate-800">Mouse Academy Graduate!</h2>
-        <p class="text-slate-500 mb-8">You can click, scroll, and drag like a pro. You've conquered the mouse!</p>
+    <div class="bg-white p-12 rounded-[4rem] max-w-sm border-b-8 border-indigo-500 shadow-[0_0_100px_rgba(79,70,229,0.3)]">
+        <div class="text-7xl mb-4">🏆</div>
+        <h2 class="text-3xl font-black mb-2 text-slate-800">Master of Mouse!</h2>
+        <p class="text-slate-500 mb-8 leading-relaxed">You delivered all the cargo perfectly. You have officially mastered clicking, scrolling, and dragging!</p>
         <button onclick="window.location.href='../mouse-practice.html?unlocked=13'" 
-                class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-xl hover:scale-105 transition-all">
-            COLLECT DIPLOMA 🎓
+                class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-xl">
+            CLAIM DIPLOMA 🎓
         </button>
     </div>
   </div>
 
   <script>
+    let deliveries = 0;
+    const totalNeeded = 3;
+    const items = [
+        { emoji: '📦', color: 'bg-amber-400' },
+        { emoji: '🎁', color: 'bg-rose-400' },
+        { emoji: '💎', color: 'bg-sky-400' }
+    ];
+
     const cargo = document.getElementById('cargo');
+    const cargoContainer = document.getElementById('cargo-container');
     const dropZone = document.getElementById('drop-zone');
+    const truckLabel = document.getElementById('truck-label');
+    const truckIcon = document.getElementById('truck-icon');
+
+    function updateCargo() {
+        if (deliveries < totalNeeded) {
+            cargo.style.display = 'flex';
+            cargo.innerHTML = items[deliveries].emoji;
+            // Update color classes
+            cargo.className = `package ${items[deliveries].color} rounded-[2rem] shadow-2xl flex items-center justify-center text-6xl border-4 border-white item-appear`;
+            
+            // Shift position slightly so they have to "find" it
+            const xShift = (Math.random() * 400) - 200;
+            cargoContainer.style.transform = `translateX(${xShift}px)`;
+            
+            // Scroll back to top to start the next delivery cycle
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+    }
 
     // Drag Logic
     cargo.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', 'cargo');
-        cargo.classList.add('opacity-50');
+        cargo.classList.add('opacity-30', 'scale-75');
     });
 
     cargo.addEventListener('dragend', () => {
-        cargo.classList.remove('opacity-50');
+        cargo.classList.remove('opacity-30', 'scale-75');
     });
 
-    // Drop Zone Logic
+    // Drop Zone Interaction
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
         dropZone.classList.add('over');
@@ -86,21 +136,41 @@
         e.preventDefault();
         dropZone.classList.remove('over');
         
-        // Success!
-        dropZone.innerHTML = '<span class="text-6xl mb-2">✅</span><p class="text-emerald-600 font-black">DELIVERED!</p>';
+        deliveries++;
+        
+        // Update HUD
+        const slot = document.getElementById(`slot-${deliveries}`);
+        slot.classList.replace('bg-slate-200', 'bg-emerald-500');
+        slot.classList.replace('border-slate-300', 'border-emerald-200');
+        slot.classList.add('text-white', 'scale-110');
+
+        // Visual Feedback
+        truckIcon.innerText = '✅';
+        truckLabel.innerText = `DELIVERY ${deliveries} COMPLETE!`;
         cargo.style.display = 'none';
         
         setTimeout(() => {
-            document.getElementById('success-modal').classList.remove('hidden');
-        }, 500);
+            truckIcon.innerText = '🚚';
+            truckLabel.innerText = deliveries < 3 ? 'Get the next item!' : 'Truck is Full!';
+            updateCargo();
+        }, 1200);
     });
 
-    // AUTO-SCROLL logic (Crucial for dragging back up)
+    // SMART AUTO-SCROLL
+    // This allows the user to scroll the page while dragging
     document.addEventListener('dragover', (e) => {
-        if (e.clientY < 100) {
-            window.scrollBy(0, -10); // Scroll up if dragging near the top
+        const threshold = 150; // Distance from top/bottom to start scroll
+        if (e.clientY < threshold) {
+            window.scrollBy(0, -15); // Scroll Up
+        } else if (e.clientY > window.innerHeight - threshold) {
+            window.scrollBy(0, 15); // Scroll Down
         }
     });
+
+    // Initialize first item
+    window.onload = () => {
+        updateCargo();
+    };
   </script>
 </body>
 </html>
