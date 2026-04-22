@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Academy Graduation | SmartKids</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      .no-print { display: none; }
+      body { background: white; }
+      .diploma-card { border: 10px double #475569 !important; box-shadow: none !important; }
+    }
+    .diploma-card { 
+      background-image: radial-gradient(#ffffff 2px, transparent 2px);
+      background-size: 30px 30px;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-6 font-sans">
+
+  <div class="max-w-4xl w-full bg-white rounded-[4rem] shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden diploma-card border-[16px] border-white relative">
+    
+    <div class="absolute top-10 right-10 w-32 h-32 bg-amber-400 rounded-full flex items-center justify-center border-8 border-amber-200 shadow-xl transform rotate-12 z-10">
+        <span class="text-5xl">🥇</span>
+    </div>
+
+    <div class="p-12 md:p-20 text-center relative z-0">
+        <p class="text-indigo-600 font-black tracking-[0.3em] uppercase mb-4">Official Certificate</p>
+        <h1 class="text-5xl md:text-7xl font-black text-slate-800 mb-6 tracking-tighter">Mouse Master</h1>
+        
+        <div class="w-24 h-2 bg-indigo-500 mx-auto mb-10 rounded-full"></div>
+
+        <p class="text-xl text-slate-500 max-w-lg mx-auto leading-relaxed mb-12">
+            This certifies that the <span class="font-bold text-slate-800">Digital Native</span> has successfully completed all missions at the Mouse Academy, demonstrating elite skill in <span class="text-indigo-600 font-bold">Precision Clicking</span>, <span class="text-indigo-600 font-bold">Speed Double-Clicking</span>, and <span class="text-indigo-600 font-bold">Advanced Cargo Dragging</span>.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 mb-16 max-w-md mx-auto">
+            <div class="bg-slate-50 p-4 rounded-3xl border-2 border-slate-100">
+                <div class="text-3xl mb-1">🎈</div>
+                <p class="text-[10px] font-black uppercase text-slate-400">Clicking</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-3xl border-2 border-slate-100">
+                <div class="text-3xl mb-1">🐭</div>
+                <p class="text-[10px] font-black uppercase text-slate-400">Double-Click</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-3xl border-2 border-slate-100">
+                <div class="text-3xl mb-1">📦</div>
+                <p class="text-[10px] font-black uppercase text-slate-400">Drag & Scroll</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 justify-center no-print">
+            <button onclick="window.print()" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-black hover:bg-slate-700 transition-all shadow-lg shadow-slate-200 flex items-center justify-center gap-2">
+                <span>🖨️</span> PRINT DIPLOMA
+            </button>
+            <button onclick="window.location.href='../mouse-practice.html'" class="bg-white text-slate-400 px-10 py-4 rounded-2xl font-black border-2 border-slate-100 hover:bg-slate-50 transition-all">
+                RETURN TO HUB
+            </button>
+        </div>
+    </div>
+
+    <div class="h-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-500 no-print"></div>
+  </div>
+
+</body>
+</html>
