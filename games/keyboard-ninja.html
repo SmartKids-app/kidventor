@@ -3,6 +3,385 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Keyboard Ninja V2 | Kidventor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:Inter,system-ui,sans-serif;
+background:radial-gradient(circle at top,#312e81,#0f172a 60%,#020617);
+}
+
+.letter{
+position:absolute;
+width:72px;
+height:72px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+font-weight:900;
+color:#fff;
+background:linear-gradient(135deg,#6366f1,#4338ca);
+box-shadow:0 15px 35px rgba(0,0,0,.4);
+user-select:none;
+transition:.15s;
+}
+
+.hit{
+transform:scale(0);
+opacity:0;
+}
+
+.bomb{
+background:linear-gradient(135deg,#ef4444,#991b1b);
+}
+
+.freeze{
+background:linear-gradient(135deg,#06b6d4,#0ea5e9);
+}
+
+.star{
+background:linear-gradient(135deg,#f59e0b,#eab308);
+}
+
+.flash{
+animation:flash .3s linear;
+}
+
+@keyframes flash{
+0%{transform:scale(1)}
+50%{transform:scale(1.25)}
+100%{transform:scale(1)}
+}
+
+.floaty{animation:floaty 3s ease-in-out infinite}
+@keyframes floaty{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+
+.panel{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.08);
+}
+
+#mobileKeys button{
+font-size:12px;
+font-weight:900;
+padding:8px;
+border-radius:10px;
+background:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HUD -->
+<div class="fixed top-0 left-0 right-0 z-50 p-4">
+<div class="max-w-6xl mx-auto flex justify-between gap-4 items-center">
+
+<div class="flex gap-3">
+<div class="panel px-5 py-3 rounded-2xl text-white">
+<div class="text-[10px] uppercase font-black text-indigo-300">Score</div>
+<div id="score" class="text-2xl font-black">0</div>
+</div>
+
+<div class="panel px-5 py-3 rounded-2xl text-white">
+<div class="text-[10px] uppercase font-black text-amber-300">Stars</div>
+<div id="stars" class="text-2xl font-black">0</div>
+</div>
+</div>
+
+<div class="text-center">
+<div id="level" class="text-white text-xl font-black">LEVEL 1</div>
+<div id="combo" class="text-emerald-300 text-sm font-black"></div>
+</div>
+
+<div class="panel px-5 py-3 rounded-2xl text-white">
+<div class="text-[10px] uppercase font-black text-rose-300">Lives</div>
+<div id="lives" class="text-xl font-black">❤️❤️❤️</div>
+</div>
+
+</div>
+</div>
+
+<!-- Start Screen -->
+<div id="startScreen" class="fixed inset-0 z-40 flex items-center justify-center bg-black/70">
+<div class="text-center px-6 floaty">
+<h1 class="text-white text-6xl md:text-7xl font-black">KEYBOARD <span class="text-indigo-500">NINJA</span></h1>
+<p class="mt-4 text-indigo-200 font-bold tracking-[.25em] uppercase">Type Fast • Save The Scroll</p>
+
+<button onclick="startGame()" class="mt-8 px-10 py-5 rounded-2xl bg-indigo-600 text-white font-black text-xl hover:bg-indigo-700">
+START MISSION
+</button>
+</div>
+</div>
+
+<!-- Arena -->
+<div id="gameArea" class="fixed inset-0"></div>
+
+<!-- Mobile Keys -->
+<div id="mobileKeys" class="fixed bottom-0 left-0 right-0 z-50 bg-black/30 p-2 grid grid-cols-6 gap-1 md:hidden"></div>
+
+<!-- Game Over -->
+<div id="gameOver" class="hidden fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-6">
+<div class="bg-white rounded-[2rem] p-8 max-w-md w-full text-center">
+<div class="text-6xl">🏆</div>
+<h2 class="text-4xl font-black mt-4">Mission Complete</h2>
+
+<div class="mt-8 space-y-3">
+<div class="bg-slate-100 rounded-xl p-4 flex justify-between">
+<span class="font-bold">Final Score</span>
+<span id="finalScore" class="font-black">0</span>
+</div>
+
+<div class="bg-indigo-600 text-white rounded-xl p-4 flex justify-between">
+<span class="font-bold">Stars Won</span>
+<span id="finalStars" class="font-black">0</span>
+</div>
+</div>
+
+<button onclick="location.reload()" class="mt-8 w-full py-4 rounded-xl bg-slate-900 text-white font-black hover:bg-indigo-600">
+PLAY AGAIN
+</button>
+</div>
+</div>
+
+<script>
+const area = document.getElementById("gameArea");
+
+let score=0;
+let stars=0;
+let lives=3;
+let level=1;
+let combo=0;
+let speed=2.2;
+let started=false;
+let ended=false;
+let spawnRate=900;
+let active=[];
+let timer;
+
+function updateHUD(){
+scoreEl.textContent=score;
+starsEl.textContent=stars;
+levelEl.textContent="LEVEL "+level;
+comboEl.textContent=combo>1?"COMBO x"+combo:"";
+
+let hearts="";
+for(let i=0;i<3;i++) hearts += i<lives ? "❤️":"🖤";
+livesEl.textContent=hearts;
+}
+
+const scoreEl=document.getElementById("score");
+const starsEl=document.getElementById("stars");
+const levelEl=document.getElementById("level");
+const comboEl=document.getElementById("combo");
+const livesEl=document.getElementById("lives");
+
+function startGame(){
+if(started)return;
+started=true;
+document.getElementById("startScreen").classList.add("hidden");
+spawnLoop();
+requestAnimationFrame(loop);
+}
+
+function spawnLoop(){
+timer=setInterval(spawnLetter,spawnRate);
+}
+
+function restartSpawner(){
+clearInterval(timer);
+spawnLoop();
+}
+
+function randomLetter(){
+const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+return chars[Math.floor(Math.random()*chars.length)];
+}
+
+function spawnLetter(){
+if(ended)return;
+
+let type="normal";
+let rand=Math.random();
+
+if(rand<0.08) type="bomb";
+else if(rand<0.14) type="freeze";
+else if(rand<0.22) type="star";
+
+const el=document.createElement("div");
+el.className="letter "+type;
+el.textContent= type==="bomb" ? "💣" :
+type==="freeze" ? "❄️" :
+type==="star" ? "⭐" :
+randomLetter();
+
+const x=Math.random()*(window.innerWidth-80);
+el.style.left=x+"px";
+el.style.top="-80px";
+
+area.appendChild(el);
+
+active.push({
+char:el.textContent,
+type,
+el,
+x,
+y:-80
+});
+}
+
+function loop(){
+if(ended)return;
+
+for(let i=active.length-1;i>=0;i--){
+let a=active[i];
+a.y += speed;
+a.el.style.top=a.y+"px";
+
+if(a.y > window.innerHeight){
+a.el.remove();
+active.splice(i,1);
+
+if(a.type==="normal"){
+lives--;
+combo=0;
+if(lives<=0){endGame();return;}
+}
+updateHUD();
+}
+}
+
+requestAnimationFrame(loop);
+}
+
+function hitEffect(el){
+el.classList.add("hit");
+setTimeout(()=>el.remove(),120);
+}
+
+function levelCheck(){
+if(score>=50 && level===1){
+level=2; speed=3; spawnRate=700; restartSpawner();
+}
+if(score>=120 && level===2){
+level=3; speed=4; spawnRate=550; restartSpawner();
+}
+if(score>=220 && level===3){
+level=4; speed=5; spawnRate=450; restartSpawner();
+}
+}
+
+function processKey(key){
+if(!started || ended)return;
+
+key=key.toUpperCase();
+
+for(let i=0;i<active.length;i++){
+let a=active[i];
+
+if(
+(a.type==="normal" && a.char===key) ||
+(a.type!=="normal" && key===" ")
+){
+
+if(a.type==="bomb"){
+combo=0;
+lives--;
+if(lives<=0){endGame();return;}
+}
+
+else if(a.type==="freeze"){
+speed=Math.max(1.5,speed-1);
+setTimeout(()=>speed+=1,4000);
+score+=10;
+stars+=2;
+combo++;
+}
+
+else if(a.type==="star"){
+score+=20;
+stars+=5;
+combo++;
+}
+
+else{
+combo++;
+score += 10*combo;
+stars += 1;
+}
+
+hitEffect(a.el);
+active.splice(i,1);
+
+levelCheck();
+updateHUD();
+return;
+}
+}
+
+combo=0;
+updateHUD();
+}
+
+document.addEventListener("keydown",(e)=>{
+if(!started){startGame();return;}
+processKey(e.key===" " ? " " : e.key);
+});
+
+function endGame(){
+ended=true;
+clearInterval(timer);
+
+document.getElementById("finalScore").textContent=score;
+document.getElementById("finalStars").textContent=stars;
+document.getElementById("gameOver").classList.remove("hidden");
+
+let saved=Number(localStorage.getItem("kidventorStars"))||0;
+localStorage.setItem("kidventorStars",saved+stars);
+}
+
+/* mobile keyboard */
+const keys="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const mobile=document.getElementById("mobileKeys");
+
+keys.split("").forEach(k=>{
+let b=document.createElement("button");
+b.textContent=k;
+b.onclick=()=>processKey(k);
+mobile.appendChild(b);
+});
+
+let space=document.createElement("button");
+space.textContent="⭐";
+space.className="col-span-6 bg-indigo-600 text-white";
+space.onclick=()=>processKey(" ");
+mobile.appendChild(space);
+
+updateHUD();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Keyboard Ninja Pro | Kidventor</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
