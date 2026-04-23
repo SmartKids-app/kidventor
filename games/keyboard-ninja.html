@@ -140,7 +140,7 @@
     let ended = false;
     let activeLetters = [];
 
-    // Sound FX Simulation (Visual)
+    // Visual Slash Effect
     function triggerSlash(x, y) {
         const slash = document.createElement("div");
         slash.className = "slash";
@@ -158,97 +158,116 @@
         for(let i=0; i<3; i++) hearts += (i < lives) ? "❤️" : "🖤";
         document.getElementById("lives").textContent = hearts;
 
+        const comboContainer = document.getElementById("comboContainer");
         if (combo > 2) {
-            document.getElementById("comboContainer").classList.remove("hidden");
+            comboContainer.classList.remove("hidden");
             document.getElementById("comboText").textContent = `X${Math.floor(combo/2)}`;
         } else {
-            document.getElementById("comboContainer").classList.add("hidden");
+            comboContainer.classList.add("hidden");
         }
     }
 
     function spawnLetter() {
-        if (ended) return;
+        if (ended || !started) return;
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const char = chars[Math.floor(Math.random() * chars.length)];
         const el = document.createElement("div");
         el.className = "letter";
         el.textContent = char;
         
+        // Ensure letters stay within screen bounds
         const x = Math.random() * (window.innerWidth - 100) + 20;
         el.style.left = x + "px";
         el.style.top = "-100px";
         
-        // Randomize color slightly for variety
-        const colors = ['#6366f1', '#8b5cf6', '#4f46e5', '#3730a3'];
-        el.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random()*colors.length)]}, #1e1b4b)`;
-
         gameArea.appendChild(el);
         activeLetters.push({ char, el, x, y: -100 });
         
-        // Increase speed slowly
-        speed += 0.01;
+        // Gradual speed increase
+        speed += 0.02;
     }
 
     function gameLoop() {
         if (ended) return;
+
         for (let i = activeLetters.length - 1; i >= 0; i--) {
             const item = activeLetters[i];
             item.y += speed;
             item.el.style.top = item.y + "px";
 
+            // If letter falls off screen
             if (item.y > window.innerHeight) {
                 item.el.remove();
                 activeLetters.splice(i, 1);
                 lives--;
                 combo = 0;
                 updateUI();
-                if (lives <= 0) endGame();
+                if (lives <= 0) {
+                    endGame();
+                    return;
+                }
             }
         }
         requestAnimationFrame(gameLoop);
     }
 
+    // MAIN INPUT LISTENER
     document.addEventListener("keydown", (e) => {
+        // Prevent game from starting on modifier keys like Shift/Alt
+        if (e.key.length !== 1 && !started) return;
+
+        // START LOGIC
         if (!started) {
             started = true;
             document.getElementById("startScreen").classList.add("hidden");
-            setInterval(spawnLetter, 800);
+            setInterval(spawnLetter, 900);
+            updateUI(); // Set initial hearts/score
             gameLoop();
             return;
         }
+
         if (ended) return;
 
         const key = e.key.toUpperCase();
         let hitFound = false;
 
+        // Check if hit
         for (let i = 0; i < activeLetters.length; i++) {
             if (activeLetters[i].char === key) {
                 const hit = activeLetters[i];
                 triggerSlash(hit.x, hit.y + 35);
                 hit.el.classList.add("hit");
                 
-                setTimeout(() => hit.el.remove(), 200);
+                // Visual cleanup
+                const targetEl = hit.el;
+                setTimeout(() => targetEl.remove(), 100);
+                
                 activeLetters.splice(i, 1);
                 
                 combo++;
-                score += (10 * Math.floor(combo/2 || 1));
+                score += (10 * Math.max(1, Math.floor(combo/2)));
                 updateUI();
                 hitFound = true;
                 break;
             }
         }
         
-        if (!hitFound && started) combo = 0; // Break combo on wrong key
+        // Reset combo if player types the wrong letter
+        if (!hitFound) {
+            combo = 0;
+            updateUI();
+        }
     });
 
     function endGame() {
+        if (ended) return;
         ended = true;
         document.getElementById("gameOver").classList.remove("hidden");
         document.getElementById("finalScore").textContent = score;
         const totalStars = Math.floor(score / 5);
         document.getElementById("starsWon").textContent = totalStars;
         
-        // Save to local storage for the Adventure page
+        // Save stars to local storage
         let savedStars = Number(localStorage.getItem("kidventorStars")) || 0;
         localStorage.setItem("kidventorStars", savedStars + totalStars);
     }
