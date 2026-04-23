@@ -128,52 +128,63 @@
 
     let currentChapter = 0;
 
-    function render() {
-      const container = document.getElementById("story-container");
-      const ch = chapters[currentChapter];
-      
-      // Update Background
-      document.body.style.backgroundColor = ch.color;
+function render() {
+  const container = document.getElementById("story-container");
+  const ch = chapters[currentChapter];
+  
+  // 1. Update Background
+  document.body.style.backgroundColor = ch.color;
 
-      container.innerHTML = `
-        <div class="chapter-card active">
-            <div class="mb-12 bg-white/60 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white shadow-sm">
-                <h4 style="color: ${ch.accent}" class="font-black text-[10px] uppercase tracking-[0.3em] mb-2">Log Summary // Act 0${currentChapter + 1}</h4>
-                <p class="text-slate-700 font-bold leading-relaxed">${ch.summary}</p>
-            </div>
-
-            <div class="story-font">
-                <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-8 text-slate-900">${ch.title}</h1>
-                <p class="text-xl text-slate-800 leading-[1.9] drop-cap">${ch.content}</p>
-            </div>
+  // 2. Update Content
+  container.innerHTML = `
+    <div class="chapter-card active">
+        <div class="mb-12 bg-white/60 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white shadow-sm">
+            <h4 style="color: ${ch.accent}" class="font-black text-[10px] uppercase tracking-[0.3em] mb-2">Log Summary // Act 0${currentChapter + 1}</h4>
+            <p class="text-slate-700 font-bold leading-relaxed">${ch.summary}</p>
         </div>
-      `;
 
-      // Update Navigation
-      document.getElementById('log-indicator').innerText = `LOG 0${currentChapter + 1}/0${chapters.length}`;
-      document.getElementById('progress-bar').style.width = ((currentChapter + 1) / chapters.length) * 100 + "%";
-      document.getElementById('progress-bar').style.backgroundColor = ch.accent;
-      
-      document.getElementById('prev-btn').disabled = (currentChapter === 0);
-      
-      const nextBtn = document.getElementById('next-btn');
-      if (currentChapter === chapters.length - 1) {
-        nextBtn.innerHTML = "Back To Morals ↺";
-        nextBtn.onclick = () => window.location.href = "morals.html";
-      } else {
-        nextBtn.innerHTML = "NEXT LOG →";
-        nextBtn.onclick = () => changeChapter(1);
-      }
+        <div class="story-font">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-8 text-slate-900">${ch.title}</h1>
+            <p class="text-xl text-slate-800 leading-[1.9] drop-cap">${ch.content}</p>
+        </div>
+    </div>
+  `;
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  // 3. Update Navigation Indicators
+  document.getElementById('log-indicator').innerText = `LOG 0${currentChapter + 1}/0${chapters.length}`;
+  const progressBar = document.getElementById('progress-bar');
+  progressBar.style.width = ((currentChapter + 1) / chapters.length) * 100 + "%";
+  progressBar.style.backgroundColor = ch.accent;
+  
+  // 4. Update Previous Button
+  document.getElementById('prev-btn').disabled = (currentChapter === 0);
+  
+  // 5. Update Next/Redirect Button
+  const nextBtn = document.getElementById('next-btn');
+  if (currentChapter === chapters.length - 1) {
+    // Final Page Logic
+    nextBtn.innerHTML = "Back To Morals ↺";
+    nextBtn.onclick = () => { 
+      window.location.href = "https://smartkids-app.github.io/kidventor/morals.html"; 
+    };
+  } else {
+    // Normal Page Logic
+    nextBtn.innerHTML = "NEXT LOG →";
+    nextBtn.onclick = () => changeChapter(1);
+  }
 
-    function changeChapter(dir) {
-      currentChapter += dir;
-      render();
-    }
+  // 6. Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    window.onload = render;
+// Keep this outside of render
+function changeChapter(dir) {
+  currentChapter += dir;
+  render();
+}
+
+// Start the page
+window.onload = render;
   </script>
 </body>
 </html>
