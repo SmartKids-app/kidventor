@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aduke: The Growth Logic | KidVentor Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+    
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .chapter-transition {
+      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .progress-glow {
+      box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform shadow-lg">K</div>
+        <span class="font-extrabold text-xl tracking-tighter uppercase text-slate-800">Kid<span class="text-indigo-600">Ventor</span></span>
+      </a>
+      <div class="flex items-center gap-4">
+        <span class="hidden md:block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growth Module: Series 01</span>
+        <div class="h-1 w-24 bg-slate-100 rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-indigo-600 transition-all duration-500 progress-glow"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 md:py-20">
+    
+    <div id="chapter-target" class="chapter-transition">
+      </div>
+
+    <div class="mt-16 flex items-center justify-between border-t border-slate-200 pt-10">
+      <button onclick="changeChapter(-1)" id="prev-btn" class="flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-indigo-600 transition group disabled:opacity-30">
+        <span class="group-hover:-translate-x-1 transition-transform">←</span> PREVIOUS LOG
+      </button>
+      
+      <div id="chapter-indicator" class="mono text-[10px] font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+        LOG 01/02
+      </div>
+
+      <button onclick="changeChapter(1)" id="next-btn" class="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 transition group disabled:opacity-30">
+        NEXT LOG <span class="group-hover:translate-x-1 transition-transform">→</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 py-12 px-6 mt-20">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="mono text-indigo-400 text-xs mb-4 uppercase tracking-widest">Archiving History for Future Builders</p>
+      <p class="text-slate-500 text-[10px] uppercase tracking-[0.4em] font-bold">© 2026 KidVentor Academy • Nigeria</p>
+    </div>
+  </footer>
+
+  <script>
+    const chapters = [
+      {
+        title: "Aduke's Roots",
+        subtitle: "The Foundation of Hard Work",
+        virtue: "Diligence",
+        content: `
+          <p class="text-xl md:text-2xl text-slate-700 leading-relaxed mb-8 italic border-l-4 border-indigo-200 pl-6">
+            Aduke was known for her quiet determination. A trader with a heart as warm as the morning sun, she built her life on the lessons of her late mother, Niniola, and her father.
+          </p>
+          <div class="space-y-6 text-slate-600 leading-relaxed">
+            <p>Niniola was a famous fish seller at the Olode Market, always returning with stories of the sea. Though she passed away when Aduke was just eight, her legacy of resilience remained. Aduke’s father, a farmer and pillar of support, raised her with a simple rule: <strong class="text-slate-900">“A woman who speaks calmly holds the world in her hands.”</strong></p>
+            <p>Aduke married young and scaled her trading business across West Africa. She was brave but never boastful. When her father passed away, Aduke became the <strong>Lead Architect</strong> of her family’s future. While her siblings dreamed of university degrees, Aduke provided the resources. She was the engine that powered their dreams.</p>
+          </div>
+          <div class="mt-10 bg-indigo-50 p-8 rounded-[2rem] border border-indigo-100">
+            <h4 class="mono text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2">Inventory Check:</h4>
+            <p class="text-sm text-indigo-900 font-medium leading-relaxed">Aduke didn't have a degree yet, but she was already a master of <strong>Supply Chain Management</strong> and <strong>Family Ethics</strong>.</p>
+          </div>
+        `
+      },
+      {
+        title: "The Silent Decision",
+        subtitle: "Upgrading the System",
+        virtue: "Self-Growth",
+        content: `
+          <p class="text-xl md:text-2xl text-slate-700 leading-relaxed mb-8 italic border-l-4 border-indigo-200 pl-6">
+            Life continued at its usual rhythm, but Aduke’s "Internal OS" was ready for an update. Her routes now stretched from Lomé to Abidjan.
+          </p>
+          <div class="space-y-6 text-slate-600 leading-relaxed">
+            <p>She began importing rare fabrics and herbs, managing a growing warehouse with the help of Odulaja—a calm, devoted assistant who respected her strength. Their bond grew quietly, a partnership built on mutual respect.</p>
+            <p>Despite her success, Aduke craved <strong>New Data</strong>—an education. In secret, she applied to a university in Ghana. It was a bold "code change" she didn't discuss with anyone. When the acceptance letter arrived on a humid Tuesday, she realized: <strong class="text-slate-900">“I deserve to grow too.”</strong></p>
+            <p>While others relied on her for food and fees, she knew that to lead better, she had to learn more. No one noticed her packed bags. She was stepping into her next chapter—quietly, but with the power of a woman who knows her worth.</p>
+          </div>
+          <div class="mt-10 bg-slate-900 text-white p-8 rounded-[2rem] shadow-xl">
+            <h4 class="mono text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2">The Tech Connection:</h4>
+            <p class="text-sm opacity-90 leading-relaxed">Just like an app needs an update to stay fast, a <strong>KidVentor</strong> knows that learning never stops. Aduke’s decision to go to school was her way of "patching" her future for even greater success.</p>
+          </div>
+        `
+      }
+    ];
+
+    let currentChapter = 0;
+
+    function renderChapter() {
+      const chapter = chapters[currentChapter];
+      const target = document.getElementById("chapter-target");
+      
+      target.classList.remove("chapter-transition");
+      void target.offsetWidth; // Trigger reflow
+      target.classList.add("chapter-transition");
+
+      target.innerHTML = `
+        <div class="mb-10">
+          <span class="mono text-[10px] font-black bg-indigo-600 text-white px-3 py-1 rounded-full uppercase tracking-widest leading-none">Virtue: ${chapter.virtue}</span>
+          <h2 class="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs mt-6 mb-2">${chapter.subtitle}</h2>
+          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-slate-900">${chapter.title}</h1>
+        </div>
+        <div class="prose prose-slate lg:prose-lg max-w-none">
+          ${chapter.content}
+        </div>
+      `;
+
+      // Update UI
+      document.getElementById("chapter-indicator").innerText = `LOG 0${currentChapter + 1}/0${chapters.length}`;
+      document.getElementById("progress-bar").style.width = `${((currentChapter + 1) / chapters.length) * 100}%`;
+      
+      document.getElementById("prev-btn").disabled = currentChapter === 0;
+      document.getElementById("next-btn").disabled = currentChapter === chapters.length - 1;
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeChapter(direction) {
+      const nextIndex = currentChapter + direction;
+      if (nextIndex >= 0 && nextIndex < chapters.length) {
+        currentChapter = nextIndex;
+        renderChapter();
+      }
+    }
+
+    // Initial load
+    window.onload = renderChapter;
+  </script>
+</body>
+</html>
