@@ -9,7 +9,7 @@
 
 <meta name="description" content="Kidventor Academy teaches coding, digital literacy and character education for children.">
 
-<style>
+<!--<style>
 html{ scroll-behavior:smooth; }
 body{ font-family:Inter,system-ui,sans-serif; }
 
@@ -41,12 +41,83 @@ animation:shine 3s linear infinite;
 
 @keyframes shine{ to{background-position:200% center;} }
 .card:hover{ transform:translateY(-8px); }
+</style>-->
+    <style>
+/* ... existing styles ... */
+
+/* LOGO SPIN ANIMATION */
+@keyframes logo-turn {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+.logo-container:hover .logo-icon {
+    animation: logo-turn 0.8s ease-in-out;
+}
+
+/* SHINING EDGE MENU BUTTONS */
+.nav-link {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    color: #4f46e5;
+    background: white;
+    border: 1px solid #818cf8;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+/* The Shining Light Edge Effect */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 0.75rem;
+    padding: 1px; /* The border width */
+    background: linear-gradient(90deg, transparent, #ffffff, #6366f1, transparent);
+    background-size: 200% auto;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link:hover::after {
+    opacity: 1;
+    animation: shine 1.5s linear infinite;
+}
 </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
-
 <header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100 px-6">
+    <div class="content-container h-20 flex items-center justify-between">
+        
+        <a href="index.html" class="logo-container flex items-center gap-3 group">
+            <div class="logo-icon w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center shadow-lg transition-transform">K</div>
+            <span class="font-black text-xl tracking-tight group-hover:text-indigo-600 transition-colors">Kidventor</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-4 text-sm font-bold">
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#courses" class="nav-link">Courses</a>
+            <a href="adventure.html" class="nav-link text-indigo-600">Adventure</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            
+            <a href="morals.html" class="ml-4 px-6 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition transform hover:-translate-y-0.5 active:scale-95">
+                Morals
+            </a>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden text-3xl font-bold p-2 hover:bg-slate-50 rounded-lg">☰</button>
+    </div>
+</header>
+<!--<header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100 px-6">
 <div class="content-container h-20 flex items-center justify-between">
     <a href="#" class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center shadow-lg">K</div>
@@ -62,7 +133,7 @@ animation:shine 3s linear infinite;
     </nav>
     <button id="menuBtn" class="md:hidden text-3xl font-bold">☰</button>
 </div>
-</header>
+</header>-->
 
 <div id="mobileMenu" class="hidden fixed inset-0 bg-slate-950 text-white z-50">
 <div class="h-full flex flex-col items-center justify-center gap-8 text-3xl font-black">
