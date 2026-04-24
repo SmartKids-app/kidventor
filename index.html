@@ -132,7 +132,7 @@ animation:shine 3s linear infinite;
             <a href="#testimonials" class="nav-link">Testimonials</a>
             <a href="#courses" class="nav-link">Courses</a>
             <a href="adventure.html" class="nav-link text-indigo-600">Adventure</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#Worksheets">Worksheets</a>
             
             <a href="morals.html" class="ml-4 px-6 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition transform hover:-translate-y-0.5 active:scale-95">
                 Morals
@@ -146,7 +146,7 @@ animation:shine 3s linear infinite;
 <div class="h-full flex flex-col items-center justify-center gap-8 text-3xl font-black">
 <a href="#testimonials">Testimonials</a>
 <a href="#courses">Courses</a>
-<a href="#why">Why Us</a>
+<a href="#Worksheets">Worksheets</a>
 <a href="adventure.html">Adventure</a>
 <a href="#contact">Contact</a>
 <a href="morals.html">Morals</a>
@@ -281,65 +281,108 @@ animation:shine 3s linear infinite;
             </div>
     </div>
 </section>
-<!--<section id="adventure" class="pt-32 pb-24 px-6 bg-slate-50">
+<section id="worksheet" class="pt-32 pb-24 px-6 bg-slate-50">
 <div class="content-container">
     
     <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-wrap justify-between items-center mb-12">
         <div class="flex items-center gap-4">
-            <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-indigo-200">🛡️</div>
+            <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-indigo-200">👨‍🎓</div>
             <div>
-                <h2 class="text-2xl font-black text-slate-800 tracking-tight">Code Knight Musa</h2>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Level 04 Explorer</p>
+                <h2 class="text-2xl font-black text-slate-800 tracking-tight">Student Worksheet</h2>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Active Session: April 2026</p>
             </div>
         </div>
-        <div class="flex gap-8">
-            <div class="text-center">
-                <span class="block text-2xl font-black text-indigo-600">1,240</span>
-                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Total XP</span>
-            </div>
-            <div class="text-center text-orange-500">
-                <span class="block text-2xl font-black">🔥 5</span>
-                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Day Streak</span>
-            </div>
+        <div class="flex gap-4">
+            <button onclick="window.print()" class="px-6 py-3 bg-slate-900 text-white text-xs font-black rounded-xl hover:bg-indigo-600 transition shadow-lg shadow-slate-200">
+                PRINT WORKSHEET
+            </button>
         </div>
     </div>
 
-    <h3 class="text-center text-sm font-black text-slate-400 uppercase tracking-[0.4em] mb-12">Current Mission: The Great Ripple</h3>
+    <div class="grid lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-6">
+            <h3 class="text-sm font-black text-slate-400 uppercase tracking-[0.4em] mb-6">Completed Topics</h3>
+            
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 flex items-center justify-between group hover:border-indigo-200 transition">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center font-bold">01</div>
+                    <div>
+                        <h4 class="font-black text-slate-800">Internet Safety Fundamentals</h4>
+                        <p class="text-xs text-slate-400">Mastered: Privacy, Passwords & Phishing</p>
+                    </div>
+                </div>
+                <span class="text-emerald-500 font-black text-xs">PASSED</span>
+            </div>
 
-    <div class="relative max-w-xl mx-auto">
-        <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 z-0 border-dashed border-l-2"></div>
+            <div class="bg-white p-6 rounded-3xl border border-slate-100 flex items-center justify-between group hover:border-indigo-200 transition">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center font-bold">02</div>
+                    <div>
+                        <h4 class="font-black text-slate-800">Keyboard Ninja (Speed Test)</h4>
+                        <p class="text-xs text-slate-400">Current Rank: Shogun (45 WPM)</p>
+                    </div>
+                </div>
+                <span class="text-indigo-600 font-black text-xs">88% SCORE</span>
+            </div>
 
-        <div class="relative z-10 flex flex-col items-center mb-16">
-            <div class="w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xl mb-4 border-4 border-white">✓</div>
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 w-full text-center">
-                <h4 class="font-black text-slate-800">Mouse Mastery</h4>
-                <p class="text-xs text-slate-500 mt-1">Status: Mastered • +200 XP Earned</p>
+            <div class="bg-indigo-600 p-8 rounded-[2.5rem] text-white shadow-xl shadow-indigo-200 relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="px-3 py-1 bg-white/20 text-white text-[10px] font-black rounded-full uppercase">In Progress</span>
+                    <h4 class="text-2xl font-black mt-4">Algorithm Basics: The Sandwich Method</h4>
+                    <p class="text-indigo-100 text-sm mt-2 opacity-90">Learn how to break down complex tasks into small, logical steps. Complete the quiz to earn your Logic Badge.</p>
+                    <button class="mt-6 px-8 py-3 bg-white text-indigo-600 font-black rounded-xl text-xs hover:scale-105 transition">START QUIZ</button>
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500 rounded-full blur-3xl opacity-50"></div>
             </div>
         </div>
 
-        <div class="relative z-10 flex flex-col items-center mb-16">
-            <div class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-2xl mb-4 border-4 border-white animate-bounce">
-                <span class="text-3xl">📖</span>
+        <div class="space-y-8">
+            <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">Skill Breakdown</h3>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs font-black mb-2 uppercase">
+                        <span>Coding Logic</span>
+                        <span class="text-indigo-600">75%</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs font-black mb-2 uppercase">
+                        <span>Digital Ethics</span>
+                        <span class="text-emerald-500">90%</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-emerald-500" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="flex justify-between text-xs font-black mb-2 uppercase">
+                        <span>Creative Design</span>
+                        <span class="text-amber-500">40%</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-amber-500" style="width: 40%"></div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-8 rounded-[2rem] shadow-xl border-2 border-indigo-600 w-full text-center">
-                <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-[10px] font-black rounded-full uppercase">Current Quest</span>
-                <h4 class="font-black text-xl text-slate-800 mt-3">One Good Turn</h4>
-                <p class="text-sm text-slate-500 mt-2">Finish the story to unlock the "Kindness Badge"</p>
-                <a href="morals/One-Good-Turn.html" class="inline-block mt-4 text-indigo-600 font-black text-sm uppercase tracking-widest hover:translate-x-2 transition-transform">Resume →</a>
+
+            <div class="bg-indigo-50 p-8 rounded-[2.5rem] border-2 border-dashed border-indigo-200">
+                <h4 class="font-black text-indigo-900 text-sm uppercase mb-2">Teacher's Note</h4>
+                <p class="text-xs text-indigo-700 leading-relaxed italic">
+                    "Musa has shown exceptional growth in digital ethics. Next focus: Refining mouse precision in the Architect module."
+                </p>
             </div>
         </div>
 
-        <div class="relative z-10 flex flex-col items-center opacity-50 grayscale">
-            <div class="w-14 h-14 bg-slate-300 text-slate-600 rounded-full flex items-center justify-center mb-4 border-4 border-white">🔒</div>
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 w-full text-center">
-                <h4 class="font-black text-slate-800">Scratch Architect</h4>
-                <p class="text-xs text-slate-500 mt-1">Unlock at Level 05</p>
-            </div>
-        </div>
     </div>
-
 </div>
-</section>-->
+</section>
 <section id="courses" class="py-24 px-6 bg-white">
 <div class="content-container">
     <h2 class="text-4xl font-black mb-14 text-center md:text-left">Popular Learning Paths</h2>
