@@ -5,6 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FAQ | Kidventor Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .glass-nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); }
+        
+        /* Accordion Styles */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .faq-item.active .faq-content {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <nav class="glass-nav border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform shadow-lg">K</div>
+                <span class="font-black text-lg tracking-tighter uppercase">Kidventor</span>
+            </a>
+            <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+                <a href="about.html" class="hover:text-indigo-600 transition">About</a>
+                <a href="contact.html" class="hover:text-indigo-600 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto pt-20 pb-12 px-6 text-center">
+        <span class="inline-block bg-indigo-100 text-indigo-700 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">
+            Help Center
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-6">
+            Got <span class="text-indigo-600">Questions?</span>
+        </h1>
+        <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Everything you need to know about our coding classes, digital literacy programs, and how we support young creators.
+        </p>
+    </header>
+
+    <main class="max-w-3xl mx-auto pb-24 px-6">
+        <div class="space-y-4">
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl transition-all hover:border-indigo-300 shadow-sm overflow-hidden">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                    <span class="font-bold text-slate-900 md:text-lg">What is Kidventor Academy?</span>
+                    <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-content px-6 text-slate-600 leading-relaxed">
+                    Kidventor Academy is a learning platform that teaches children coding, keyboard/mouse skills, digital literacy, and moral values. We focus on turning children from tech users into tech creators.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl transition-all hover:border-indigo-300 shadow-sm overflow-hidden">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                    <span class="font-bold text-slate-900 md:text-lg">What age group do you teach?</span>
+                    <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-content px-6 text-slate-600 leading-relaxed">
+                    We support children from ages 6 to 18. Our lessons are tiered—beginners start with mouse control and typing, while older students dive into website development and logic.
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-8 rounded-[2rem] my-8 shadow-xl text-white">
+                <h3 class="font-black text-xl mb-3">Do you offer CBT Exam Prep?</h3>
+                <p class="text-slate-400 mb-6">Yes! We specifically train students in keyboard speed, mouse accuracy, and the confidence needed to navigate Computer Based Testing environments effectively.</p>
+                <a href="contact.html" class="text-indigo-400 font-bold text-sm uppercase tracking-widest hover:text-white transition">Inquire about CBT →</a>
+            </div>
+
+            <div class="faq-item bg-white border border-slate-200 rounded-2xl transition-all hover:border-indigo-300 shadow-sm overflow-hidden">
+                <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                    <span class="font-bold text-slate-900 md:text-lg">Do students need their own laptops?</span>
+                    <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-content px-6 text-slate-600 leading-relaxed">
+                    While having a personal computer helps for practice at home, we provide the necessary guidance and tools during our structured sessions. For online learners, a computer with internet access is required.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center bg-indigo-50 p-10 rounded-[3rem] border border-indigo-100">
+            <h3 class="text-2xl font-black text-slate-900 mb-2">Still have questions?</h3>
+            <p class="text-slate-600 mb-8">Can't find what you're looking for? Reach out to our support team.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:edukidsafrica@gmail.com" class="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black hover:shadow-lg transition">Email Us</a>
+                <a href="contact.html" class="bg-white border border-slate-200 px-8 py-4 rounded-2xl font-black hover:bg-slate-50 transition">Contact Page</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-12 border-b border-slate-800 pb-12">
+            <div>
+                <h3 class="text-white text-2xl font-black mb-4 tracking-tighter uppercase">Kidventor Academy</h3>
+                <p class="text-sm leading-relaxed">Empowering children with coding, digital literacy, and strong moral values for the future.</p>
+            </div>
+            <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-white text-xs font-black uppercase tracking-widest opacity-50 mb-2">Links</h4>
+                    <a href="index.html" class="hover:text-indigo-400 transition">Home</a>
+                    <a href="about.html" class="hover:text-indigo-400 transition">About</a>
+                    <a href="contact.html" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <h4 class="text-white text-xs font-black uppercase tracking-widest opacity-50 mb-2">Legal</h4>
+                    <a href="privacy.html" class="hover:text-indigo-400 transition">Privacy</a>
+                    <a href="disclaimer.html" class="hover:text-indigo-400 transition">Disclaimer</a>
+                    <a href="terms.html" class="hover:text-indigo-400 transition">Terms</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 text-[10px] font-bold uppercase tracking-widest flex justify-between">
+            <p>© 2026 Kidventor Academy</p>
+            <p>Nigeria</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(button) {
+            const item = button.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQ | Kidventor Academy</title>
     <meta name="description" content="Frequently Asked Questions about Kidventor Academy, including coding classes for kids, keyboard and mouse training, worksheets, CBT preparation, pricing, and parent support.">
     <meta name="keywords" content="Kidventor Academy FAQ, coding classes for kids FAQ, keyboard training FAQ, CBT preparation questions, digital literacy academy FAQ">
     <meta name="author" content="Kidventor Academy">
@@ -30,7 +180,7 @@
 
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- NAV -->
+    <!-- NAV --
     <nav class="glass-nav border-b py-4 px-4 sm:px-6 sticky top-0 z-50 shadow-sm">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-2 group">
@@ -47,7 +197,7 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO --
     <header class="max-w-5xl mx-auto pt-16 md:pt-20 px-4 sm:px-6">
         <div class="flex flex-wrap items-center gap-3 mb-4">
             <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] border border-indigo-200">
@@ -71,7 +221,7 @@
         <div class="w-20 h-2 bg-indigo-500 rounded-full mt-10"></div>
     </header>
 
-    <!-- FAQ CONTENT -->
+    <!-- FAQ CONTENT --
     <main class="max-w-5xl mx-auto py-16 px-4 sm:px-6">
         <div class="space-y-8">
 
@@ -154,7 +304,7 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER --
     <footer class="bg-slate-950 text-slate-500 py-16 px-4 sm:px-6">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 border-b border-slate-900 pb-10">
             <div class="text-center md:text-left">
