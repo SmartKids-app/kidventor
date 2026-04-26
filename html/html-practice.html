@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Practice Lab | Kidventor Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fira+Code:wght@400;500;700&display=swap');
+
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
+        .code-font { font-family: 'Fira Code', monospace; }
+
+        /* Glowing effect for the editor */
+        .editor-focus:focus-within {
+            ring: 4px;
+            ring-color: rgba(14, 165, 233, 0.2);
+            border-color: #0ea5e9;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .preview-window {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <nav class="bg-white sticky top-0 z-50 border-b border-slate-200 py-4 px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-9 h-9 bg-sky-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-sky-200">K</div>
+                <span class="font-extrabold uppercase text-sm tracking-tight">Kidventor Academy</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <span id="task-counter" class="text-[10px] font-black bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full uppercase">Task 1 of 3</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
+            
+            <div class="space-y-6">
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+                    <h1 class="text-3xl font-black mb-4">HTML <span class="text-sky-600">Live Lab</span> 🧪</h1>
+                    <p id="instruction-text" class="text-slate-600 mb-6 font-medium">
+                        Your mission: Type <code class="bg-slate-100 px-2 py-1 rounded text-pink-600">&lt;h1&gt;Hello World&lt;/h1&gt;</code> into the editor below!
+                    </p>
+
+                    <div class="editor-focus transition-all bg-slate-900 rounded-[2rem] p-6 shadow-2xl relative">
+                        <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            </div>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">index.html</span>
+                        </div>
+                        
+                        <textarea id="html-input" 
+                            class="w-full h-64 bg-transparent border-none text-sky-400 code-font text-lg outline-none resize-none"
+                            placeholder="Type your code here..."
+                            spellcheck="false"
+                        ></textarea>
+                    </div>
+
+                    <div class="mt-6 flex gap-3">
+                        <button onclick="checkTask()" class="bg-sky-600 hover:bg-sky-700 text-white font-black py-4 px-8 rounded-2xl transition-all flex-1 shadow-lg shadow-sky-100">
+                            CHECK MY CODE ✅
+                        </button>
+                        <button onclick="resetCode()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-4 px-6 rounded-2xl transition-all">
+                            RESET
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky top-28 space-y-4">
+                <p class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] ml-4">Browser Live View</p>
+                <div class="bg-white rounded-[2.5rem] border-8 border-slate-200 shadow-2xl overflow-hidden aspect-video flex flex-col">
+                    <div class="bg-slate-100 p-3 flex items-center gap-3">
+                        <div class="flex gap-1.5">
+                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                        </div>
+                        <div class="bg-white rounded-md flex-1 text-[10px] text-slate-400 px-3 py-1 truncate">
+                            localhost:8080/my-awesome-site
+                        </div>
+                    </div>
+                    <div id="live-preview" class="p-8 flex-1 overflow-auto preview-window">
+                        <div class="text-slate-300 text-center mt-10 italic">Your website will appear here...</div>
+                    </div>
+                </div>
+
+                <div class="bg-sky-50 p-6 rounded-3xl border border-sky-100">
+                    <h3 class="text-xs font-black text-sky-800 uppercase mb-4 tracking-widest text-center">Tap to Insert</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <button onclick="insertTag('<h1>', '</h1>')" class="bg-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition text-sky-600 border border-sky-100">&lt;h1&gt; Heading</button>
+                        <button onclick="insertTag('<p>', '</p>')" class="bg-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition text-sky-600 border border-sky-100">&lt;p&gt; Text</button>
+                        <button onclick="insertTag('<img src=\'https://via.placeholder.com/150\'>', '')" class="bg-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm hover:shadow-md transition text-sky-600 border border-sky-100">&lt;img&gt; Photo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const htmlInput = document.getElementById('html-input');
+        const livePreview = document.getElementById('live-preview');
+        const instructionText = document.getElementById('instruction-text');
+        const taskCounter = document.getElementById('task-counter');
+
+        let currentTask = 1;
+
+        // 1. Live Preview Logic
+        htmlInput.addEventListener('input', () => {
+            const code = htmlInput.value;
+            livePreview.innerHTML = code || '<div class="text-slate-300 text-center mt-10 italic">Your website will appear here...</div>';
+        });
+
+        // 2. Helper to insert tags
+        function insertTag(open, close) {
+            const start = htmlInput.selectionStart;
+            const end = htmlInput.selectionEnd;
+            const text = htmlInput.value;
+            const before = text.substring(0, start);
+            const after = text.substring(end, text.length);
+            htmlInput.value = before + open + close + after;
+            htmlInput.dispatchEvent(new Event('input'));
+            htmlInput.focus();
+        }
+
+        // 3. Reset Button
+        function resetCode() {
+            htmlInput.value = '';
+            htmlInput.dispatchEvent(new Event('input'));
+        }
+
+        // 4. Task Checker Logic
+        function checkTask() {
+            const code = htmlInput.value.toLowerCase();
+            
+            if (currentTask === 1 && code.includes('<h1>') && code.includes('</h1>')) {
+                success('Great! Now let\'s add a paragraph with <p>I am a coder</p>!');
+                currentTask = 2;
+                taskCounter.innerText = "Task 2 of 3";
+            } else if (currentTask === 2 && code.includes('<p>') && code.includes('</p>')) {
+                success('Amazing! Finally, add an image using the <img> tag!');
+                currentTask = 3;
+                taskCounter.innerText = "Task 3 of 3";
+            } else if (currentTask === 3 && code.includes('<img')) {
+                confetti();
+                instructionText.innerHTML = "<span class='text-emerald-600 font-bold'>🎉 Lab Complete! You are a Web Developer!</span>";
+                taskCounter.innerText = "Level Mastered!";
+            } else {
+                alert("Keep trying! Make sure you close your tags properly.");
+            }
+        }
+
+        function success(nextMsg) {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            instructionText.innerHTML = nextMsg;
+        }
+    </script>
+
+</body>
+</html>
