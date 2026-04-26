@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Introduction | Kidventor Academy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:#f8fbff;
+    color:#0f172a;
+}
+
+.float-icon{
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+.topic-card{
+    transition:0.3s ease;
+}
+
+.topic-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+}
+
+.glow-btn{
+    transition:0.3s ease;
+}
+
+.glow-btn:hover{
+    transform:scale(1.03);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-sky-100 py-4 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+        <a href="../index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-black text-lg">
+                K
+            </div>
+            <div>
+                <h2 class="font-extrabold text-sm uppercase tracking-tight">
+                    Kidventor Academy
+                </h2>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                    Learn • Build • Create
+                </p>
+            </div>
+        </a>
+
+        <div class="hidden md:block">
+            <span class="bg-sky-50 text-sky-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest">
+                HTML Learning Path
+            </span>
+        </div>
+
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <div class="inline-block bg-sky-100 text-sky-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6">
+                Welcome to Coding
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-6">
+                Coding is <span class="text-sky-600">Not Hard</span><br>
+                It is Actually Fun 🎉
+            </h1>
+
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                Many children think programming is too difficult.
+                That is not true.
+                Coding is simply giving instructions to a computer.
+                If you can tell someone how to make tea,
+                you can learn coding too.
+            </p>
+
+            <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                HTML is the best place to start.
+                It helps you build websites like YouTube,
+                school portals, online stores, and even your own future company website.
+            </p>
+
+            <a href="#topics" class="glow-btn inline-block bg-sky-600 hover:bg-slate-900 text-white font-black px-8 py-5 rounded-2xl shadow-xl">
+                START LEARNING HTML 🚀
+            </a>
+        </div>
+
+        <div class="text-center">
+            <div class="float-icon inline-block text-8xl mb-6">
+                💻
+            </div>
+
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg">
+                <h3 class="font-black text-xl mb-4">
+                    HTML Means:
+                </h3>
+
+                <div class="space-y-3 text-left max-w-sm mx-auto">
+                    <div class="flex gap-3">
+                        <span class="font-black text-sky-600">H</span>
+                        <span>Hyper</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <span class="font-black text-sky-600">T</span>
+                        <span>Text</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <span class="font-black text-sky-600">M</span>
+                        <span>Markup</span>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <span class="font-black text-sky-600">L</span>
+                        <span>Language</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- WHY LEARN HTML -->
+
+<section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto bg-white rounded-[2.5rem] p-10 md:p-14 border border-slate-100 shadow-sm">
+
+        <h2 class="text-4xl font-black mb-8 text-center">
+            Why Every Child Should Learn HTML 🌍
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-sky-50 rounded-3xl p-8 border border-sky-100">
+                <div class="text-4xl mb-4">🌐</div>
+                <h3 class="font-black text-lg mb-3">
+                    Build Websites
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Learn how websites are created and start building your own pages from scratch.
+                </p>
+            </div>
+
+            <div class="bg-sky-50 rounded-3xl p-8 border border-sky-100">
+                <div class="text-4xl mb-4">🧠</div>
+                <h3 class="font-black text-lg mb-3">
+                    Think Smarter
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Coding helps your brain solve problems faster and think step-by-step.
+                </p>
+            </div>
+
+            <div class="bg-sky-50 rounded-3xl p-8 border border-sky-100">
+                <div class="text-4xl mb-4">💼</div>
+                <h3 class="font-black text-lg mb-3">
+                    Future Career
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Web development is one of the biggest future jobs in the world.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- TOPIC CARDS -->
+
+<section id="topics" class="px-6 pb-24">
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="text-4xl font-black text-center mb-4">
+            Your HTML Learning Roadmap 🛣️
+        </h2>
+
+        <p class="text-center text-slate-500 mb-14 max-w-2xl mx-auto">
+            Learn step-by-step. No fear. No pressure.
+            Just simple lessons that make coding exciting.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <a href="html-basics.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">🏗️</div>
+                <h3 class="font-black text-xl mb-3">HTML Basics</h3>
+                <p class="text-slate-500 text-sm">
+                    Learn how websites are structured and how HTML works.
+                </p>
+            </a>
+
+            <a href="html-tags.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">🏷️</div>
+                <h3 class="font-black text-xl mb-3">HTML Tags</h3>
+                <p class="text-slate-500 text-sm">
+                    Discover headings, paragraphs, images, buttons and more.
+                </p>
+            </a>
+
+            <a href="html-attributes.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">⚙️</div>
+                <h3 class="font-black text-xl mb-3">HTML Attributes</h3>
+                <p class="text-slate-500 text-sm">
+                    Learn the extra instructions that make tags smarter.
+                </p>
+            </a>
+
+            <a href="html-practice.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">✍️</div>
+                <h3 class="font-black text-xl mb-3">HTML Practice</h3>
+                <p class="text-slate-500 text-sm">
+                    Practice with beginner-friendly coding activities.
+                </p>
+            </a>
+
+            <a href="html-quiz.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">🧪</div>
+                <h3 class="font-black text-xl mb-3">HTML Quiz</h3>
+                <p class="text-slate-500 text-sm">
+                    Test your knowledge and challenge yourself.
+                </p>
+            </a>
+
+            <a href="html-project.html" class="topic-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="text-4xl mb-4">🚀</div>
+                <h3 class="font-black text-xl mb-3">HTML Project</h3>
+                <p class="text-slate-500 text-sm">
+                    Build your first real website and feel like a developer.
+                </p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- MOTIVATION -->
+
+<section class="px-6 pb-24">
+    <div class="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 text-center text-white">
+
+        <h2 class="text-4xl font-black mb-6">
+            Remember This 💡
+        </h2>
+
+        <p class="text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto">
+            Nobody was born knowing how to code.
+            Every great programmer started by learning
+            their first HTML tag.
+            Your journey starts here.
+        </p>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-white border-t border-slate-100 py-10 px-6 text-center">
+    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+        © 2026 Kidventor Academy • Code Your Dreams
+    </p>
+</footer>
+
+</body>
+</html>
