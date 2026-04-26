@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Tags | Kidventor Academy</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:#f8fbff;
+    color:#0f172a;
+}
+
+.code-font{
+    font-family:'Fira Code', monospace;
+}
+
+.tag-card{
+    transition:0.3s ease;
+}
+
+.tag-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.06);
+}
+
+.float-tag{
+    animation: floatTag 4s ease-in-out infinite;
+}
+
+@keyframes floatTag{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-sky-100 py-4 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+        <a href="html-introduction.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-black text-lg">
+                K
+            </div>
+
+            <div>
+                <h2 class="font-extrabold text-sm uppercase tracking-tight">
+                    Kidventor Academy
+                </h2>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                    HTML Tags
+                </p>
+            </div>
+        </a>
+
+        <a href="html-introduction.html"
+           class="text-sm font-bold text-sky-600 hover:text-slate-900">
+           ← Back to HTML Home
+        </a>
+
+    </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <div class="inline-block bg-sky-100 text-sky-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6">
+                Lesson 2
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-6">
+                Meet HTML <span class="text-sky-600">Tags</span> 🏷️
+            </h1>
+
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                HTML tags are the special instructions we give to the browser.
+                They tell the browser what to show and how to show it.
+            </p>
+
+            <p class="text-lg text-slate-600 leading-relaxed">
+                Think of tags like labels on boxes.
+                Each label tells the browser exactly what is inside.
+            </p>
+        </div>
+
+        <div class="float-tag">
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg">
+                <h3 class="font-black text-xl mb-6 text-center">
+                    Example of a Tag
+                </h3>
+
+                <div class="bg-slate-900 rounded-3xl p-6 code-font text-center text-lg text-white">
+                    &lt;h1&gt;Hello&lt;/h1&gt;
+                </div>
+
+                <p class="text-center text-slate-500 text-sm mt-5">
+                    This tells the browser to show a big heading.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- TAG SANDWICH -->
+
+<section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto bg-slate-900 rounded-[3rem] p-10 md:p-14 text-white">
+
+        <h2 class="text-4xl font-black text-center mb-10">
+            The Tag Sandwich 🥪
+        </h2>
+
+        <p class="text-center text-slate-300 max-w-3xl mx-auto mb-10">
+            Most HTML tags come in pairs.
+            One opens the instruction, and the other closes it.
+            Just like bread on both sides of a sandwich.
+        </p>
+
+        <div class="bg-slate-800 rounded-3xl p-8 code-font text-center text-xl md:text-2xl">
+            <span class="text-pink-400">&lt;h1&gt;</span>
+            My First Website
+            <span class="text-pink-400">&lt;/h1&gt;</span>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-10">
+
+            <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                <h3 class="font-black text-pink-400 mb-2">
+                    Opening Tag
+                </h3>
+                <p class="text-sm text-slate-300">
+                    Starts the instruction
+                </p>
+            </div>
+
+            <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                <h3 class="font-black text-white mb-2">
+                    Content
+                </h3>
+                <p class="text-sm text-slate-300">
+                    What people see
+                </p>
+            </div>
+
+            <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
+                <h3 class="font-black text-pink-400 mb-2">
+                    Closing Tag
+                </h3>
+                <p class="text-sm text-slate-300">
+                    Ends the instruction
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- COMMON TAGS -->
+
+<section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="text-4xl font-black text-center mb-10">
+            Common HTML Tags You Must Know 🚀
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;h1&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Heading</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for big titles like page headings.
+                </p>
+            </div>
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;p&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Paragraph</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for writing normal text and stories.
+                </p>
+            </div>
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;img&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Image</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for putting pictures on your webpage.
+                </p>
+            </div>
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;a&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Anchor Link</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for links that move users to another page.
+                </p>
+            </div>
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;button&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Button</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for clickable buttons on websites.
+                </p>
+            </div>
+
+            <div class="tag-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">&lt;div&gt;</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Container</h3>
+                <p class="text-slate-500 text-sm">
+                    Used for grouping sections together.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- MINI PRACTICE -->
+
+<section class="px-6 pb-24">
+    <div class="max-w-5xl mx-auto bg-sky-600 rounded-[3rem] p-12 text-center text-white">
+
+        <h2 class="text-4xl font-black mb-6">
+            Quick Practice ✍️
+        </h2>
+
+        <p class="text-sky-100 mb-8 max-w-2xl mx-auto">
+            Which tag should you use for a big title like:
+            "Welcome to My Website"?
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                &lt;h1&gt;
+            </div>
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                &lt;p&gt;
+            </div>
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                &lt;img&gt;
+            </div>
+
+        </div>
+
+        <p class="mt-8 text-sm text-sky-100">
+            Correct answer: <strong>&lt;h1&gt;</strong>
+        </p>
+    </div>
+</section>
+
+<!-- NEXT LESSON -->
+
+<section class="px-6 pb-24 text-center">
+    <h2 class="text-3xl font-black mb-6">
+        Ready for the Next Lesson?
+    </h2>
+
+    <a href="html-attributes.html"
+       class="inline-block bg-sky-600 hover:bg-slate-900 text-white font-black px-10 py-5 rounded-2xl shadow-xl transition">
+       Continue to HTML Attributes →
+    </a>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-white border-t border-slate-100 py-10 px-6 text-center">
+    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+        © 2026 Kidventor Academy • HTML Tags Module
+    </p>
+</footer>
+
+</body>
+</html>
