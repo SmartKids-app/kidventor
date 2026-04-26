@@ -248,40 +248,22 @@
     <script>
     function updateLocks() {
         const levels = ['level2', 'level3', 'advance'];
-        const requirements = {
-            'level2': 'level1',
-            'level3': 'level2',
-            'advance': 'level3'
-        };
+        const requirements = { 'level2': 'level1', 'level3': 'level2', 'advance': 'level3' };
 
         levels.forEach(lvl => {
-            const previousLvl = requirements[lvl];
-            const isUnlocked = localStorage.getItem('unlock_' + previousLvl);
+            const isUnlocked = localStorage.getItem('unlock_' + requirements[lvl]);
             const card = document.getElementById('link-' + lvl);
             
-            if (isUnlocked === 'true' && card) {
-                // Remove greyed out look
+            // The "if (card)" check prevents the page from breaking
+            if (card && isUnlocked === 'true') {
                 card.classList.remove('opacity-50', 'pointer-events-none');
-                
-                // Update Lock Icon
-                const lock = card.querySelector('.lock-icon');
-                if(lock) lock.innerText = "🔓";
-                
-                // Update Button Text
-                const btn = card.querySelector('.mt-auto');
-                if(btn) {
-                    btn.innerText = "START MISSION";
-                    btn.classList.remove('text-slate-400');
-                    btn.classList.add('text-indigo-600', 'border-indigo-500');
-                }
-                
-                // Activate link
                 card.href = `quiz.html?level=${lvl}`;
+                
+                const btn = card.querySelector('.mt-auto');
+                if(btn) btn.innerText = "START MISSION";
             }
         });
     }
-    
-    // Check for unlocks whenever user returns to landing page
     window.onload = updateLocks;
 </script>
 </body>
