@@ -5,6 +5,356 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internet Safety Lab | Kidventor Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        /* Lock Animation */
+        .lock-animation {
+            animation: lockWiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes lockWiggle {
+            0%,100% { transform: rotate(0deg); }
+            10% { transform: rotate(-10deg); }
+            20% { transform: rotate(10deg); }
+            30% { transform: rotate(0deg); }
+        }
+
+        /* Scan Line */
+        .scan-line {
+            height: 2px;
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+            animation: scan 2.5s linear infinite;
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Card Hover */
+        .card-hover {
+            transition: 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Security Meter */
+        .security-fill {
+            animation: fillMeter 4s infinite;
+        }
+
+        @keyframes fillMeter {
+            0% { width: 20%; }
+            50% { width: 90%; }
+            100% { width: 20%; }
+        }
+    </style>
+</head>
+
+<body class="text-slate-900">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 py-4 px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-black">
+                    K
+                </div>
+                <span class="font-extrabold tracking-tighter uppercase text-sm">
+                    Kidventor Academy
+                </span>
+            </a>
+
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Security Protocols Active
+                </span>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <header class="py-20 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="text-7xl mb-6 lock-animation inline-block">
+                🔐
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                Become an <span class="text-emerald-600">Internet Guard</span>
+            </h1>
+
+            <p class="text-lg text-slate-500 leading-relaxed">
+                The internet is powerful, but not everything online is safe.
+                Learn how to spot fake websites, dangerous links,
+                and protect your computer like a cyber hero!
+            </p>
+
+        </div>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-6xl mx-auto px-6 pb-24 space-y-20">
+
+
+        <!-- SECTION 1 -->
+        <!-- HTTPS + PADLOCK -->
+        <section class="bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-sm">
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <div class="relative bg-slate-900 rounded-[2.5rem] p-6 overflow-hidden border-4 border-slate-800">
+
+                    <div class="bg-slate-800 rounded-xl p-3 flex items-center gap-3 mb-6">
+                        <span class="text-emerald-500">🔒</span>
+                        <span class="text-slate-300 text-xs font-mono">
+                            https://www.kidventor.com.ng
+                        </span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="h-2 w-3/4 bg-slate-800 rounded"></div>
+                        <div class="h-2 w-full bg-slate-800 rounded"></div>
+                        <div class="h-2 w-1/2 bg-slate-800 rounded"></div>
+                    </div>
+
+                    <div class="absolute inset-0 scan-line opacity-40"></div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase mb-4">
+                        Rule #1
+                    </div>
+
+                    <h2 class="text-3xl font-black mb-6">
+                        Look for the “S” 🛡️
+                    </h2>
+
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Before typing your password, always check the website address.
+                        <strong>HTTPS</strong> means the site is secure.
+                    </p>
+
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        If you only see <strong>HTTP</strong>,
+                        or your browser shows a warning,
+                        stop immediately.
+                    </p>
+
+                    <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex gap-4">
+                        <div class="text-2xl">✅</div>
+                        <p class="text-sm font-bold text-emerald-800">
+                            The padlock means your information is encrypted
+                            and safer from hackers.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 2 -->
+        <!-- THINK BEFORE CLICK -->
+        <section class="bg-emerald-900 rounded-[3rem] p-10 md:p-16 text-white">
+
+            <h2 class="text-4xl font-black mb-6">
+                Think Before You Click 🖱️
+            </h2>
+
+            <p class="text-emerald-100 text-lg max-w-2xl mb-10">
+                Hackers use something called <strong>Phishing</strong>.
+                They pretend to be your school, your game,
+                or even your friend to trick you.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-6">
+                    <h3 class="text-rose-400 font-black uppercase text-xs mb-3">
+                        The Bait 🎣
+                    </h3>
+
+                    <p class="text-sm">
+                        “Click here now and get 1,000,000 free coins!”
+                    </p>
+                </div>
+
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-6">
+                    <h3 class="text-emerald-300 font-black uppercase text-xs mb-3">
+                        The Shield 🛡️
+                    </h3>
+
+                    <p class="text-sm">
+                        Hover over the link first.
+                        If it looks strange or suspicious,
+                        do NOT click it.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 3 -->
+        <!-- COMPUTER HEALTH -->
+        <section>
+
+            <h2 class="text-3xl font-black text-center mb-10">
+                Keep Your Computer Healthy 🩺
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-white rounded-[2.5rem] p-8 border border-slate-200 text-center card-hover">
+                    <div class="text-4xl mb-4">🚫</div>
+                    <h3 class="font-black mb-3">
+                        Unknown Downloads
+                    </h3>
+                    <p class="text-sm text-slate-500">
+                        Never download files from websites you do not trust.
+                        Hidden viruses can destroy your computer.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] p-8 border border-slate-200 text-center card-hover">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="font-black mb-3">
+                        Keep Updating
+                    </h3>
+                    <p class="text-sm text-slate-500">
+                        Updates fix weak spots in your computer.
+                        Think of them like medicine for your device.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] p-8 border border-slate-200 text-center card-hover">
+                    <div class="text-4xl mb-4">🔌</div>
+                    <h3 class="font-black mb-3">
+                        Stranger USBs
+                    </h3>
+                    <p class="text-sm text-slate-500">
+                        Never plug random USB drives into your computer.
+                        They may carry dangerous malware.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 4 -->
+        <!-- PUBLIC WIFI -->
+        <section class="bg-amber-50 border-2 border-amber-200 rounded-[3rem] p-10">
+
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+
+                <div class="text-center">
+                    <div class="text-7xl mb-4">📶</div>
+
+                    <h3 class="font-black text-xl text-amber-900">
+                        Public Wi-Fi Danger
+                    </h3>
+                </div>
+
+                <div>
+                    <p class="text-amber-800 leading-relaxed mb-4">
+                        Open Wi-Fi in airports, cafés,
+                        and public places is like speaking loudly
+                        in a crowded room.
+                    </p>
+
+                    <p class="text-amber-800 leading-relaxed font-bold">
+                        Never log into your bank,
+                        school portal, or passwords
+                        using public Wi-Fi.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 5 -->
+        <!-- SECURITY METER -->
+        <section class="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm">
+
+            <h2 class="text-3xl font-black text-center mb-8">
+                Your Cyber Safety Meter 🔋
+            </h2>
+
+            <div class="max-w-2xl mx-auto">
+
+                <div class="w-full h-5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                    <div class="h-full bg-emerald-500 rounded-full security-fill"></div>
+                </div>
+
+                <p class="text-center text-sm text-slate-500 mt-4">
+                    Safe habits make your security stronger every day.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="text-center">
+
+            <h2 class="text-3xl font-black mb-6">
+                Ready for the Safety Challenge?
+            </h2>
+
+            <button class="bg-emerald-600 hover:bg-slate-900 text-white font-black py-6 px-12 rounded-[2rem] transition-all transform hover:scale-105 shadow-xl">
+                TAKE THE SAFETY CHALLENGE 🏆
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-12 px-6 text-center border-t border-slate-100">
+        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+            © 2026 Kidventor Academy • Stay Safe, Stay Smart
+        </p>
+    </footer>
+
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Safety Lab | Kidventor Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
