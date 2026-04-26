@@ -1,1 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Attributes | Kidventor Academy</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:#f8fbff;
+    color:#0f172a;
+}
+
+.code-font{
+    font-family:'Fira Code', monospace;
+}
+
+.attribute-card{
+    transition:0.3s ease;
+}
+
+.attribute-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.06);
+}
+
+.float-gear{
+    animation: floatGear 4s ease-in-out infinite;
+}
+
+@keyframes floatGear{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-sky-100 py-4 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+        <a href="html-introduction.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-black text-lg">
+                K
+            </div>
+
+            <div>
+                <h2 class="font-extrabold text-sm uppercase tracking-tight">
+                    Kidventor Academy
+                </h2>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                    HTML Attributes
+                </p>
+            </div>
+        </a>
+
+        <a href="html-introduction.html"
+           class="text-sm font-bold text-sky-600 hover:text-slate-900">
+           ← Back to HTML Home
+        </a>
+
+    </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <div class="inline-block bg-sky-100 text-sky-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6">
+                Lesson 3
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-6">
+                HTML <span class="text-sky-600">Attributes</span> ⚙️
+            </h1>
+
+            <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                Tags tell the browser what to show.
+                Attributes give extra instructions about how it should work.
+            </p>
+
+            <p class="text-lg text-slate-600 leading-relaxed">
+                Think of attributes like giving more details.
+                For example: not just “show image,” but “show THIS image.”
+            </p>
+        </div>
+
+        <div class="float-gear">
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg">
+                <h3 class="font-black text-xl mb-6 text-center">
+                    Example
+                </h3>
+
+                <div class="bg-slate-900 rounded-3xl p-6 code-font text-white text-center text-lg">
+                    &lt;img src="photo.jpg"&gt;
+                </div>
+
+                <p class="text-center text-slate-500 text-sm mt-5">
+                    <strong>src</strong> is the attribute.
+                    It tells the browser which image to show.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- WHAT ATTRIBUTES DO -->
+
+<section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto bg-white rounded-[3rem] p-10 md:p-14 border border-slate-100 shadow-sm">
+
+        <h2 class="text-4xl font-black text-center mb-10">
+            What Attributes Do 🔍
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="attribute-card bg-sky-50 p-8 rounded-3xl border border-sky-100">
+                <div class="text-4xl mb-4">🖼️</div>
+                <h3 class="font-black text-lg mb-3">
+                    Choose Images
+                </h3>
+                <p class="text-slate-600 text-sm">
+                    Attributes help tell the browser which image file to display.
+                </p>
+            </div>
+
+            <div class="attribute-card bg-sky-50 p-8 rounded-3xl border border-sky-100">
+                <div class="text-4xl mb-4">🔗</div>
+                <h3 class="font-black text-lg mb-3">
+                    Create Links
+                </h3>
+                <p class="text-slate-600 text-sm">
+                    They tell links where users should go after clicking.
+                </p>
+            </div>
+
+            <div class="attribute-card bg-sky-50 p-8 rounded-3xl border border-sky-100">
+                <div class="text-4xl mb-4">🎨</div>
+                <h3 class="font-black text-lg mb-3">
+                    Add Styling Help
+                </h3>
+                <p class="text-slate-600 text-sm">
+                    Some attributes help with colors, design and page structure.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- COMMON ATTRIBUTES -->
+
+<section class="px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="text-4xl font-black text-center mb-10">
+            Common HTML Attributes You Must Know 🚀
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+            <div class="attribute-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">src</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Source</h3>
+                <p class="text-slate-500 text-sm">
+                    Used with images to show where the picture is coming from.
+                </p>
+            </div>
+
+            <div class="attribute-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">href</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Hyperlink Reference</h3>
+                <p class="text-slate-500 text-sm">
+                    Used inside links to tell where the user should go.
+                </p>
+            </div>
+
+            <div class="attribute-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">alt</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Alternative Text</h3>
+                <p class="text-slate-500 text-sm">
+                    Helps explain what an image is if it does not load.
+                </p>
+            </div>
+
+            <div class="attribute-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <code class="text-sky-600 font-black text-xl">class</code>
+                <h3 class="font-black text-lg mt-4 mb-3">Class Name</h3>
+                <p class="text-slate-500 text-sm">
+                    Helps organize and style parts of your webpage.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CODE EXAMPLES -->
+
+<section class="px-6 pb-24">
+    <div class="max-w-6xl mx-auto bg-slate-900 rounded-[3rem] p-10 md:p-14 text-white">
+
+        <h2 class="text-4xl font-black text-center mb-10">
+            Real Attribute Examples 💻
+        </h2>
+
+        <div class="space-y-6">
+
+            <div class="bg-slate-800 rounded-2xl p-6 code-font text-sm md:text-base">
+                &lt;img src="school.jpg" alt="My School"&gt;
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-6 code-font text-sm md:text-base">
+                &lt;a href="https://www.kidventor.com.ng"&gt;Visit Kidventor&lt;/a&gt;
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-6 code-font text-sm md:text-base">
+                &lt;div class="card"&gt;Welcome&lt;/div&gt;
+            </div>
+
+        </div>
+
+        <p class="text-center text-slate-300 mt-8">
+            Notice how attributes give extra meaning to the tags.
+        </p>
+
+    </div>
+</section>
+
+<!-- MINI PRACTICE -->
+
+<section class="px-6 pb-24">
+    <div class="max-w-5xl mx-auto bg-sky-600 rounded-[3rem] p-12 text-center text-white">
+
+        <h2 class="text-4xl font-black mb-6">
+            Quick Practice ✍️
+        </h2>
+
+        <p class="text-sky-100 mb-8">
+            Which attribute helps an image know what picture to display?
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                href
+            </div>
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                src
+            </div>
+
+            <div class="bg-white text-sky-700 font-black p-5 rounded-2xl">
+                class
+            </div>
+
+        </div>
+
+        <p class="mt-8 text-sm text-sky-100">
+            Correct answer: <strong>src</strong>
+        </p>
+    </div>
+</section>
+
+<!-- NEXT LESSON -->
+
+<section class="px-6 pb-24 text-center">
+    <h2 class="text-3xl font-black mb-6">
+        Ready for Practice Time?
+    </h2>
+
+    <a href="html-practice.html"
+       class="inline-block bg-sky-600 hover:bg-slate-900 text-white font-black px-10 py-5 rounded-2xl shadow-xl transition">
+       Continue to HTML Practice →
+    </a>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-white border-t border-slate-100 py-10 px-6 text-center">
+    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+        © 2026 Kidventor Academy • HTML Attributes Module
+    </p>
+</footer>
+
+</body>
+</html>
