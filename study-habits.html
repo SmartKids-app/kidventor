@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Power-Up | Kidventor Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfdfd; }
+
+        @keyframes brain-glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.3)); }
+            50% { filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.6)); }
+        }
+        .animate-brain { animation: brain-glow 3s infinite; }
+
+        .habit-card { transition: all 0.3s ease; }
+        .habit-card:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 py-4 px-6">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-black">K</div>
+                <span class="font-extrabold tracking-tighter uppercase text-sm">Kidventor Academy</span>
+            </a>
+            <div class="text-[10px] font-black uppercase tracking-widest text-orange-500 bg-orange-50 px-3 py-1 rounded-full">
+                Learning Mastery
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-20 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-7xl mb-6 animate-brain inline-block">🧠</div>
+            <h1 class="text-5xl md:text-6xl font-black mb-6 tracking-tight text-slate-900">Study <span class="text-orange-500">Smarter</span>, Not Harder</h1>
+            <p class="text-lg text-slate-500 leading-relaxed">
+                Your brain is the world's most powerful computer. To get the best results, you need to install the right habits!
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24 space-y-16">
+
+        <section class="bg-white p-8 md:p-12 rounded-[3.5rem] shadow-sm border border-slate-100 overflow-hidden">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-black mb-6">Step 1: The "No-Distraction" Zone 📵</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        When you study, your brain enters "Deep Work" mode. But every time your phone pings or someone talks to you, your brain "restarts."
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                            <span class="text-2xl">📱</span>
+                            <p class="text-[10px] font-black text-red-600 uppercase mt-2">Phone Away</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-2xl border border-green-100 text-center">
+                            <span class="text-2xl">🎧</span>
+                            <p class="text-[10px] font-black text-green-600 uppercase mt-2">Quiet Spot</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative bg-slate-50 rounded-[2.5rem] h-64 flex items-center justify-center border-2 border-dashed border-slate-200">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-32 h-32 bg-orange-100 rounded-full animate-ping opacity-20"></div>
+                    </div>
+                    <div class="z-10 text-center">
+                        <div class="text-5xl mb-2">🚀</div>
+                        <p class="font-black text-orange-600 uppercase tracking-widest text-xs">Deep Focus Mode</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-orange-500 rounded-[3rem] p-10 md:p-16 text-white relative overflow-hidden">
+            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="bg-white rounded-3xl p-6 shadow-xl text-slate-900">
+                        <h4 class="font-black text-center mb-4">THE RECALL TEST</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 rounded-xl text-xs border border-slate-100 italic">"Don't just re-read the page over and over..."</div>
+                            <div class="p-3 bg-orange-50 rounded-xl text-xs border border-orange-100 font-bold">"Close the book and try to explain it to a friend (or your teddy bear!)"</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-4xl font-black mb-6">Use "Active Recall" 💡</h2>
+                    <p class="text-orange-100 leading-relaxed text-lg">
+                        Reading a page 10 times doesn't help you remember. **Testing yourself** is the only way to make the information stick forever. 
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div>
+            <h2 class="text-3xl font-black text-center mb-10 text-slate-800">The 25-5 Method 🍅</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 habit-card text-center">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-xl mx-auto mb-4">⏱️</div>
+                    <h3 class="font-black mb-2">25 Mins Work</h3>
+                    <p class="text-slate-500 text-sm">Set a timer and work with 100% focus. No talking!</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 habit-card text-center">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-xl mx-auto mb-4">🥤</div>
+                    <h3 class="font-black mb-2">5 Mins Break</h3>
+                    <p class="text-slate-500 text-sm">Stretch, drink water, or walk around. No screens!</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 habit-card text-center">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl mx-auto mb-4">🔄</div>
+                    <h3 class="font-black mb-2">Repeat</h3>
+                    <p class="text-slate-500 text-sm">Do this 4 times, then take a longer 30-minute break.</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="bg-slate-900 rounded-[3.5rem] p-10 md:p-16 text-white text-center relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-3xl font-black mb-6">Sleep is Your "Save" Button 💾</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
+                    When you sleep, your brain moves everything you learned today from "Short-Term Memory" to "Long-Term Memory." If you don't sleep, you lose the info!
+                </p>
+                <div class="inline-flex items-center gap-2 bg-white/10 px-6 py-3 rounded-full border border-white/20">
+                    <span class="text-orange-400">⭐</span>
+                    <span class="text-xs font-black uppercase tracking-widest">Goal: 9 Hours of Sleep</span>
+                </div>
+            </div>
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl"></div>
+        </section>
+
+        <div class="text-center">
+            <h3 class="text-2xl font-black mb-6 text-slate-800">Ready to boost your productivity?</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="window.location.href='planner.html'" class="bg-orange-500 hover:bg-slate-900 text-white font-black py-5 px-10 rounded-2xl transition shadow-xl shadow-orange-100">
+                    DOWNLOAD STUDY PLANNER 📝
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white py-12 px-6 text-center border-t border-slate-100">
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">© 2026 Kidventor Academy • Future-Proof Learning</p>
+    </footer>
+
+</body>
+</html>
