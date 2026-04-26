@@ -1,5 +1,509 @@
-
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Mega Quiz | Kidventor Academy</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f8fafc;
+    overflow-x: hidden;
+}
+
+.glass-card {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.option-btn {
+    transition: all 0.25s ease;
+    border: 2px solid #e2e8f0;
+}
+
+.option-btn:hover {
+    border-color: #0ea5e9;
+    background: #f0f9ff;
+    transform: translateY(-2px);
+}
+
+.option-btn.correct {
+    border-color: #22c55e;
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.option-btn.wrong {
+    border-color: #ef4444;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.progress-bar {
+    transition: width 0.4s ease;
+}
+
+.fade-slide {
+    animation: fadeSlide .4s ease;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+<!-- TOP HEADER -->
+<div id="quiz-header" class="fixed top-0 left-0 w-full bg-white border-b border-slate-200 p-4 z-50 hidden">
+    <div class="max-w-5xl mx-auto">
+
+        <div class="flex flex-wrap gap-4 justify-between items-center mb-4">
+            <div class="flex flex-wrap gap-3">
+                <div class="bg-sky-100 text-sky-700 px-4 py-2 rounded-2xl font-bold text-sm">
+                    Score: <span id="current-score">0</span>/25
+                </div>
+
+                <div class="bg-amber-100 text-amber-700 px-4 py-2 rounded-2xl font-bold text-sm">
+                    ⏱️ <span id="timer">00:45</span>
+                </div>
+            </div>
+
+            <div class="text-xs font-black uppercase tracking-widest text-slate-500">
+                Question <span id="q-number">1</span> of 25
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+            <div id="progress-fill" class="progress-bar h-full bg-sky-500 rounded-full" style="width: 0%;"></div>
+        </div>
+    </div>
+</div>
+
+<main class="w-full max-w-3xl pt-10">
+
+<!-- START SCREEN -->
+<div id="start-screen" class="glass-card p-10 rounded-[3rem] shadow-2xl text-center space-y-6 border-b-8 border-sky-600">
+    <div class="text-7xl">🏆</div>
+
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+        Ready for the <br>
+        <span class="text-sky-600">HTML Mega Challenge?</span>
+    </h1>
+
+    <p class="text-slate-500 text-lg leading-relaxed">
+        25 Fun Questions • 45 Seconds Each <br>
+        Learn while you play and become an HTML Hero!
+    </p>
+
+    <div class="bg-sky-50 border border-sky-100 rounded-3xl p-6">
+        <p class="text-sm font-semibold text-slate-600">
+            No fear. No pressure. Just practice.<br>
+            Coding is easier than you think 💙
+        </p>
+    </div>
+
+    <button onclick="startQuiz()" class="w-full bg-slate-900 hover:bg-sky-600 text-white font-black py-5 rounded-3xl transition-all shadow-xl">
+        START QUIZ NOW →
+    </button>
+
+    <a href="html-introduction.html" class="block text-sm font-bold text-slate-400 hover:text-sky-600 transition">
+        ← Back to HTML Lessons
+    </a>
+</div>
+
+<!-- QUIZ CONTENT -->
+<div id="quiz-content" class="hidden fade-slide">
+    <div class="glass-card p-8 rounded-[3rem] shadow-2xl space-y-8">
+
+        <div id="difficulty-badge" class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-2xl font-bold text-xs uppercase tracking-widest">
+            Easy Starter 🌱
+        </div>
+
+        <h2 id="question-text" class="text-2xl md:text-3xl font-extrabold text-slate-800 leading-snug">
+            Loading question...
+        </h2>
+
+        <div id="options-grid" class="grid gap-4"></div>
+
+        <div id="feedback-box" class="hidden rounded-3xl p-6 border">
+            <h3 id="feedback-title" class="font-black text-lg mb-2"></h3>
+            <p id="feedback-text" class="text-sm text-slate-600"></p>
+        </div>
+    </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" class="hidden glass-card p-10 rounded-[3rem] shadow-2xl text-center space-y-6">
+
+    <div id="result-icon" class="text-7xl">🌟</div>
+
+    <h2 id="result-title" class="text-4xl font-black">
+        Great Job!
+    </h2>
+
+    <p id="result-msg" class="text-slate-600 text-lg">
+        You did amazing!
+    </p>
+
+    <div class="bg-slate-50 rounded-3xl p-8">
+        <span class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
+            Final Score
+        </span>
+
+        <span id="final-score" class="text-5xl font-black text-sky-600">
+            0/25
+        </span>
+    </div>
+
+    <button onclick="location.reload()" class="w-full bg-slate-900 hover:bg-sky-600 text-white font-black py-5 rounded-3xl transition-all">
+        PLAY AGAIN
+    </button>
+
+    <a href="html-introduction.html" class="block text-sm font-bold text-slate-400 hover:text-sky-600 transition">
+        ← Back to HTML Lessons
+    </a>
+</div>
+
+</main>
+
+<script>
+const questions = [
+{
+q: "What does HTML stand for?",
+a: ["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language"],
+correct: 0,
+explain: "HTML is the language used to build the structure of web pages."
+},
+{
+q: "Which tag creates the biggest heading?",
+a: ["<h1>", "<h6>", "<head>"],
+correct: 0,
+explain: "<h1> is the largest heading tag in HTML."
+},
+{
+q: "Which tag creates a paragraph?",
+a: ["<p>", "<text>", "<para>"],
+correct: 0,
+explain: "<p> is used for normal paragraphs of text."
+},
+{
+q: "Which tag adds an image?",
+a: ["<picture>", "<img>", "<src>"],
+correct: 1,
+explain: "<img> helps you place pictures on your webpage."
+},
+{
+q: "Which tag creates a clickable link?",
+a: ["<a>", "<link>", "<go>"],
+correct: 0,
+explain: "<a> is called the anchor tag and creates links."
+},
+{
+q: "What does href do inside <a> tag?",
+a: ["Adds color", "Sets link destination", "Makes text bigger"],
+correct: 1,
+explain: "href tells the browser where the link should go."
+},
+{
+q: "Which tag makes a line break?",
+a: ["<br>", "<break>", "<lb>"],
+correct: 0,
+explain: "<br> moves content to the next line."
+},
+{
+q: "Which tag makes bold text?",
+a: ["<strong>", "<fat>", "<bold>"],
+correct: 0,
+explain: "<strong> makes important text bold."
+},
+{
+q: "Which tag creates a bullet list?",
+a: ["<ul>", "<ol>", "<li>"],
+correct: 0,
+explain: "<ul> creates an unordered (bulleted) list."
+},
+{
+q: "Which tag creates a numbered list?",
+a: ["<ul>", "<ol>", "<list>"],
+correct: 1,
+explain: "<ol> creates an ordered (numbered) list."
+},
+{
+q: "Which tag creates a list item?",
+a: ["<li>", "<item>", "<ul>"],
+correct: 0,
+explain: "<li> means list item."
+},
+{
+q: "Which tag is used for a button?",
+a: ["<button>", "<press>", "<click>"],
+correct: 0,
+explain: "<button> creates clickable buttons."
+},
+{
+q: "Which part closes a tag?",
+a: ["/", "*", "+"],
+correct: 0,
+explain: "A forward slash closes most HTML tags."
+},
+{
+q: "Which tag contains page information?",
+a: ["<head>", "<body>", "<main>"],
+correct: 0,
+explain: "<head> stores page information like title."
+},
+{
+q: "Which tag shows page content?",
+a: ["<body>", "<head>", "<meta>"],
+correct: 0,
+explain: "Everything users see goes inside <body>."
+},
+{
+q: "Which tag sets the page title?",
+a: ["<title>", "<name>", "<header>"],
+correct: 0,
+explain: "<title> appears in the browser tab."
+},
+{
+q: "Which tag adds a horizontal line?",
+a: ["<hr>", "<line>", "<br>"],
+correct: 0,
+explain: "<hr> creates a horizontal rule."
+},
+{
+q: "Which attribute helps images load?",
+a: ["src", "href", "style"],
+correct: 0,
+explain: "src tells the browser where the image is located."
+},
+{
+q: "Which attribute adds image description?",
+a: ["alt", "src", "title"],
+correct: 0,
+explain: "alt describes the image for accessibility."
+},
+{
+q: "Which tag makes italic text?",
+a: ["<em>", "<italic>", "<slant>"],
+correct: 0,
+explain: "<em> is commonly used for emphasis and italics."
+},
+{
+q: "Which tag is used for forms?",
+a: ["<form>", "<box>", "<input-area>"],
+correct: 0,
+explain: "<form> helps collect user information."
+},
+{
+q: "Which tag creates a text input?",
+a: ["<input>", "<type>", "<textbox>"],
+correct: 0,
+explain: "<input> creates fields users can type into."
+},
+{
+q: "Which tag creates a checkbox?",
+a: ["<input type='checkbox'>", "<check>", "<box>"],
+correct: 0,
+explain: "Checkboxes are made using input type checkbox."
+},
+{
+q: "Which tag creates a table row?",
+a: ["<tr>", "<td>", "<table-row>"],
+correct: 0,
+explain: "<tr> means table row."
+},
+{
+q: "Which tag creates a table cell?",
+a: ["<td>", "<tr>", "<cell>"],
+correct: 0,
+explain: "<td> means table data cell."
+}
+];
+
+let currentQ = 0;
+let score = 0;
+let timer;
+let timeLeft = 45;
+
+function startQuiz() {
+    document.getElementById("start-screen").classList.add("hidden");
+    document.getElementById("quiz-header").classList.remove("hidden");
+    document.getElementById("quiz-content").classList.remove("hidden");
+    loadQuestion();
+}
+
+function loadQuestion() {
+    if (currentQ >= questions.length) {
+        showResults();
+        return;
+    }
+
+    const q = questions[currentQ];
+
+    document.getElementById("question-text").innerText = q.q;
+    document.getElementById("q-number").innerText = currentQ + 1;
+    document.getElementById("progress-fill").style.width =
+        ((currentQ / questions.length) * 100) + "%";
+
+    updateDifficulty();
+
+    const grid = document.getElementById("options-grid");
+    grid.innerHTML = "";
+
+    document.getElementById("feedback-box").classList.add("hidden");
+
+    q.a.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn w-full p-5 rounded-2xl font-bold text-left";
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(index, btn);
+        grid.appendChild(btn);
+    });
+
+    resetTimer();
+}
+
+function checkAnswer(selectedIndex, btn) {
+    clearInterval(timer);
+
+    const q = questions[currentQ];
+    const correctIndex = q.correct;
+    const buttons = document.querySelectorAll(".option-btn");
+
+    buttons.forEach(button => button.disabled = true);
+
+    const feedbackBox = document.getElementById("feedback-box");
+    const feedbackTitle = document.getElementById("feedback-title");
+    const feedbackText = document.getElementById("feedback-text");
+
+    if (selectedIndex === correctIndex) {
+        if (btn) btn.classList.add("correct");
+
+        score++;
+        document.getElementById("current-score").innerText = score;
+
+        feedbackTitle.innerText = "✅ Correct! Great job!";
+        feedbackTitle.className = "font-black text-lg mb-2 text-emerald-600";
+        feedbackText.innerText = q.explain;
+
+        confetti({
+            particleCount: 50,
+            spread: 70,
+            origin: { y: 0.7 }
+        });
+    } else {
+        if (btn) btn.classList.add("wrong");
+
+        buttons[correctIndex].classList.add("correct");
+
+        feedbackTitle.innerText = "❌ Not quite!";
+        feedbackTitle.className = "font-black text-lg mb-2 text-rose-600";
+        feedbackText.innerText = q.explain;
+    }
+
+    feedbackBox.classList.remove("hidden");
+
+    setTimeout(() => {
+        currentQ++;
+        loadQuestion();
+    }, 2200);
+}
+
+function resetTimer() {
+    clearInterval(timer);
+
+    timeLeft = 45;
+    document.getElementById("timer").innerText = "00:45";
+
+    timer = setInterval(() => {
+        timeLeft--;
+
+        document.getElementById("timer").innerText =
+            `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            checkAnswer(-1, null);
+        }
+    }, 1000);
+}
+
+function updateDifficulty() {
+    const badge = document.getElementById("difficulty-badge");
+
+    if (currentQ < 8) {
+        badge.innerText = "Easy Starter 🌱";
+        badge.className = "inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-2xl font-bold text-xs uppercase tracking-widest";
+    }
+    else if (currentQ < 17) {
+        badge.innerText = "Growing Builder 🚀";
+        badge.className = "inline-block bg-amber-100 text-amber-700 px-4 py-2 rounded-2xl font-bold text-xs uppercase tracking-widest";
+    }
+    else {
+        badge.innerText = "HTML Master 👑";
+        badge.className = "inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-2xl font-bold text-xs uppercase tracking-widest";
+    }
+}
+
+function showResults() {
+    document.getElementById("quiz-header").classList.add("hidden");
+    document.getElementById("quiz-content").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
+
+    document.getElementById("final-score").innerText = `${score}/25`;
+
+    if (score >= 20) {
+        document.getElementById("result-icon").innerText = "👑";
+        document.getElementById("result-title").innerText = "HTML Master!";
+        document.getElementById("result-msg").innerText =
+            "Outstanding work! You are building like a real web developer.";
+
+        confetti({
+            particleCount: 250,
+            spread: 120
+        });
+    }
+    else if (score >= 12) {
+        document.getElementById("result-icon").innerText = "🚀";
+        document.getElementById("result-title").innerText = "Great Progress!";
+        document.getElementById("result-msg").innerText =
+            "You are getting stronger in HTML every day!";
+    }
+    else {
+        document.getElementById("result-icon").innerText = "🌱";
+        document.getElementById("result-title").innerText = "Keep Growing!";
+        document.getElementById("result-msg").innerText =
+            "Practice makes progress. You are doing better already!";
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
