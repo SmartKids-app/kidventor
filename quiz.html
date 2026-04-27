@@ -227,7 +227,7 @@ async function loadQuiz() {
     document.getElementById("quiz-screen").classList.remove("hidden");
 
     try {
-        const response = await fetch(`quiz/${level}.json`);
+        const response = await fetch(`quiz/${currentLevelKey}.json`);
         const data = await response.json();
 
         questions = data.questions;
