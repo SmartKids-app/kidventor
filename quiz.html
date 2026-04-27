@@ -41,7 +41,34 @@
             <div id="timer" class="font-mono font-bold text-rose-500 bg-rose-50 px-4 py-1 rounded-lg italic">30s</div>
         </div>
     </main>
+<div id="copyright-overlay" class="fixed inset-0 z-[110] flex items-center justify-center bg-sky-900/95 backdrop-blur-xl p-4 hidden">
+    <div class="bg-white w-full max-w-lg p-10 rounded-[3rem] shadow-2xl text-center border-4 border-sky-100">
+        <div class="text-6xl mb-6">🤝</div>
+        <h2 class="text-3xl font-black text-slate-800 mb-2">Our Digital Honor Code</h2>
+        <p class="text-slate-500 mb-8 font-medium">Welcome, Young Inventor! Before we begin, let's agree on how we treat our tools and community:</p>
+        
+        <div class="space-y-4 text-left mb-8">
+            <div class="flex gap-4 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+                <span class="text-2xl">🌱</span>
+                <p class="text-sm text-emerald-900 font-bold">Use this platform to grow and learn. These materials are here for your personal discovery!</p>
+            </div>
+            
+            <div class="flex gap-4 p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                <span class="text-2xl">🚫</span>
+                <p class="text-sm text-amber-900 font-bold">Please do not copy, sell, or redistribute our lessons. They are exclusive to the Kidventor family.</p>
+            </div>
 
+            <div class="flex gap-4 p-4 bg-rose-50 rounded-2xl border border-rose-100">
+                <span class="text-2xl">🛡️</span>
+                <p class="text-sm text-rose-900 font-bold">Respect the system. Abuse of materials or any attempt to break the rules is not the Inventor way.</p>
+            </div>
+        </div>
+
+        <button onclick="acceptHonorCode()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all shadow-xl">
+            I Agree & I'm Ready!
+        </button>
+    </div>
+</div>
     <script>
     // 1. CONFIGURATION
     const params = new URLSearchParams(window.location.search);
@@ -52,7 +79,7 @@
     let score = 0;
     let timer;
 
-    // 2. SHUFFLE ALGORITHM (Fisher-Yates)
+    // 2. SHUFFLE ALGORITHM
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -61,30 +88,41 @@
         return array;
     }
 
-    // 3. INITIALIZE & FETCH
+    // 3. INITIALIZE (Fetch data but don't start yet)
     async function initQuiz() {
         try {
             const response = await fetch(`data/${levelKey}.json`);
             if (!response.ok) throw new Error("Data not found");
             
             const data = await response.json();
-            
-            // Shuffle the questions as soon as they are loaded
             quizData = shuffle(data.questions);
 
+            // Set UI labels behind the scenes
             document.getElementById('level-name').innerText = data.levelName;
             document.getElementById('q-total').innerText = quizData.length;
             
+            // Show the Copyright/Honor overlay immediately after loading
             document.getElementById('loader').classList.add('hidden');
-            document.getElementById('quiz-ui').classList.remove('hidden');
+            document.getElementById('copyright-overlay').classList.remove('hidden');
 
-            displayQuestion();
         } catch (err) {
             document.getElementById('loader').innerHTML = `<p class="text-red-500 font-black">ERROR: data/${levelKey}.json not found!</p>`;
         }
     }
 
-    // 4. DISPLAY QUESTION
+    // 4. OVERLAY ACTION: START THE QUIZ
+    function acceptHonorCode() {
+        // Hide overlay
+        document.getElementById('copyright-overlay').classList.add('hidden');
+        
+        // Show Quiz UI
+        document.getElementById('quiz-ui').classList.remove('hidden');
+        
+        // Start first question and timer
+        displayQuestion();
+    }
+
+    // 5. DISPLAY QUESTION
     function displayQuestion() {
         if (currentIndex >= quizData.length) return endQuiz();
 
@@ -97,7 +135,7 @@
 
         q.a.forEach((option, index) => {
             const btn = document.createElement('button');
-            btn.className = "option-btn w-full p-5 rounded-2xl font-bold text-left bg-slate-50 text-slate-700";
+            btn.className = "option-btn w-full p-5 rounded-2xl font-bold text-left bg-slate-50 text-slate-700 border-2 border-transparent hover:border-sky-500 transition-all";
             btn.innerText = option;
             btn.onclick = () => checkAnswer(index, btn);
             grid.appendChild(btn);
@@ -106,7 +144,7 @@
         startTimer();
     }
 
-    // 5. CHECK ANSWER
+    // 6. CHECK ANSWER
     function checkAnswer(selected, btn) {
         clearInterval(timer);
         const correct = quizData[currentIndex].correct;
@@ -129,7 +167,7 @@
         }, 1500);
     }
 
-    // 6. TIMER (15 MINUTES)
+    // 7. TIMER (15 MINUTES)
     function startTimer() {
         clearInterval(timer);
         let timeLeft = 900; 
@@ -151,30 +189,17 @@
         }, 1000);
     }
 
-    // 7. END QUIZ & SCORE LOGIC
+    // 8. END LOGIC
     function endQuiz() {
         let pass = false;
         let required = 0;
 
-        // Dynamic Pass Logic based on your request
-        if (levelKey === 'level1') {
-            required = 20;
-            pass = score >= 20;
-        } else if (levelKey === 'level2') {
-            required = 35;
-            pass = score >= 35;
-        } else if (levelKey === 'level3') {
-            required = 45;
-            pass = score >= 45;
-        } else {
-            // Default for Advance or other levels
-            required = Math.floor(quizData.length * 0.9); 
-            pass = score >= required;
-        }
+        if (levelKey === 'level1') { required = 20; pass = score >= 20; }
+        else if (levelKey === 'level2') { required = 35; pass = score >= 35; }
+        else if (levelKey === 'level3') { required = 45; pass = score >= 45; }
+        else { required = Math.floor(quizData.length * 0.9); pass = score >= required; }
 
-        if(pass) {
-            localStorage.setItem('unlock_' + levelKey, 'true');
-        }
+        if(pass) localStorage.setItem('unlock_' + levelKey, 'true');
         
         document.getElementById('quiz-ui').innerHTML = `
             <div class="text-center py-10">
@@ -193,6 +218,7 @@
         `;
     }
 
+    // Start loading process
     initQuiz();
 </script>
 </body>
