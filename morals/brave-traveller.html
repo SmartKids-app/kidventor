@@ -1,210 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Words of the Old | Timmy's Journey</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@800&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Follow Timi, the brave young explorer, on an unforgettable journey of courage, friendship, wisdom, and discovery. A premium Kidventor Academy storybook experience for children.">
+  <title>The Little Explorer | Kidventor Academy</title>
 
-        body { 
-            margin: 0; padding: 0; 
-            font-family: 'Crimson Pro', serif;
-            background: #0f172a; /* Deep midnight blue */
-            color: #1e293b;
-            overflow-x: hidden;
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        #story-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  <style>
+    .story-body p {
+      margin-bottom: 1.5rem;
+      line-height: 1.9;
+    }
 
-        .book-page { 
-            max-width: 800px;
-            width: 100%;
-            background: #fff;
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            text-align: justify;
-            line-height: 1.8;
-            font-size: 21px;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+    .story-card {
+      animation: fadeInUp 0.7s ease;
+    }
 
-        .book-page h2 { 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 32px;
-            color: #0f172a;
-            margin-top: 0;
-            margin-bottom: 25px;
-            border-left: 5px solid #f59e0b; /* Amber accent */
-            padding-left: 20px;
-        }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .navigation {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 12px 24px;
-            border-radius: 100px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            z-index: 100;
-        }
+    .wisdom-gradient {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    }
 
-        button { 
-            padding: 10px 24px; 
-            font-size: 13px; 
-            font-weight: 800;
-            cursor: pointer; 
-            border: none;
-            background: #0f172a;
-            color: white;
-            border-radius: 50px; 
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .nav-btn {
+      transition: all 0.3s ease;
+    }
 
-        button:hover {
-            background: #f59e0b;
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .progress-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            z-index: 1000;
-        }
-
-        #bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, #f59e0b, #fbbf24);
-            transition: width 0.4s ease;
-        }
-
-        .meta-text {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 800;
-            color: #94a3b8;
-            letter-spacing: 3px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .book-page { padding: 30px; font-size: 18px; }
-            .navigation { width: 90%; justify-content: center; }
-        }
-    </style>
+    .nav-btn:hover {
+      transform: scale(1.03);
+    }
+  </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <div class="progress-indicator"><div id="bar"></div></div>
+  <!-- NAVBAR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
 
-    <div id="story-container"></div>
+      <a href="../index.html" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform">
+          K
+        </div>
+        <span class="font-black text-lg tracking-tight uppercase">
+          Kidventor Academy
+        </span>
+      </a>
 
-    <div class="navigation">
-        <button id="prevBtn" onclick="changePage(-1)">← Prev</button>
-        <button id="nextBtn" onclick="changePage(1)">Next →</button>
+      <a href="../stories.html" class="text-[11px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-700 transition">
+        ← Back to Story Hub
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="max-w-5xl mx-auto px-6 pt-20">
+
+    <div class="flex items-center gap-3 mb-5 flex-wrap">
+      <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-[0.2em] border border-indigo-200">
+        Adventure Story
+      </span>
+
+      <span class="text-slate-300">—</span>
+
+      <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+        Theme: Courage + Discovery + Growth
+      </span>
     </div>
 
-    <script>
-    const story = [
+    <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-8">
+      The Little Explorer <br>
+      <span class="text-indigo-600">and the Seven Roads</span>
+    </h1>
+
+    <div class="w-24 h-2 bg-indigo-500 rounded-full mb-12"></div>
+
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-5xl mx-auto px-6 pb-32">
+
+    <div class="grid lg:grid-cols-12 gap-12">
+
+      <!-- STORY -->
+      <article class="lg:col-span-8">
+
+        <div id="story-card" class="story-card bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm">
+
+          <div class="mb-8">
+            <span id="chapter-number" class="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-500">
+              Chapter 01
+            </span>
+
+            <h2 id="chapter-title" class="text-3xl font-black text-slate-900 mt-3 mb-6">
+              Loading...
+            </h2>
+
+            <div class="w-16 h-1 bg-indigo-500 rounded-full"></div>
+          </div>
+
+          <div id="story-content" class="story-body text-lg text-slate-700">
+            Loading story...
+          </div>
+
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="flex justify-between mt-8 gap-4">
+
+          <button
+            id="prevBtn"
+            onclick="prevChapter()"
+            class="nav-btn bg-white border border-slate-200 px-8 py-4 rounded-2xl font-black text-sm hover:border-indigo-500"
+          >
+            ← Previous
+          </button>
+
+          <button
+            id="nextBtn"
+            onclick="nextChapter()"
+            class="nav-btn bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-sm hover:bg-indigo-700 shadow-lg shadow-indigo-100"
+          >
+            Next Chapter →
+          </button>
+
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="lg:col-span-4">
+
+        <div class="sticky top-24 space-y-6">
+
+          <div class="bg-slate-900 text-white p-8 rounded-[2rem] shadow-2xl relative overflow-hidden">
+
+            <h3 class="font-black uppercase text-xs tracking-[0.2em] text-indigo-400 mb-4">
+              Lesson Inside
+            </h3>
+
+            <p class="text-sm leading-relaxed opacity-90 relative z-10">
+              Real bravery is not the absence of fear. It is moving forward even when your heart is shaking.
+            </p>
+
+            <div class="absolute -right-4 -bottom-4 text-7xl opacity-10">
+              🌍
+            </div>
+
+          </div>
+
+          <div class="wisdom-gradient p-8 rounded-[2rem] border border-indigo-200 shadow-sm">
+
+            <h3 class="font-black uppercase text-xs tracking-[0.2em] text-indigo-700 mb-4">
+              Explorer Check
+            </h3>
+
+            <p class="text-[12px] font-bold text-slate-700 uppercase tracking-widest mb-6">
+              If you are afraid to try something new, what should you do?
+            </p>
+
+            <div class="space-y-3">
+
+              <button onclick="wrongAnswer()" class="w-full text-left p-4 rounded-2xl border bg-white font-black text-[11px] uppercase tracking-tight">
+                Option A: Run away forever
+              </button>
+
+              <button onclick="correctAnswer()" class="w-full text-left p-4 rounded-2xl border border-indigo-300 bg-indigo-50 text-indigo-700 font-black text-[11px] uppercase tracking-tight">
+                Option B: Take one brave step forward
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-500 py-16 px-6">
+
+    <div class="max-w-6xl mx-auto border-b border-slate-900 pb-12 flex flex-col md:flex-row justify-between items-center gap-8">
+
+      <div>
+        <div class="flex items-center gap-2 text-white mb-4">
+          <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center text-[10px] font-black">
+            K
+          </div>
+          <span class="font-black uppercase tracking-tight">
+            Kidventor Academy
+          </span>
+        </div>
+
+        <p id="typing-footer" class="text-xs font-mono text-indigo-400 h-4"></p>
+      </div>
+
+      <nav class="flex gap-8 text-[10px] font-black uppercase tracking-widest">
+        <a href="../about.html" class="hover:text-white transition">Mission</a>
+        <a href="../privacy.html" class="hover:text-white transition">Safety</a>
+      </nav>
+
+    </div>
+
+    <p class="text-center mt-8 text-[10px] uppercase tracking-[0.35em] font-bold">
+      © 2026 Kidventor Academy • Story Engine
+    </p>
+
+  </footer>
+
+  <script>
+    const chapters = [
       {
-        title: "The Dream of the Unknown",
-        text: "Timmy lived in a peaceful village of green hills and whispering trees, but his heart lived in the clouds. Every morning, he watched the birds and wondered: 'Where does the sky end? What lies beyond the hills?' While others were content with the familiar, Timmy practiced saying 'Hello' in five different languages and kept a map under his pillow. He knew that to grow, one must be willing to step into the unknown. His courage wasn't the absence of fear, but the presence of curiosity."
+        title: "The Boy Who Dreamed Beyond the Hills",
+        content: `
+          <p>Timi lived in the peaceful village of Sunvale, where green hills rolled like giant sleeping elephants and birds sang every morning like nature’s alarm clock.</p>
+
+          <p>He was known as the boy with the biggest dreams. While others played nearby, Timi would sit under the mango tree staring at the faraway hills, wondering what existed beyond them.</p>
+
+          <p>“There must be castles, giant rivers, hidden forests, and cities made of light,” he would whisper to his little brown cat, Coco.</p>
+
+          <p>Every night, he folded and unfolded the same old paper map he kept under his pillow. One day, he promised himself, he would follow the roads no one else dared to take.</p>
+        `
       },
+
       {
-        title: "The Spark of Departure",
-        text: "One sunny morning, Timmy packed his tiny backpack with a slice of bread and his lucky marble. With a final hug for his mother, he stepped onto the dusty path beyond the village. Every step felt like a drumbeat in his chest. The trees grew taller, and the sky grew wider. He realized that the world doesn't come to you; you must go to the world. With his map as his guide and hope as his fuel, Timmy began the greatest update of his life."
+        title: "The First Step Is Always the Hardest",
+        content: `
+          <p>One bright morning, Timi woke up with a feeling stronger than fear — courage.</p>
+
+          <p>He packed bread, water, a notebook, and his lucky blue marble. His mother hugged him tightly and smiled.</p>
+
+          <p>“Remember,” she said, “the world teaches brave hearts.”</p>
+
+          <p>As he crossed the village gate, his legs shook a little, but his heart stood tall. Adventure had finally begun.</p>
+        `
       },
+
       {
-        title: "A Taste of the World",
-        text: "In a bustling town far away, Timmy discovered that 'different' was just another word for 'exciting.' He tried a 'spicy puff ball' that made his eyes water and his mouth dance! He laughed with strangers who soon became friends. He learned that every culture has its own rhythm and every person has a story worth hearing. By opening his mind to new flavors and sounds, Timmy's world became a thousand times larger than the village he left behind."
+        title: "The Town of Dancing Spices",
+        content: `
+          <p>After many hours, Timi arrived at Bright Market — the loudest, happiest town he had ever seen.</p>
+
+          <p>The air smelled of roasted corn, sweet fruits, and something spicy enough to make even the clouds sneeze.</p>
+
+          <p>He tasted spicy puff balls for the first time and nearly danced from the heat.</p>
+
+          <p>Everyone laughed, and soon strangers became friends. Timi learned that sometimes adventure tastes spicy first — but sweet later.</p>
+        `
       },
+
       {
-        title: "The Strength in the Storm",
-        text: "But adventure has its shadows. One night, a fierce storm trapped Timmy under a giant tree. Cold, muddy, and alone, he missed his warm bed. But then he remembered his mother's words: 'Brave hearts don’t shine only in the sun—they glow in the dark too.' He sang a soft song against the thunder. When the sun rose the next morning, Timmy wasn't just drier; he was tougher. He learned that challenges are just the 'loading screens' of life—you must wait them out to reach the next level."
+        title: "The Night of Thunder",
+        content: `
+          <p>That evening, dark clouds marched across the sky like giant soldiers.</p>
+
+          <p>Rain poured down fiercely. Thunder shook the earth. Timi ran beneath a giant tree and hugged his bag tightly.</p>
+
+          <p>He missed home. He missed warmth. He missed his mother’s voice.</p>
+
+          <p>But then he remembered: “Brave hearts glow brightest in the dark.”</p>
+
+          <p>So he smiled, sang softly to himself, and waited for morning. By sunrise, he knew he had grown stronger.</p>
+        `
       },
+
       {
-        title: "The Forest of Connection",
-        text: "In the deep forest, Timmy found a campfire surrounded by children he had never met. Instead of hiding, he joined them. They shared mangoes and stories, playing games with sticks and stones. Timmy realized that no matter how far you travel, kindness is a universal language. He showed them his map, and they showed him their songs. The forest was no longer a maze of trees; it was a network of friends. He wasn't just a traveler anymore; he was a connector."
+        title: "The Forest of New Friends",
+        content: `
+          <p>Deep inside the Whispering Forest, Timi found children gathered around a fire, laughing and sharing mangoes.</p>
+
+          <p>They welcomed him like family.</p>
+
+          <p>They taught him forest songs, hammock sleeping, and how to find treasure hidden in ordinary places.</p>
+
+          <p>Timi realized something important: journeys are not only about places. They are about people who change your heart forever.</p>
+        `
       },
+
       {
-        title: "The Return of the Hero",
-        text: "When Timmy finally climbed the last hill home, his shoes were dusty and his bag was torn, but his spirit was glowing. He told his village of the spicy foods, the rainy nights, and the forest friends. He was the same Timmy, but with a 'new version' of his soul installed. He looked at the stars that night and whispered, 'Thank you, world.' He realized that the greatest treasure wasn't a castle or gold, but the bravery he found within himself."
+        title: "The Seven Roads",
+        content: `
+          <p>At the highest hill, Timi discovered seven roads stretching into the horizon.</p>
+
+          <p>Each road led somewhere unknown.</p>
+
+          <p>He smiled because he understood something powerful: life itself was made of roads like these.</p>
+
+          <p>You never know where courage will lead you — but you must choose to walk.</p>
+        `
+      },
+
+      {
+        title: "The Return of the Explorer",
+        content: `
+          <p>When Timi returned home, his shoes were dusty, his bag was torn, but his eyes shone brighter than ever.</p>
+
+          <p>He told stories of storms, markets, forests, and friendships.</p>
+
+          <p>The village children listened with wide eyes. Even the grown-ups smiled proudly.</p>
+
+          <p>That night, under the stars, Timi whispered, “Thank you, world.”</p>
+
+          <p>Because sometimes the greatest adventure is discovering the brave person inside yourself.</p>
+        `
       }
     ];
 
-    const colors = ['#f8fafc', '#fffbeb', '#f0fdf4', '#eff6ff', '#fdf2f8', '#f5f3ff'];
-    let currentPage = 0;
+    let current = 0;
 
-    function updateUI() {
-        const container = document.getElementById("story-container");
-        const pg = story[currentPage];
-        
-        // Progress Bar
-        document.getElementById('bar').style.width = ((currentPage + 1) / story.length * 100) + '%';
-        
-        // Navigation Buttons
-        document.getElementById('prevBtn').disabled = currentPage === 0;
-        document.getElementById('nextBtn').innerText = currentPage === story.length - 1 ? "Finish" : "Next →";
+    function renderChapter() {
+      const chapter = chapters[current];
 
-        // Render with Animation
-        container.innerHTML = `
-            <div class="book-page" style="background-color:${colors[currentPage]}; opacity: 0; transform: scale(0.95);">
-                <span class="meta-text">LOG ENTRY: 0${currentPage + 1}</span>
-                <h2>${pg.title}</h2>
-                <p>${pg.text}</p>
-            </div>
-        `;
+      document.getElementById("chapter-number").innerText =
+        `Chapter ${String(current + 1).padStart(2, '0')}`;
 
-        setTimeout(() => {
-            const el = container.querySelector('.book-page');
-            el.style.opacity = '1';
-            el.style.transform = 'scale(1)';
-        }, 50);
+      document.getElementById("chapter-title").innerText = chapter.title;
+      document.getElementById("story-content").innerHTML = chapter.content;
+
+      document.getElementById("prevBtn").disabled = current === 0;
+
+      document.getElementById("nextBtn").innerText =
+        current === chapters.length - 1
+          ? "Finish Story →"
+          : "Next Chapter →";
+
+      const card = document.getElementById("story-card");
+      card.classList.remove("story-card");
+      void card.offsetWidth;
+      card.classList.add("story-card");
     }
 
-    function changePage(dir) {
-        if (dir === 1 && currentPage < story.length - 1) {
-            currentPage++;
-            updateUI();
-        } else if (dir === -1 && currentPage > 0) {
-            currentPage--;
-            updateUI();
-        } else if (dir === 1 && currentPage === story.length - 1) {
-            // Redirect to index when story ends
-            window.location.href = "../index.html"; 
-        }
+    function nextChapter() {
+      if (current < chapters.length - 1) {
+        current++;
+        renderChapter();
+      } else {
+        alert("Congratulations! You have completed The Little Explorer.");
+        window.location.href = "../stories.html";
+      }
     }
 
-    updateUI();
-    </script>
+    function prevChapter() {
+      if (current > 0) {
+        current--;
+        renderChapter();
+      }
+    }
+
+    function correctAnswer() {
+      alert("Excellent! Courage grows one step at a time.");
+    }
+
+    function wrongAnswer() {
+      alert("Not quite! Fear becomes smaller when you move forward.");
+    }
+
+    const footerText = "Every great inventor first takes one small brave step.";
+    let i = 0;
+
+    function typeFooter() {
+      const el = document.getElementById("typing-footer");
+      if (i < footerText.length) {
+        el.innerHTML += footerText.charAt(i);
+        i++;
+        setTimeout(typeFooter, 55);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderChapter();
+      typeFooter();
+    });
+  </script>
+
 </body>
 </html>
