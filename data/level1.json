@@ -16,7 +16,7 @@
     { "q": "Where does the visible content of the webpage go?", "a": ["In the <head>", "In the <body>", "In the <title>"], "correct": 1 },
     { "q": "Which tag is used to define the title of the page (shown in the browser tab)?", "a": ["<header>", "<title>", "<tab>"], "correct": 1 },
     { "q": "What is the correct tag for a numbered (ordered) list?", "a": ["<nl>", "<ul>", "<ol>"], "correct": 2 },
-    { "q": "How do you add a comment in HTML?", "a": ["// This is a comment", "", "' This is a comment"], "correct": 1 },
+    { "q": "How do you add a comment in HTML?", "a": ["// This is a comment", "<!-- This is a comment -->", "' This is a comment"], "correct": 1 }
     { "q": "Which tag is used to emphasize text (italics)?", "a": ["<italic>", "<em>", "<i>"], "correct": 1 },
     { "q": "What does the 'alt' attribute do in an image tag?", "a": ["Changes image size", "Provides text if the image fails to load", "Changes image color"], "correct": 1 },
     { "q": "Which tag is used to define a table?", "a": ["<grid>", "<table>", "<tab>"], "correct": 1 },
