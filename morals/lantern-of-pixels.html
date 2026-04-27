@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words of the Old | Digital Wisdom</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Plus+Jakarta+Sans:wght@800&display=swap');
+
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Crimson Pro', serif;
+            overflow-x: hidden;
+            background: #1a1a1a; /* Dark background to make paper pop */
+        }
+
+        #story-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            padding: 20px;
+        }
+
+        .book-page { 
+            max-width: 700px;
+            width: 100%;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 20px;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            position: relative;
+        }
+
+        .book-page h2 { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 28px;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        button { 
+            padding: 12px 25px; 
+            font-size: 14px; 
+            font-weight: 800;
+            cursor: pointer; 
+            border: 2px solid #2c3e50;
+            background: transparent;
+            color: #2c3e50;
+            border-radius: 25px; 
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .chapter-number {
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container"><div id="progress-bar"></div></div>
+
+    <div id="story-container">
+        </div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="prevChapter()">← Back</button>
+        <button id="nextBtn" onclick="nextChapter()">Continue →</button>
+    </div>
+
+    <script>
+    const chapters = [
+      {
+        title: 'The Secret of Ever-Ink',
+        content: 'Deep within the shimmering valleys of Silicon Grove lived a young cub named Leo. Leo was a builder of worlds, a dreamer of codes. In Silicon Grove, everyone used "Ever-Ink"—a magical substance that allowed messages to fly through the air. Leo loved Ever-Ink because, with a single tap, the ink would vanish from his screen. "Poof!" Leo would laugh, watching his harsh words and silly pranks disappear into the thin blue air. He believed that because he could no longer see his mistakes, the world had forgotten them too.'
+      },
+      {
+        title: 'The Echo of the Unseen',
+        content: 'Leo began to use his Ever-Ink carelessly. When he was angry at Kira the Koala for winning the math trophy, he sent a message: "You only won because the teacher felt sorry for you." Later, he took a photo of Boby the Bear tripping over a vine and shared it with everyone, laughing as the screen cleared. "It’s gone now," Leo whispered to the stars. He didn’t realize that in Silicon Grove, the air doesn’t swallow secrets—it stores them in a place called the Great Archive, hidden behind the clouds.'
+      },
+      {
+        title: 'The Light of Truth',
+        content: 'One evening, the Elder Owl, a master of ancient wisdom and modern logic, called a meeting at the Great Oak. He held a silver lantern that glowed with a strange, pulsing light. "This," the Elder announced, "is the Light of Truth. It reveals what the eyes try to hide." Leo sat in the front row, his heart beating like a drum. The Elder turned the lantern toward the empty space above the crowd. Suddenly, the air was no longer empty. Glowing in bright, neon colors were Leo’s messages from weeks ago.'
+      },
+      {
+        title: 'The Reappearing Words',
+        content: '"You only won because the teacher felt sorry for you," the air screamed in bright orange letters. The photo of Boby falling appeared, frozen in time for all to see. Leo felt small, his fur prickling with shame. The audience went silent. Kira looked away, her eyes filling with tears. Boby looked down at his paws, embarrassed all over again. Leo realized that his "invisible ink" had never truly vanished; it had simply been waiting for the right light to show its face.'
+      },
+      {
+        title: 'The Lesson of the Footprint',
+        content: 'The Elder Owl lowered his lantern. "Young ones," he said softly, "everything you write with Ever-Ink leaves a footprint in the sand of time. Even if you wipe your screen, the footprint remains. Once a word leaves your fingers, it no longer belongs to you—it belongs to the world." Leo approached Kira and Boby, his head bowed. He realized that being an inventor wasn’t just about making things fly or glow; it was about the responsibility of the trail he left behind.'
+      },
+      {
+        title: 'The New Code',
+        content: 'From that day on, Leo became the guardian of Silicon Grove. He taught the other cubs a new rule: "Think twice, type once." He realized that digital words are like seeds—once planted, you cannot un-plant them. He spent his days using Ever-Ink to spread encouragement and build bridges instead of walls. The "Light of Truth" no longer scared him, for he knew that if the Elder Owl ever shone the light behind him again, all anyone would see were words of kindness and light.'
+      }
+    ];
+
+    const bgColors = ['#fdf6e3', '#eef2f3', '#fff5f5', '#f0f4f8', '#f9f7ff', '#ffffff'];
+    let currentChapter = 0;
+
+    function renderChapter(index) {
+        const container = document.getElementById("story-container");
+        const chapter = chapters[index];
+        
+        // Progress Bar
+        const progress = ((index + 1) / chapters.length) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+
+        // Nav Buttons
+        document.getElementById('prevBtn').disabled = index === 0;
+        document.getElementById('nextBtn').innerText = index === chapters.length - 1 ? "Finish Story" : "Continue →";
+
+        container.innerHTML = `
+            <div class="book-page" style="background-color:${bgColors[index]}; opacity: 0; transform: translateY(20px);">
+                <span class="chapter-number">PART 0${index + 1}</span>
+                <h2>${chapter.title}</h2>
+                <p>${chapter.content}</p>
+            </div>
+        `;
+
+        // Trigger Fade-In effect
+        setTimeout(() => {
+            const page = container.querySelector('.book-page');
+            page.style.opacity = '1';
+            page.style.transform = 'translateY(0)';
+        }, 50);
+    }
+
+    function nextChapter() {
+        if (currentChapter < chapters.length - 1) {
+            currentChapter++;
+            renderChapter(currentChapter);
+        } else {
+            alert("Congratulations! You've learned the secret of the Digital Footprint.");
+            window.location.href = "index.html"; // Go back to lobby
+        }
+    }
+
+    function prevChapter() {
+        if (currentChapter > 0) {
+            currentChapter--;
+            renderChapter(currentChapter);
+        }
+    }
+
+    renderChapter(currentChapter);
+    </script>
+</body>
+</html>
