@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouse Maze | Kidventor Quest</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(135deg, #ecfdf5, #ffffff);
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .target {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        user-select: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .target:hover {
+        transform: scale(1.08);
+    }
+
+    .pulse {
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0%,100% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+    }
+</style>
+</head>
+<body>
+
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+    <div class="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100">
+        <div class="flex flex-col md:flex-row justify-between gap-6 items-center">
+            <div>
+                <p class="text-xs font-black uppercase tracking-[0.3em] text-emerald-600">Kidventor Mission</p>
+                <h1 class="text-4xl font-black mt-2">🖱️ Mouse Maze</h1>
+                <p class="text-slate-500 mt-2">Click the moving target before time runs out and master your mouse skills.</p>
+            </div>
+
+            <div class="flex gap-4 flex-wrap">
+                <div class="bg-emerald-50 px-5 py-3 rounded-2xl border border-emerald-100">
+                    <p class="text-xs font-black text-emerald-700 uppercase">Score</p>
+                    <p id="score" class="text-2xl font-black">0</p>
+                </div>
+
+                <div class="bg-indigo-50 px-5 py-3 rounded-2xl border border-indigo-100">
+                    <p class="text-xs font-black text-indigo-700 uppercase">Time Left</p>
+                    <p id="timer" class="text-2xl font-black">30s</p>
+                </div>
+
+                <div class="bg-amber-50 px-5 py-3 rounded-2xl border border-amber-100">
+                    <p class="text-xs font-black text-amber-700 uppercase">Level</p>
+                    <p id="level" class="text-2xl font-black">1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameArea" class="relative mt-8 bg-white rounded-[2rem] border border-slate-100 shadow-lg h-[65vh] overflow-hidden">
+
+        <div id="startScreen" class="absolute inset-0 flex flex-col items-center justify-center text-center z-20 bg-white">
+            <div class="text-7xl mb-4">🎯</div>
+            <h2 class="text-3xl font-black">Ready for Mouse Maze?</h2>
+            <p class="text-slate-500 mt-3 max-w-md">Click the target as fast as you can. Every level gets faster and harder!</p>
+            <button onclick="startGame()" class="mt-8 px-8 py-4 rounded-2xl bg-emerald-600 text-white font-black hover:bg-emerald-700 transition-all shadow-xl">
+                START GAME
+            </button>
+        </div>
+
+        <div id="gameOverScreen" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center z-20 bg-white">
+            <div class="text-7xl mb-4">🏆</div>
+            <h2 class="text-3xl font-black">Mission Complete!</h2>
+            <p id="finalScore" class="text-lg text-slate-600 mt-4">Your Score: 0</p>
+            <button onclick="restartGame()" class="mt-8 px-8 py-4 rounded-2xl bg-indigo-600 text-white font-black hover:bg-indigo-700 transition-all shadow-xl">
+                PLAY AGAIN
+            </button>
+        </div>
+
+        <div id="target" class="target pulse bg-emerald-500 text-white hidden">🖱️</div>
+
+    </div>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 30;
+let level = 1;
+let timerInterval;
+let gameStarted = false;
+
+const target = document.getElementById("target");
+const gameArea = document.getElementById("gameArea");
+const scoreEl = document.getElementById("score");
+const timerEl = document.getElementById("timer");
+const levelEl = document.getElementById("level");
+const startScreen = document.getElementById("startScreen");
+const gameOverScreen = document.getElementById("gameOverScreen");
+const finalScore = document.getElementById("finalScore");
+
+function startGame() {
+    score = 0;
+    timeLeft = 30;
+    level = 1;
+    gameStarted = true;
+
+    updateUI();
+
+    startScreen.classList.add("hidden");
+    gameOverScreen.classList.add("hidden");
+    target.classList.remove("hidden");
+
+    moveTarget();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateUI();
+
+        if (timeLeft <= 0) {
+            endGame();
+        }
+    }, 1000);
+}
+
+function restartGame() {
+    startGame();
+}
+
+function endGame() {
+    clearInterval(timerInterval);
+    gameStarted = false;
+    target.classList.add("hidden");
+    gameOverScreen.classList.remove("hidden");
+    finalScore.textContent = `Your Score: ${score} | Level Reached: ${level}`;
+}
+
+function updateUI() {
+    scoreEl.textContent = score;
+    timerEl.textContent = timeLeft + "s";
+    levelEl.textContent = level;
+}
+
+function moveTarget() {
+    if (!gameStarted) return;
+
+    const areaRect = gameArea.getBoundingClientRect();
+
+    const maxX = areaRect.width - 100;
+    const maxY = areaRect.height - 100;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+}
+
+function increaseDifficulty() {
+    if (score >= 5) level = 2;
+    if (score >= 10) level = 3;
+    if (score >= 15) level = 4;
+    if (score >= 20) level = 5;
+
+    updateUI();
+}
+
+target.addEventListener("click", () => {
+    if (!gameStarted) return;
+
+    score++;
+    increaseDifficulty();
+    moveTarget();
+
+    if (score % 3 === 0) {
+        timeLeft += 1;
+    }
+
+    updateUI();
+});
+</script>
+
+</body>
+</html>
