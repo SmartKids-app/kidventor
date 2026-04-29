@@ -178,6 +178,77 @@
         </div>
     </div>
 </section>
+    <!-- FAQ Section -->
+<section id="faq" class="py-24 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="text-indigo-600 font-black tracking-widest uppercase text-xs bg-indigo-50 px-4 py-2 rounded-full">Got Questions?</span>
+            <h2 class="text-3xl md:text-5xl font-black mt-4 text-slate-900">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Question 1 -->
+            <div class="faq-item border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300 hover:border-indigo-200" data-aos="fade-up">
+                <button class="faq-toggle w-full flex items-center justify-between p-6 md:p-8 text-left bg-slate-50/50 hover:bg-white transition-colors">
+                    <span class="text-lg md:text-xl font-black text-slate-800">What age group is Kidventor for?</span>
+                    <span class="icon transition-transform duration-300 text-indigo-600 text-2xl">+</span>
+                </button>
+                <div class="faq-content hidden p-6 md:p-8 pt-0 bg-white border-t border-slate-50">
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Our programs are specifically tailored for children and teenagers aged 5 to 17. We group students by both age and skill level to ensure they are learning at a pace that keeps them excited but challenged.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="faq-item border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300 hover:border-indigo-200" data-aos="fade-up" data-aos-delay="100">
+                <button class="faq-toggle w-full flex items-center justify-between p-6 md:p-8 text-left bg-slate-50/50 hover:bg-white transition-colors">
+                    <span class="text-lg md:text-xl font-black text-slate-800">Do kids need prior coding knowledge?</span>
+                    <span class="icon transition-transform duration-300 text-indigo-600 text-2xl">+</span>
+                </button>
+                <div class="faq-content hidden p-6 md:p-8 pt-0 bg-white border-t border-slate-50">
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Not at all! We specialize in taking beginners from "Zero to Hero." We start with visual logic and block-based coding for younger kids and move into real-world languages like HTML, CSS, and Python for older students.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="faq-item border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300 hover:border-indigo-200" data-aos="fade-up" data-aos-delay="200">
+                <button class="faq-toggle w-full flex items-center justify-between p-6 md:p-8 text-left bg-slate-50/50 hover:bg-white transition-colors">
+                    <span class="text-lg md:text-xl font-black text-slate-800">What makes Kidventor different from other platforms?</span>
+                    <span class="icon transition-transform duration-300 text-indigo-600 text-2xl">+</span>
+                </button>
+                <div class="faq-content hidden p-6 md:p-8 pt-0 bg-white border-t border-slate-50">
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        We believe technology is a tool for good. Unlike other bootcamps, we integrate **Moral Education and Leadership** into our technical curriculum. Our students don't just learn to code; they learn responsibility, internet safety, and creative integrity.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="faq-item border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300 hover:border-indigo-200" data-aos="fade-up" data-aos-delay="300">
+                <button class="faq-toggle w-full flex items-center justify-between p-6 md:p-8 text-left bg-slate-50/50 hover:bg-white transition-colors">
+                    <span class="text-lg md:text-xl font-black text-slate-800">How do the worksheets work?</span>
+                    <span class="icon transition-transform duration-300 text-indigo-600 text-2xl">+</span>
+                </button>
+                <div class="faq-content hidden p-6 md:p-8 pt-0 bg-white border-t border-slate-50">
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Every lesson comes with downloadable, kid-friendly worksheets. These help reinforce "unplugged" learning, allowing students to practice logic and digital literacy concepts away from the screen.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center" data-aos="fade-up">
+            <p class="text-slate-500 mb-6 font-bold">Still have more questions?</p>
+            <a href="faq.html" class="inline-flex items-center gap-2 text-indigo-600 font-black hover:gap-4 transition-all">
+                View All FAQs <span>&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
  <!-- Footer -->
     <footer class="bg-slate-950 text-slate-400 py-20 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
@@ -308,6 +379,29 @@
 
     // Flip every 5 seconds
     setInterval(updateTestimonial, 5000);
+</script>
+    <!-- Interactivity Script -->
+<script>
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.icon');
+            
+            // Toggle visibility
+            content.classList.toggle('hidden');
+            
+            // Rotate icon and change color
+            if (content.classList.contains('hidden')) {
+                icon.style.transform = 'rotate(0deg)';
+                icon.textContent = '+';
+                button.parentElement.classList.remove('border-indigo-500', 'shadow-lg', 'shadow-indigo-50');
+            } else {
+                icon.style.transform = 'rotate(45deg)';
+                icon.textContent = '+'; // The rotate handles the "X" look
+                button.parentElement.classList.add('border-indigo-500', 'shadow-lg', 'shadow-indigo-50');
+            }
+        });
+    });
 </script>
 </body>
 </html>
