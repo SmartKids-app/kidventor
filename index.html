@@ -51,7 +51,30 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    .nav-link:hover { color: #4f46e5; }
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 3px;
+      background: #4f46e5;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #4f46e5;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
     .card:hover { transform: translateY(-6px); }
   </style>
 </head>
@@ -63,6 +86,7 @@
       <a href="index.html" class="font-black text-2xl text-indigo-600">Kidventor</a>
 
       <nav class="hidden lg:flex items-center gap-6 font-semibold text-sm">
+        <!-- Desktop Navigation -->
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="lessons.html" class="nav-link">Coding Lessons</a>
@@ -73,6 +97,29 @@
         <a href="adventure.html" class="nav-link">Adventure</a>
         <a href="faq.html" class="nav-link">FAQ</a>
         <a href="contact.html" class="px-5 py-2 rounded-xl bg-indigo-600 text-white">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-toggle" class="lg:hidden text-slate-700" aria-label="Open Menu" aria-controls="mobile-menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 py-6">
+      <nav class="flex flex-col gap-4 font-semibold text-base">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="lessons.html" class="nav-link">Coding Lessons</a>
+        <a href="worksheet.html" class="nav-link">Worksheets</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="morals.html" class="nav-link">Moral Stories</a>
+        <a href="adventure.html" class="nav-link">Adventure</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="bg-indigo-600 text-white text-center py-3 rounded-xl">Contact</a>
       </nav>
     </div>
   </header>
@@ -210,8 +257,21 @@
     </div>
   </footer>
 
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+    });
+  </script>
+
 </body>
 </html>
+
 
 
 
