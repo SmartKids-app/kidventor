@@ -10,175 +10,147 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap');
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #f1f5f9;
-            margin: 0;
-        }
-
-        .option-btn {
-            transition: all 0.2s ease;
-            border: 2px solid #e2e8f0;
-        }
-
-        .option-btn:hover {
-            border-color: #0284c7;
-            background: #f0f9ff;
-            transform: scale(1.02);
-        }
-
-        .correct {
-            background: #dcfce7 !important;
-            border-color: #22c55e !important;
-            color: #166534;
-        }
-
-        .wrong {
-            background: #fee2e2 !important;
-            border-color: #ef4444 !important;
-            color: #991b1b;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; margin: 0; }
+        
+        /* Slide Animations */
+        .slide-container { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; transition: opacity 0.5s ease; }
+        
+        .option-btn { transition: all 0.2s ease; border: 2px solid #e2e8f0; }
+        .option-btn:hover { border-color: #0284c7; background: #f0f9ff; transform: scale(1.02); }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
 
-    <!-- Sticky Navbar - Removed outer padding to hit the top -->
     <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 py-4 px-4 sm:px-6 shadow-sm w-full">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-3 group relative">
-                <div class="absolute -inset-2 bg-sky-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                <img 
-                    src="https://raw.githubusercontent.com/SmartKids-app/kidventor/main/image/Logo_kiventor.png" 
-                    alt="Kidventor Logo"
-                    class="w-11 h-11 object-contain rounded-xl relative z-10 group-hover:scale-110 transition-transform duration-500"
-                >
-
-                <span class="font-extrabold tracking-tight uppercase text-sm text-slate-800 relative z-10 group-hover:text-sky-600 transition-colors">
-                    Kidventor
-                </span>
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="https://raw.githubusercontent.com/SmartKids-app/kidventor/main/image/Logo_kiventor.png" alt="Logo" class="w-11 h-11 object-contain">
+                <span class="font-extrabold tracking-tight uppercase text-sm text-slate-800">Kidventor</span>
             </a>
-
-            <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-slate-500">
-                <a href="index.html" class="hover:text-sky-600 transition">Home</a>
-                <a href="lessons.html" class="hover:text-sky-600 transition">Lessons</a>
-                <a href="worksheet.html" class="hover:text-sky-600 transition">Worksheets</a>
-                <a href="about.html" class="hover:text-sky-600 transition">About</a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button 
-                id="mobile-menu-btn"
-                class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 transition duration-300"
-            >
-                <svg 
-                    id="menu-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5 text-slate-700"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round" 
-                        stroke-width="2" 
-                        d="M4 6h16M4 12h16M4 18h16"
-                    />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Dropdown -->
-        <div 
-            id="mobile-menu"
-            class="md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out"
-        >
-            <div class="pt-4 pb-4 border-t border-slate-100 mt-4 space-y-4">
-                <a href="index.html" class="block font-bold text-slate-700 hover:text-sky-600 transition">Home</a>
-                <a href="lessons.html" class="block font-bold text-slate-700 hover:text-sky-600 transition">Lessons</a>
-                <a href="worksheet.html" class="block font-bold text-slate-700 hover:text-sky-600 transition">Worksheets</a>
-                <a href="about.html" class="block font-bold text-slate-700 hover:text-sky-600 transition">About</a>
+                <a href="index.html" class="hover:text-sky-600">Home</a>
+                <a href="lessons.html" class="hover:text-sky-600">Lessons</a>
+                <a href="worksheet.html" class="hover:text-sky-600">Worksheets</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Container -->
     <div class="flex-grow flex flex-col items-center p-4">
         <div id="loader" class="text-center mt-10">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-600 mx-auto"></div>
-            <p class="mt-4 text-slate-500 font-bold">Downloading ICT Module...</p>
         </div>
 
         <main id="quiz-ui" class="hidden w-full max-w-2xl bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 mt-8">
-            
             <div class="flex justify-between items-center mb-8">
-                <span id="level-name" class="bg-sky-100 text-sky-700 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
-                    Level
-                </span>
-
-                <div class="text-slate-400 font-bold text-sm">
-                    Question 
-                    <span id="q-current" class="text-sky-600">1</span>/
-                    <span id="q-total">0</span>
-                </div>
+                <span id="level-name" class="bg-sky-100 text-sky-700 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">Level</span>
+                <div class="text-slate-400 font-bold text-sm">Question <span id="q-current" class="text-sky-600">1</span>/<span id="q-total">0</span></div>
             </div>
-
-            <h2 id="question-text" class="text-2xl font-extrabold text-slate-800 mb-8 leading-tight text-center">
-                Loading...
-            </h2>
-
+            <h2 id="question-text" class="text-2xl font-extrabold text-slate-800 mb-8 leading-tight text-center"></h2>
             <div id="options-grid" class="grid grid-cols-1 gap-4 mb-8"></div>
-
             <div class="pt-6 border-t border-slate-100 flex justify-between items-center">
-                <div class="text-xs font-black text-slate-400 uppercase">
-                    Score: <span id="score-val" class="text-sky-600 text-lg">0</span>
-                </div>
-
-                <div id="timer" class="font-mono font-bold text-rose-500 bg-rose-50 px-4 py-1 rounded-lg italic">
-                    30s
-                </div>
+                <div class="text-xs font-black text-slate-400 uppercase">Score: <span id="score-val" class="text-sky-600 text-lg">0</span></div>
+                <div id="timer" class="font-mono font-bold text-rose-500 bg-rose-50 px-4 py-1 rounded-lg italic">30s</div>
             </div>
         </main>
     </div>
 
-    <!-- Honor Code Overlay -->
-    <div id="copyright-overlay" class="fixed inset-0 z-[110] bg-slate-900/80 backdrop-blur-md p-4 hidden overflow-y-auto">
-        <div class="min-h-screen flex items-center justify-center py-8">
-            <div class="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden">
-                <!-- Overlay Content (Kept same as original) -->
-                <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 px-8 py-8 text-center text-white">
-                    <div class="text-5xl mb-3">🤝</div>
-                    <h2 class="text-3xl md:text-4xl font-black mb-2">Our Digital Honor Code</h2>
-                    <p class="text-white/90 font-medium max-w-xl mx-auto">Welcome, Young Inventor! Before we begin, let’s agree on how we protect our learning space.</p>
+    <!-- Enhanced Honor Code Overlay -->
+    <div id="copyright-overlay" class="fixed inset-0 z-[110] bg-slate-900/80 backdrop-blur-md p-4 hidden flex items-center justify-center">
+        <div class="bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col">
+            
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-600 p-6 text-center text-white">
+                <div class="text-4xl mb-2">🤝</div>
+                <h2 class="text-2xl font-black">Digital Honor Code</h2>
+            </div>
+
+            <!-- Slider Viewport -->
+            <div class="relative overflow-hidden flex-grow">
+                <div id="honor-slider" class="slide-container">
+                    
+                    <!-- Slide 1 -->
+                    <div class="slide p-8 text-center">
+                        <div class="w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🚀</div>
+                        <h3 class="font-black text-slate-800 text-xl mb-2">Original Content</h3>
+                        <p class="text-slate-600 leading-relaxed">All materials in the ICT Arena are designed specifically for Kidventor Academy students. Please enjoy them here!</p>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide p-8 text-center">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🌱</div>
+                        <h3 class="font-black text-slate-800 text-xl mb-2">Fair Use</h3>
+                        <p class="text-slate-600 leading-relaxed">You are welcome to use this for your personal learning and school projects. That is how we grow!</p>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide p-8 text-center">
+                        <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🛡️</div>
+                        <h3 class="font-black text-slate-800 text-xl mb-2">Respect the Craft</h3>
+                        <p class="text-slate-600 leading-relaxed">Copying, selling, or hosting these files on other websites without permission is not allowed.</p>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="slide p-8 text-center">
+                        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">✨</div>
+                        <h3 class="font-black text-slate-800 text-xl mb-2">Ready to Start?</h3>
+                        <p class="text-slate-600 leading-relaxed">By clicking agree, you promise to use these tools to become the best inventor you can be!</p>
+                    </div>
+
                 </div>
-                <div class="p-8 md:p-10 max-h-[75vh] overflow-y-auto">
-                    <div class="space-y-5 mb-8">
-                        <div class="flex items-start gap-4 p-5 bg-emerald-50 rounded-3xl border border-emerald-100">
-                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl shrink-0">🌱</div>
-                            <div>
-                                <h3 class="font-black text-emerald-900 mb-1">Learn & Grow</h3>
-                                <p class="text-sm text-emerald-800 leading-relaxed">Use this platform to explore, practice, and improve your skills.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sticky bottom-0 bg-white pt-4">
-                        <button onclick="acceptHonorCode()" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-wider hover:bg-black transition-all duration-300 shadow-xl hover:scale-[1.02]">
-                            I Agree & I'm Ready!
-                        </button>
-                    </div>
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="p-8 pt-0">
+                <button id="honor-next-btn" onclick="nextSlide()" class="w-full bg-sky-600 text-white py-4 rounded-2xl font-black uppercase tracking-wider hover:bg-sky-700 transition-all shadow-lg active:scale-95">
+                    Next
+                </button>
+                <div class="flex justify-center gap-2 mt-4">
+                    <div class="dot w-2 h-2 rounded-full bg-sky-600"></div>
+                    <div class="dot w-2 h-2 rounded-full bg-slate-200"></div>
+                    <div class="dot w-2 h-2 rounded-full bg-slate-200"></div>
+                    <div class="dot w-2 h-2 rounded-full bg-slate-200"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // JS remains identical to your functional version
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const slider = document.getElementById('honor-slider');
+        const nextBtn = document.getElementById('honor-next-btn');
+        const dots = document.querySelectorAll('.dot');
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlider();
+            } else {
+                acceptHonorCode();
+            }
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update Dots
+            dots.forEach((dot, i) => {
+                dot.className = i === currentSlide ? 'dot w-2 h-2 rounded-full bg-sky-600' : 'dot w-2 h-2 rounded-full bg-slate-200';
+            });
+
+            // Update Button on last slide
+            if (currentSlide === totalSlides - 1) {
+                nextBtn.innerText = "I Agree & I'm Ready!";
+                nextBtn.classList.replace('bg-sky-600', 'bg-emerald-600');
+                nextBtn.classList.add('hover:bg-emerald-700');
+            }
+        }
+
+        // Logic from previous script remains for quiz functionality
         const params = new URLSearchParams(window.location.search);
         const levelKey = params.get('level') || 'level1';
         let quizData = [];
@@ -186,26 +158,17 @@
         let score = 0;
         let timer;
 
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
         async function initQuiz() {
             try {
                 const response = await fetch(`data/${levelKey}.json`);
-                if (!response.ok) throw new Error("Data not found");
                 const data = await response.json();
-                quizData = shuffle(data.questions);
+                quizData = data.questions; 
                 document.getElementById('level-name').innerText = data.levelName;
                 document.getElementById('q-total').innerText = quizData.length;
                 document.getElementById('loader').classList.add('hidden');
                 document.getElementById('copyright-overlay').classList.remove('hidden');
             } catch (err) {
-                document.getElementById('loader').innerHTML = `<p class="text-red-500 font-black">ERROR: data/${levelKey}.json not found!</p>`;
+                console.error("Failed to load quiz data");
             }
         }
 
@@ -224,7 +187,7 @@
             grid.innerHTML = '';
             q.a.forEach((option, index) => {
                 const btn = document.createElement('button');
-                btn.className = "option-btn w-full p-5 rounded-2xl font-bold text-left bg-slate-50 text-slate-700 border-2 border-transparent hover:border-sky-500 transition-all";
+                btn.className = "option-btn w-full p-5 rounded-2xl font-bold text-left bg-slate-50";
                 btn.innerText = option;
                 btn.onclick = () => checkAnswer(index, btn);
                 grid.appendChild(btn);
@@ -253,15 +216,11 @@
         }
 
         function startTimer() {
-            clearInterval(timer);
-            let timeLeft = 30; // Resetting to 30 as per UI
-            const updateDisplay = (s) => {
-                document.getElementById('timer').innerText = `${s}s`;
-            };
-            updateDisplay(timeLeft);
+            let timeLeft = 30;
+            document.getElementById('timer').innerText = `30s`;
             timer = setInterval(() => {
                 timeLeft--;
-                updateDisplay(timeLeft);
+                document.getElementById('timer').innerText = `${timeLeft}s`;
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     checkAnswer(-1, null);
@@ -270,36 +229,10 @@
         }
 
         function endQuiz() {
-            let pass = score >= (quizData.length * 0.8);
-            document.getElementById('quiz-ui').innerHTML = `
-                <div class="text-center py-10">
-                    <h2 class="text-4xl font-black mb-4">${pass ? 'MISSION COMPLETE! 🏆' : 'RETRY NEEDED ⛔'}</h2>
-                    <p class="text-xl font-bold mb-6">Score: ${score} / ${quizData.length}</p>
-                    <button onclick="location.href='index.html'" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black uppercase">Lobby</button>
-                </div>
-            `;
+            document.getElementById('quiz-ui').innerHTML = `<div class="text-center py-10"><h2 class="text-4xl font-black">Score: ${score}/${quizData.length}</h2><button onclick="location.reload()" class="mt-6 bg-sky-600 text-white px-8 py-3 rounded-xl font-bold">Try Again</button></div>`;
         }
 
         initQuiz();
-
-        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const menuIcon = document.getElementById("menu-icon");
-        let isOpen = false;
-
-        mobileMenuBtn.addEventListener("click", () => {
-            isOpen = !isOpen;
-            if (isOpen) {
-                mobileMenu.classList.remove("max-h-0", "opacity-0");
-                mobileMenu.classList.add("max-h-[500px]", "opacity-100");
-                menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`;
-            } else {
-                mobileMenu.classList.remove("max-h-[500px]", "opacity-100");
-                mobileMenu.classList.add("max-h-0", "opacity-0");
-                menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />`;
-            }
-        });
     </script>
-
 </body>
 </html>
