@@ -286,20 +286,61 @@ renderStars();
 
 <body class="bg-slate-50 text-slate-900">
 
-<header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur border-b border-slate-100 px-6">
-    <div class="content-container h-20 flex items-center justify-between">
-        <a href="index.html" class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center shadow-lg">K</div>
-            <span class="font-black text-xl tracking-tight">Kidventor</span>
+<header class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto h-20 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+            <img 
+                src="https://raw.githubusercontent.com/SmartKids-app/kidventor/main/image/Logo_kiventor.png" 
+                alt="Kidventor Logo"
+                class="w-12 h-12 object-contain rounded-xl shadow-md"
+            >
+            <span class="font-black text-xl tracking-tight text-slate-800 group-hover:text-indigo-600 transition-colors">
+                Kidventor
+            </span>
         </a>
-        <nav class="hidden md:flex gap-8 font-bold text-sm">
-            <a href="lessons.html" class="hover:text-indigo-600">Lessons</a>
-            <a href="morals.html" class="hover:text-indigo-600">Morals</a>
-            <a href="adventure.html" class="text-indigo-600">Adventure</a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8 font-bold text-sm text-slate-600">
+            <a href="lessons.html" class="hover:text-indigo-600 transition">Lessons</a>
+            <a href="morals.html" class="hover:text-indigo-600 transition">Morals</a>
+            <a href="adventure.html" class="text-indigo-600 font-black">Adventure</a>
         </nav>
+
+        <!-- Mobile Menu Button -->
+        <button 
+            id="mobile-menu-btn"
+            class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 transition"
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="w-6 h-6 text-slate-700" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d="M4 6h16M4 12h16M4 18h16"
+                />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 pt-4 pb-4">
+        <div class="flex flex-col gap-4 text-sm font-bold text-slate-600">
+
+            <a href="lessons.html" class="hover:text-indigo-600 transition">Lessons</a>
+            <a href="morals.html" class="hover:text-indigo-600 transition">Morals</a>
+            <a href="adventure.html" class="text-indigo-600 font-black">Adventure</a>
+
+        </div>
     </div>
 </header>
-
 <section class="hero-bg pt-36 pb-24 px-6">
     <div class="content-container grid lg:grid-cols-2 gap-14 items-center">
         <div>
@@ -622,175 +663,15 @@ window.addEventListener("load", () => {
   dailyBonus();
 });
 </script>
+<script>
+const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
-<!-- IMPORTANT:
-Also create this file:
-/games/mouse-maze.html
-because your old system was showing 404.
-This upgrade now includes fallback loading so it still opens.
--->
-
-<!--<script>
-/* ===============================
-   KIDVENTOR QUEST ENGINE
-   Cleaner / Faster / More Playable
-================================= */
-
-const GAME_PATH = "games/";
-
-/* Game database */
-const games = {
-  "Keyboard Ninja": {
-    file: "keyboard-ninja.html",
-    color: "indigo"
-  },
-  "Mouse Maze": {
-    file: "mouse-maze.html",
-    color: "emerald"
-  },
-  "Puzzle Hero": {
-    file: "puzzle-hero.html",
-    color: "amber"
-  },
-  "Space Cadet": {
-    file: "space-cadet.html",
-    color: "purple"
-  }
-};
-
-/* Elements */
-const modal = document.getElementById("gameModal");
-const frame = document.getElementById("gameFrame");
-const titleEl = document.getElementById("modalTitle");
-const loadingEl = document.getElementById("gameLoading");
-
-/* ===============================
-   OPEN GAME
-================================= */
-function openGame(gameTitle) {
-  const game = games[gameTitle];
-
-  if (!game) {
-    alert("Game not found.");
-    return;
-  }
-
-  titleEl.textContent = gameTitle;
-  loadingEl.classList.remove("hidden");
-  frame.classList.add("opacity-0");
-
-  modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
-
-  frame.src = GAME_PATH + game.file;
-
-  frame.onload = () => {
-    loadingEl.classList.add("hidden");
-    frame.classList.remove("opacity-0");
-  };
-}
-
-/* ===============================
-   CLOSE GAME
-================================= */
-function closeGame() {
-  modal.classList.add("hidden");
-  frame.src = "";
-  document.body.style.overflow = "auto";
-}
-
-/* ===============================
-   ESC KEY CLOSE
-================================= */
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeGame();
+mobileMenuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
 });
+</script>
 
-/* ===============================
-   CLICK OUTSIDE CLOSE
-================================= */
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) closeGame();
-});
-
-/* ===============================
-   STAR BALANCE SYSTEM
-================================= */
-let stars = Number(localStorage.getItem("kidventorStars")) || 140;
-
-function updateStars() {
-  const starText = document.querySelector("#missions .text-xl");
-  if (starText) {
-    starText.textContent = "⭐ " + stars;
-  }
-}
-
-function rewardStars(amount = 10) {
-  stars += amount;
-  localStorage.setItem("kidventorStars", stars);
-  updateStars();
-}
-
-/* ===============================
-   DAILY BONUS
-================================= */
-function dailyBonus() {
-  const today = new Date().toDateString();
-  const claimed = localStorage.getItem("dailyBonus");
-
-  if (claimed !== today) {
-    stars += 20;
-    localStorage.setItem("kidventorStars", stars);
-    localStorage.setItem("dailyBonus", today);
-
-    setTimeout(() => {
-      alert("🎉 Daily Bonus! +20 Stars");
-      updateStars();
-    }, 1200);
-  }
-}
-
-/* ===============================
-   BUTTON EFFECTS
-================================= */
-document.querySelectorAll("button").forEach(btn => {
-  btn.addEventListener("mouseenter", () => {
-    btn.classList.add("scale-105");
-  });
-
-  btn.addEventListener("mouseleave", () => {
-    btn.classList.remove("scale-105");
-  });
-});
-
-/* ===============================
-   REWARD WHEN GAME OPENS
-================================= */
-const oldOpen = openGame;
-
-window.openGame = function(title){
-  rewardStars(5);   // reward just for playing
-  oldOpen(title);
-};
-
-window.closeGame = closeGame;
-
-/* ===============================
-   PAGE LOAD
-================================= */
-window.addEventListener("load", () => {
-  updateStars();
-  dailyBonus();
-});
-
-/* ===============================
-   FUTURE FEATURE READY
-   Save badges later
-================================= */
-function unlockBadge(name){
-  console.log("Badge unlocked:", name);
-}
-</script>-->
     
 
 </body>
