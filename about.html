@@ -40,23 +40,64 @@
 <body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
 
   <!-- NAVIGATION -->
-  <nav class="bg-white/90 backdrop-blur-md border-b py-5 px-4 sm:px-6 sticky top-0 z-50">
+  <nav class="bg-white/90 backdrop-blur-md border-b py-4 px-4 sm:px-6 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <a href="index.html" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black group-hover:rotate-12 transition-transform">K</div>
-        <span class="font-black text-xl tracking-tighter uppercase text-slate-800">Kidventor</span>
-      </a>
 
-      <div class="hidden md:flex items-center gap-8 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
-        <a href="index.html" class="nav-link hover:text-indigo-600 transition">Home</a>
-        <a href="worksheet.html" class="nav-link hover:text-indigo-600 transition">Worksheets</a>
-        <a href="morals.html" class="nav-link hover:text-indigo-600 transition">Morals</a>
-        <a href="contact.html" class="nav-link hover:text-indigo-600 transition">Contact</a>
-      </div>
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+            <img 
+                src="https://raw.githubusercontent.com/SmartKids-app/kidventor/main/image/Logo_kiventor.png" 
+                alt="Kidventor Logo"
+                class="w-12 h-12 object-contain rounded-xl shadow-md"
+            >
+            <span class="font-black text-xl tracking-tight uppercase text-slate-800 group-hover:text-indigo-600 transition-colors">
+                Kidventor
+            </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-8 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+            <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+            <a href="worksheet.html" class="hover:text-indigo-600 transition">Worksheets</a>
+            <a href="morals.html" class="hover:text-indigo-600 transition">Morals</a>
+            <a href="contact.html" class="hover:text-indigo-600 transition">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button 
+            id="mobile-menu-btn"
+            class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 transition"
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="w-6 h-6 text-slate-700" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+            >
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d="M4 6h16M4 12h16M4 18h16"
+                />
+            </svg>
+        </button>
     </div>
-  </nav>
 
-  <!-- HERO -->
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 border-t pt-4">
+        <div class="flex flex-col gap-4 text-sm font-bold uppercase tracking-wider text-slate-600">
+
+            <a href="index.html" class="hover:text-indigo-600 transition">Home</a>
+            <a href="worksheet.html" class="hover:text-indigo-600 transition">Worksheets</a>
+            <a href="morals.html" class="hover:text-indigo-600 transition">Morals</a>
+            <a href="contact.html" class="hover:text-indigo-600 transition">Contact</a>
+
+        </div>
+    </div>
+</nav>
+<!-- HERO -->
   <header class="mission-gradient py-24 md:py-32 px-4 sm:px-6 text-center text-white relative overflow-hidden">
     <div class="relative z-10 max-w-4xl mx-auto">
       <span class="bg-indigo-500/30 text-indigo-100 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] inline-block border border-indigo-400/30 mb-8">
@@ -197,7 +238,14 @@
       © 2026 Kidventor Academy • All Rights Reserved
     </div>
   </footer>
+<script>
+const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
+mobileMenuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+});
+</script>
 </body>
 </html>
 
