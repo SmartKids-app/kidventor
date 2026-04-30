@@ -103,22 +103,61 @@
 </head>
 <body>
 
-    <nav class="hud sticky top-0 px-8 py-4 flex justify-between items-center z-50">
-        <div class="flex gap-10">
+    <!-- Responsive Navbar with Logo -->
+<nav class="hud-panel sticky top-0 z-50 px-4 sm:px-6 py-4 border-b border-white/10 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+        <!-- Left: Logo + Stats -->
+        <div class="flex items-center gap-4 sm:gap-8">
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group relative">
+                <div class="absolute -inset-2 bg-indigo-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <img
+                    src="https://raw.githubusercontent.com/SmartKids-app/kidventor/main/image/Logo_kiventor.png"
+                    alt="Kidventor Logo"
+                    class="w-10 h-10 object-contain rounded-xl relative z-10 group-hover:scale-110 transition-transform duration-500"
+                >
+
+                <span class="hidden sm:block font-black text-sm uppercase tracking-tight text-white relative z-10">
+                    Kidventor
+                </span>
+            </a>
+
+            <!-- Score -->
             <div>
-                <p class="text-[10px] uppercase font-black text-indigo-400 tracking-widest">Level</p>
-                <p id="level-display" class="text-xl font-black italic">1 / 5</p>
+                <p class="text-[10px] uppercase font-black text-indigo-400 tracking-widest">
+                    Score
+                </p>
+                <p id="score" class="text-lg sm:text-xl font-black text-white">
+                    0
+                </p>
             </div>
+
+            <!-- Level -->
             <div>
-                <p class="text-[10px] uppercase font-black text-emerald-400 tracking-widest">Status</p>
-                <p id="status-display" class="text-xl font-black text-slate-400 uppercase">Wait</p>
+                <p class="text-[10px] uppercase font-black text-emerald-400 tracking-widest">
+                    Level
+                </p>
+                <p id="level-display" class="text-lg sm:text-xl font-black text-white">
+                    1/20
+                </p>
             </div>
         </div>
+
+        <!-- Right: Rewards -->
         <div class="text-right">
-            <p class="text-[10px] uppercase font-black text-amber-400 tracking-widest">Stars</p>
-            <p class="text-xl font-black text-amber-300">⭐ <span id="stars-display">0</span></p>
+            <p class="text-[10px] uppercase font-black text-amber-400 tracking-widest">
+                Rewards
+            </p>
+            <p class="text-lg sm:text-xl font-black text-amber-300">
+                ⭐ <span id="stars">0</span>
+            </p>
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <main class="flex flex-col items-center justify-center h-[calc(100vh-80px)] p-6">
         <div id="maze" class="maze-container w-[600px] h-[400px]" onmouseleave="handleWallHit()">
@@ -329,5 +368,34 @@
         }
 
     </script>
+    <script>
+/*
+Optional responsive navbar enhancement
+- Shrinks slightly on scroll
+- Adds stronger glass effect
+*/
+
+const hudNav = document.querySelector(".hud-panel");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+        hudNav.classList.add(
+            "shadow-xl",
+            "bg-slate-900/80",
+            "backdrop-blur-xl"
+        );
+
+        hudNav.classList.remove(
+            "bg-transparent"
+        );
+    } else {
+        hudNav.classList.remove(
+            "shadow-xl",
+            "bg-slate-900/80",
+            "backdrop-blur-xl"
+        );
+    }
+});
+</script>
 </body>
 </html>
