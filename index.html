@@ -395,6 +395,105 @@ html{
 
     </div>
 </section>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 800, once: true });
+
+        // Navigation Toggle
+        const menuBtn = document.getElementById('menu-toggle');
+        const closeBtn = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => mobileMenu.classList.remove('translate-x-full'), 10);
+        });
+
+        const hideMenu = () => {
+            mobileMenu.classList.add('translate-x-full');
+            setTimeout(() => mobileMenu.classList.add('hidden'), 400);
+        };
+
+        closeBtn.addEventListener('click', hideMenu);
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', hideMenu));
+    </script>
+    <script>
+    const testimonials = [
+        {
+            text: "My son used to spend all his time playing games. Now, he's curious about how they are made! Kidventor changed his perspective.",
+            author: "Mrs. Adewale",
+            role: "Parent",
+            initial: "A"
+        },
+        {
+            text: "Integrating Kidventor's curriculum into our school was the best decision. The students are now more digitally literal than ever before.",
+            author: "Dr. Olatunji",
+            role: "School Owner (Bright Path Intl)",
+            initial: "O"
+        },
+        {
+            text: "I was worried about internet safety, but the moral lessons taught alongside coding gave me total peace of mind as a mother.",
+            author: "Sarah J.",
+            role: "Parent",
+            initial: "S"
+        },
+        {
+            text: "The CBT preparation modules are exceptional. Our students showed a 40% improvement in computer-based testing confidence.",
+            author: "Engr. Benson",
+            role: "School Proprietor",
+            initial: "B"
+        },
+        {
+            text: "Kidventor Academy doesn't just teach syntax; they teach problem-solving. My daughter has become so much more organized in her schoolwork.",
+            author: "Mr. Chukwuma",
+            role: "Parent",
+            initial: "C"
+        }
+    ];
+
+    let currentIndex = 0;
+    const container = document.getElementById('testimonial-container');
+    const textElem = document.getElementById('testimonial-text');
+    const authorElem = document.getElementById('testimonial-author');
+    const roleElem = document.getElementById('testimonial-role');
+    const avatarElem = document.getElementById('testimonial-avatar');
+    const dots = document.querySelectorAll('.dot');
+
+    function updateTestimonial() {
+        // Fade Out & Slide Down
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            const t = testimonials[currentIndex];
+
+            // Update Content
+            textElem.textContent = `"${t.text}"`;
+            authorElem.textContent = t.author;
+            roleElem.textContent = t.role;
+            avatarElem.textContent = t.initial;
+
+            // Update Dots
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.add('bg-indigo-600', 'w-8');
+                    dot.classList.remove('bg-slate-200', 'w-2');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'w-8');
+                    dot.classList.add('bg-slate-200', 'w-2');
+                }
+            });
+
+            // Fade In & Slide Up
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+        }, 700);
+    }
+
+    // Flip every 5 seconds
+    setInterval(updateTestimonial, 5000);
+</script>
 <script>
 const authCard = document.getElementById("auth-form-card");
 const signupBtn = document.getElementById("signup-trigger");
